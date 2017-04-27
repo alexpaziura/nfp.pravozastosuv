@@ -87,6 +87,28 @@ $('#edrpoE').keyup(function() {
         $field.popover('hide');
     }
 });
+$('#suma_shtraf').keyup(function() {
+    var $field  = $(this);
+    var val = $.trim($field.val());
+    var regex = /^\d+(\.\d{1,2})?$/;
+    if ( !regex.test( val ))   {
+        $('#wrong_fields').removeClass('hidden');
+        $field.removeClass('accepted_field');
+        $field.addClass('required_field');
+        $field.popover('show');
+    } else {
+        $('#wrong_fields').addClass('hidden');
+        $field.removeClass('required_field');
+        $field.addClass('accepted_field');
+        $field.popover('hide');
+    }
+    if (val === '') {
+        $('#wrong_fields').addClass('hidden');
+        $field.removeClass('required_field');
+        $field.removeClass('accepted_field');
+        $field.popover('hide');
+    }
+});
 $('#type_fo').on('change', function () {
     if ($(this).val() != '') {
         $(this).removeClass('required_field');
@@ -100,6 +122,9 @@ $(document).ready(function(){
         animation: true});
     $('#edrpoE').popover({title: "Поле обов'язкове для заповнення!",
         content: "Формат запису: 99999999999 або АА 999999", trigger: "manual", placement: "top",
+        animation: true});
+    $('#suma_shtraf').popover({title: "Допускаються тільки цифри і крапка!",
+        content: "Формат запису: 999999999.99", trigger: "manual", placement: "top",
         animation: true});
 });
 $(document).ready(function () {

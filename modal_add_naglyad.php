@@ -323,7 +323,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="b_usun_lic_umov">Застосоване розпорядження є розпорядження про усунення порушення ліц.умов</label>
+                                        <label for="b_usun_lic_umov" style="text-align: justify;">Застосоване розпорядження є розпорядження про усунення порушення ліц.умов</label>
                                         <select name="b_usun_lic_umov" id="b_usun_lic_umov" class="form-control">
                                             <option value="" selected></option>
                                             <option value="1">Так</option>
@@ -376,10 +376,111 @@
                                 <div class="col-sm-6">
                                     <label for="n_akt_nevik">Номер</label>
                                     <input name="n_akt_nevik" type="text" class="form-control" id="dn_akt_nevik"
-                                           maxlength="45">
+                                           maxlength="34">
                                 </div>
                             </div>
                         </div>
+                        <fieldset>
+                            <legend>Постанова про застосування штрафної санкції</legend>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="d_post_shtrafD">Дата постанови про штраф</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_post_shtrafD">
+                                            <input name="d_post_shtraf" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="n_post_shtraf">№ постанови про штраф</label>
+                                        <input name="n_post_shtraf" type="text" class="form-control"
+                                               id="n_post_shtraf" maxlength="45">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="suma_shtraf">Сума штрафу, грн</label>
+                                        <input name="suma_shtraf" type="text" class="form-control"
+                                               id="suma_shtraf" maxlength="12">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="strok_splat_shtrafD">Строк сплати штрафу</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="strok_splat_shtrafD">
+                                            <input name="strok_splat_shtraf" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="strok_splat_shtrafD">Інформація про сплату штрафу (дата сплати по платіжному дорученню)</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="strok_splat_shtrafD">
+                                            <input name="strok_splat_shtraf" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="suma_shtraf">Інформація про усунення порушення, за яке застосована штрафна санкція</label>
+                                        <input name="suma_shtraf" type="text" class="form-control"
+                                               id="suma_shtraf" maxlength="12">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="strok_splat_shtrafD">Дата Довідки про виконання постанови</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="strok_splat_shtrafD">
+                                            <input name="strok_splat_shtraf" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dn_akt_nevik">Дата та номер службової записки до ЮрДеп щодо стягнення штрафної санкції у судовому порядку</label>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="d_akt_nevikD">Дата</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_akt_nevikD">
+                                            <input name="d_akt_nevik" data-mask="99.99.9999" type="text"
+                                                   class="form-control" >
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="n_akt_nevik">Номер</label>
+                                        <input name="n_akt_nevik" type="text" class="form-control" id="dn_akt_nevik"
+                                               maxlength="34">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </form>
             </div>

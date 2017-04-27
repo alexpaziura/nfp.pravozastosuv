@@ -664,6 +664,7 @@ if (isset($_POST['add_nag'])) {
                         <td><?= $row['name_info_vik'] ?></td>
                         <td><?= $row['d_dovidki_vik_rozp'] == NULL ? '' : date($format_date, $row['d_dovidki_vik_rozp'])?></td>
                         <td><?= $row['dn_akt_nevik'] ?></td>
+
                         <td><?= $row['d_post_shtraf'] == NULL ? '' : date($format_date, $row['d_post_shtraf']) ?></td>
                         <td><?= $row['n_post_shtraf'] ?></td>
                         <td><?= $row['suma_shtraf'] ?></td>
