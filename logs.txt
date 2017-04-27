@@ -1,0 +1,13 @@
+Error: INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_name_fu, edrpo, type_fu, vid_perevirki, pidstava_pozaplan,
+            d_start_perevirki, d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah,
+            d_napr_proved, n_napr_proved, ker_inspekt_group, ch_inspekt_group, d_akt_perevirki,
+            n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, d_rozp_usun, n_rozp_usun, strok_usun_por,
+            b_usun_lic_umov) 
+            VALUES (1, 1493202368, 1, 434343, 10, 'defsdfs',SS 43434334,2,1,NULL,
+            NULL, NULL, NULL, NULL, NULL, NULL,
+            NULL, NULL, NULL, NULL, NULL,
+            NULL, NULL, NULL, 1, NULL, NULL, NULL,
+            NULL)
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '43434334,2,1,NULL,
+            NULL, NULL, NULL, NULL, NULL, NULL,
+           ' at line 6
