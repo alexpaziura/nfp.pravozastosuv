@@ -631,7 +631,21 @@ if (isset($_POST['add_nag'])) {
                         <td><?= $row['edrpo'] ?></td>
                         <td><?= $row['name_type_fu'] ?></td>
                         <td><?= $row['name_vid_perevirki'] ?></td>
-                        <td><?= $row['pidstava_pozaplan'] ?></td>
+                        <td><?
+                            $pidstavi = $row['pidstava_pozaplan'];
+                            $result = '';
+                            $pieces = explode("; ", $pidstavi);
+                            foreach ($pieces as $pidstav) {
+                                $num = (int) $pidstav;
+                                foreach ($table_p as $row_p){
+                                    if($row_p['id_pozaplan']==$num) {
+                                        $result .= $row_p['name_pozaplan'].'; ';
+                                        break;
+                                    }
+                                }
+                            }
+                            echo $result;
+                            ?></td>
                         <td><?= $row['d_start_perevirki'] == NULL ? '' : date($format_date, $row['d_start_perevirki']) ?></td>
                         <td><?= $row['d_end_perevirki'] == NULL ? '' : date($format_date, $row['d_end_perevirki']) ?></td>
                         <td><?= $row['d_start_dialnist'] == NULL ? '' : date($format_date, $row['d_start_dialnist']) ?></td>
@@ -664,12 +678,11 @@ if (isset($_POST['add_nag'])) {
                         <td><?= $row['name_info_vik'] ?></td>
                         <td><?= $row['d_dovidki_vik_rozp'] == NULL ? '' : date($format_date, $row['d_dovidki_vik_rozp'])?></td>
                         <td><?= $row['dn_akt_nevik'] ?></td>
-
                         <td><?= $row['d_post_shtraf'] == NULL ? '' : date($format_date, $row['d_post_shtraf']) ?></td>
                         <td><?= $row['n_post_shtraf'] ?></td>
                         <td><?= $row['suma_shtraf'] ?></td>
-                        <td><?= $row['strok_splat_shtraf'] ?></td>
-                        <td><?= $row['info_splat_shtraf'] ?></td>
+                        <td><?= $row['strok_splat_shtraf'] == NULL ? '' : date($format_date, $row['strok_splat_shtraf']) ?></td>
+                        <td><?= $row['info_splat_shtraf'] == NULL ? '' : date($format_date, $row['info_splat_shtraf']) ?></td>
                         <td><?= $row['info_usun_por'] ?></td>
                         <td><?= $row['d_dovidki_vik_post'] == NULL ? '' : date($format_date, $row['d_dovidki_vik_post']) ?></td>
                         <td><?= $row['dn_sluj_ur'] ?></td>
