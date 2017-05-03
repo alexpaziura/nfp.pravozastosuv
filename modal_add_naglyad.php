@@ -484,20 +484,22 @@
                         <fieldset>
                             <legend>Процедури стягнення в судовому порядку</legend>
                             <div class="form-group">
-                                <label for="info_usun_por">Інформація про усунення порушення, за яке застосована штрафна санкція</label>
-                                <input name="info_usun_por" type="text" class="form-control"
-                                       id="info_usun_por" maxlength="255">
+                                <label for="sluj_perep_splat">Службова переписка щодо сплати судового збору (дата/номер
+                                    службової записки) (фіксується подання на сплату - поверення з причинами про
+                                    неможливість сплати - повторне подання, інше)</label>
+                                <input name="sluj_perep_splat" type="text" class="form-control"
+                                       id="sluj_perep_splat" maxlength="255">
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="dn_sluj_ur">Дата та номер службової записки до ЮрДеп щодо стягнення штрафної санкції у судовому порядку</label>
+                                        <label for="dn_doc_splat">Дата/номер документу (платіжного доручення) про сплату судового збору</label>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="d_sluj_urD">Дата</label>
+                                                <label for="d_doc_splatD">Дата</label>
                                                 <div class="input-group date dp" data-provide="datepicker"
-                                                     id="d_sluj_urD">
-                                                    <input name="d_sluj_ur" data-mask="99.99.9999" type="text"
+                                                     id="d_doc_splatD">
+                                                    <input name="d_doc_splat" data-mask="99.99.9999" type="text"
                                                            class="form-control" >
                                                     <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -505,8 +507,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label for="n_sluj_ur">Номер</label>
-                                                <input name="n_sluj_ur" type="text" class="form-control" id="n_sluj_ur"
+                                                <label for="n_doc_splat">Номер</label>
+                                                <input name="n_doc_splat" type="text" class="form-control" id="n_doc_splat"
                                                        maxlength="34">
                                             </div>
                                         </div>
@@ -514,13 +516,13 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="dn_sluj_ur">Дата та номер службової записки до ЮрДеп щодо стягнення штрафної санкції у судовому порядку</label>
+                                        <label for="dn_sluj_nap_mat">Дата/номер службової записки щодо направлення матеріалів для подання позовної заяви</label>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="d_sluj_urD">Дата</label>
+                                                <label for="d_sluj_nap_matD">Дата</label>
                                                 <div class="input-group date dp" data-provide="datepicker"
-                                                     id="d_sluj_urD">
-                                                    <input name="d_sluj_ur" data-mask="99.99.9999" type="text"
+                                                     id="d_sluj_nap_matD">
+                                                    <input name="d_sluj_nap_mat" data-mask="99.99.9999" type="text"
                                                            class="form-control" >
                                                     <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -528,8 +530,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label for="n_sluj_ur">Номер</label>
-                                                <input name="n_sluj_ur" type="text" class="form-control" id="n_sluj_ur"
+                                                <label for="n_sluj_nap_mat">Номер</label>
+                                                <input name="n_sluj_nap_mat" type="text" class="form-control" id="n_sluj_nap_mat"
                                                        maxlength="34">
                                             </div>
                                         </div>

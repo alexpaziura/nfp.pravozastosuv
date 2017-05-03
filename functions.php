@@ -140,6 +140,10 @@ function add_inspekt()
         return false;
     }
     global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: ". mysqli_error($link);
+        exit();
+    }
     $index_pidrozdil = 0;
     switch ($_SESSION['group']) {
         case "ДеРЗІТ":
@@ -211,19 +215,25 @@ function add_inspekt()
     $info_usun_por = $_POST['info_usun_por'] != '' ? "'".trim(htmlspecialchars($_POST['info_usun_por']))."'" : 'NULL';
     $d_dovidki_vik_post = $_POST['d_dovidki_vik_post'] != '' ? strtotime($_POST['d_dovidki_vik_post']) : 'NULL';
     $dn_sluj_ur = "'".$_POST['d_sluj_ur'].' '.trim(htmlspecialchars($_POST['n_sluj_ur']))."'";
+    $sluj_perep_splat = $_POST['sluj_perep_splat'] != '' ? "'".trim(htmlspecialchars($_POST['sluj_perep_splat']))."'" : 'NULL';
+    $dn_doc_splat = "'".$_POST['d_doc_splat'].' '.trim(htmlspecialchars($_POST['n_doc_splat']))."'";
+    $dn_sluj_nap_mat = "'".$_POST['d_sluj_nap_mat'].' '.trim(htmlspecialchars($_POST['n_sluj_nap_mat']))."'";
+
 
     $sql = "INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_name_fu, edrpo, type_fu, vid_perevirki, pidstava_pozaplan,
             d_start_perevirki, d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah,
             d_napr_proved, n_napr_proved, ker_inspekt_group, ch_inspekt_group, d_akt_perevirki,
             n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, d_rozp_usun, n_rozp_usun, strok_usun_por,
             b_usun_lic_umov, info_vik_rozp, d_dovidki_vik_rozp, dn_akt_nevik, d_post_shtraf, n_post_shtraf, suma_shtraf,
-            strok_splat_shtraf, info_splat_shtraf, info_usun_por, d_dovidki_vik_post, dn_sluj_ur) 
+            strok_splat_shtraf, info_splat_shtraf, info_usun_por, d_dovidki_vik_post, dn_sluj_ur, sluj_perep_splat, 
+            dn_doc_splat, dn_sluj_nap_mat) 
             VALUES ($active, $date_change, $user, $nzp, $index_pidrozdil, $short_name_fu,$edrpo,$type_fo,$vid_perevirki,$pidstava_pozaplanS,
             $d_start_perevirki, $d_end_perevirki, $d_start_dialnist, $d_end_dialnist, $d_nak_zah, $n_nak_zah,
             $d_napr_proved, $n_napr_proved, $ker_inspekt_group, $ch_inspekt_group, $d_akt_perevirki,
             $n_akt_perevirki, $d_akt_zu, $n_akt_zu, $vid_akt_zu, $d_rozp_usun, $n_rozp_usun, $strok_usun_por,
             $b_usun_lic_umov, $info_vik_rozp, $d_dovidki_vik_rozp, $dn_akt_nevik, $d_post_shtraf, $n_post_shtraf,
-            $suma_shtraf, $strok_splat_shtraf, $info_splat_shtraf, $info_usun_por, $d_dovidki_vik_post, $dn_sluj_ur)";
+            $suma_shtraf, $strok_splat_shtraf, $info_splat_shtraf, $info_usun_por, $d_dovidki_vik_post, $dn_sluj_ur,
+            $sluj_perep_splat, $dn_doc_splat, $dn_sluj_nap_mat)";
     $result = mysqli_query($link, $sql);
 
     if ($result) {
