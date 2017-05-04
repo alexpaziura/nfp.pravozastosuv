@@ -572,11 +572,11 @@
         immediateUpdates:true,
         todayHighlight: true
     });
-    $('#modal-add-naglyad').ready(function () {
+/*    $('#modal-add-naglyad').ready(function () {
         $('.modal-page').addClass('hidden');
         $('#modal-page-1').removeClass('hidden');
         $('#page-1').addClass('active-success');
-    });
+    });*/
     function click1() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-1').removeClass('hidden');

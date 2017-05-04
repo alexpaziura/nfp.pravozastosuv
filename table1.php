@@ -86,12 +86,14 @@ if (isset($_POST['add_nag'])) {
                 $("#modal-ch-multi").modal({backdrop: "static"});
             } else if (selection.length == 1) {
                 $("#modal_edit_n").modal({backdrop: "static"});
+                click1e();
             } else if (selection.length == 0) {
                 $("#modal-ch-0").modal({backdrop: "static"});
             }
         });
         $("#addBtn").click(function () {
             $("#modal-add-naglyad").modal({backdrop: "static"});
+            click1();
         });
         /*$("#modal-add-naglyad").on('show.bs.modal', function () {
          $('.form-control').val('');
@@ -200,7 +202,7 @@ if (isset($_POST['add_nag'])) {
 
                         <th data-field="state" data-checkbox="true" rowspan="4" data-events="clickCheck"></th>
                         <th data-field="id_inspekt" data-sortable="true" rowspan="4" data-halign="center" data-align="center"
-                            class="col-xs-1">id_inspekt
+                            class="col-xs-1 hidden">id_inspekt
                         </th>
                         <th data-field="active" data-sortable="true" rowspan="4" data-halign="center" data-align="center"
                             class="col-xs-1">active
@@ -616,7 +618,7 @@ if (isset($_POST['add_nag'])) {
                     <?php foreach ($table_inspekt as $row): ?>
                         <tr>
                             <td></td>
-                            <td><?= $row['id_inspekt'] ?></td>
+                            <td class="hidden"><?= $row['id_inspekt'] ?></td>
                             <td><?= $row['active'] ?></td>
                             <td><?= $row['date_change'] == NULL ? '' : date($for_date_change, $row['date_change']) ?></td>
                             <td><?= $row['username'] ?></td>
@@ -627,7 +629,7 @@ if (isset($_POST['add_nag'])) {
                             <td><?= $row['name_type_fu'] ?></td>
                             <td><?= $row['name_vid_perevirki'] ?></td>
                             <td>
-                                <div id="pidstav" class="hidden"><?=$row['pidstava_pozaplan']?></div>
+
                                 <?
                                 $pidstavi = $row['pidstava_pozaplan'];
                                 $result = '';

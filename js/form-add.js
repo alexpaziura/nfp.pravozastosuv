@@ -12,22 +12,22 @@ $('#add-form').submit(function () {
     var type_fo = $.trim($type_fo.val());
 
     if (nzp === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert.removeClass('hidden');
         $nzp_field.addClass('required_field');
         noError = false;
     }
     if (short_name_fu === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert.removeClass('hidden');
         $short_name_fu.addClass('required_field');
         noError = false;
     }
     if (edrpoE === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert.removeClass('hidden');
         $edrpoE.addClass('required_field');
         noError = false;
     }
     if (type_fo === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert.removeClass('hidden');
         $type_fo.addClass('required_field');
         noError = false;
     }
@@ -36,7 +36,9 @@ $('#add-form').submit(function () {
         $('#pidstava_pozaplanS').addClass('required_field');
         noError = false;
     }*/
-    noError = $alert.hasClass('hidden');
+    if(!$alert.hasClass('hidden')) {
+        noError = false;
+    }
     return noError;
 });
 

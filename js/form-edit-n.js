@@ -87,7 +87,7 @@ $('#edrpoEE').keyup(function() {
         $field.popover('hide');
     }
 });
-$('#suma_shtraf').keyup(function() {
+/*$('#suma_shtraf').keyup(function() {
     var $field  = $(this);
     var val = $.trim($field.val());
     var regex = /^\d+(\.\d{1,2})?$/;
@@ -108,7 +108,7 @@ $('#suma_shtraf').keyup(function() {
         $field.removeClass('accepted_field');
         $field.popover('hide');
     }
-});
+});*/
 $('#type_fo').on('change', function () {
     if ($(this).val() != '') {
         $(this).removeClass('required_field');
@@ -133,11 +133,17 @@ $(document).ready(function () {
         var selection = $table.bootstrapTable('getSelections');
         var selectedRow = selection[0];
         var selectedRowJS = JSON.stringify(selectedRow);
-        $("#nzpE").val(selectedRow.nzp);
-        $('#short_name_fuE').val(selectedRow.short_name_fu);
-        $('#edrpoEE').val(selectedRow.edrpo);
+        var rowTable = [];
+        $.post("requests.php", { id_inst_row: selectedRow.id_inspekt })
+            .done(function(data) {
+                alert("Data Loaded: " +  data);
+                rowTable = $.parseJSON(data);
+            });
+        $("#nzpE").val(rowTable['nzp']);
+        $('#short_name_fuE').val(rowTable.short_name_fu);
+        $('#edrpoEE').val(rowTable.edrpo);
     });
-    $('#vid_perevirkiS').on('change', function () {
+    /*$('#vid_perevirkiS').on('change', function () {
         if ($(this).val() == '3') {
             $('#pidstava_pozaplanS').prop('disabled', false);
             $('#pidstava_pozaplanS').multiselect('refresh');
@@ -148,8 +154,8 @@ $(document).ready(function () {
             $('#pidstava_pozaplanS').multiselect('refresh');
             $('#pidstava_pozaplanS').multiselect('disable');
         }
-    });
-    $('#pidstava_pozaplanS').multiselect({
+    });*/
+    $('#pidstava_pozaplanSE').multiselect({
         nonSelectedText: 'Виберіть підставу!',
         allSelectedText: 'Вибрано всі підстави',
         disabledText: 'Заблоковано!',

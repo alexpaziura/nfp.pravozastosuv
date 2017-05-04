@@ -19,7 +19,7 @@
             </div>
             <div class="modal-body" style="background-color: #e8e1ca;">
                 <form id="edit-form-n" method="post" autocomplete="off">
-                    <div id="modal-page-1e" class="modal-page">
+                    <div id="modal-page-1e" class="modal-page-edit">
                         <p style="color: red">
                             <sup>
                                 <i class="fa fa-asterisk" style="color: red"></i>
@@ -54,10 +54,48 @@
                             </div>
                         </div>
                     </div>
-                    <div id="modal-page-2e" class="modal-page">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="type_foE">Тип суб'єкта нагляду <sup>
+                                        <i class="fa fa-asterisk" style="color: red"></i>
+                                    </sup></label>
+                                <select name="type_foE" id="type_foE" class="form-control">
+                                    <option value="" hidden></option>
+                                    <?php foreach ($table_type_fu as $row): ?>
+                                        <?php if ($row['visible']=='0') continue;?>
+                                        <option value="<?= $row['id_type_fu'] ?>"><?= $row['name_type_fu'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="vid_perevirkiSE">Вид перевірки</label>
+                                <select name="vid_perevirkiSE" id="vid_perevirkiSE" class="form-control">
+                                    <?php foreach ($table_vid_perevirki as $row): ?>
+                                        <?php if ($row['visible']=='0') continue;?>
+                                        <option value="<?=$row['id_vid_perevirki'] ?>" <?=$row['id_vid_perevirki']=='1'?'selected':'' ?>><?= $row['name_vid_perevirki'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="pidstava_pozaplanSE">Підстава проведення позапланової перевірки</label>
+                                <select name="pidstava_pozaplanSE[]" multiple="multiple" id="pidstava_pozaplanSE" class="form-control" disabled>
+                                    <?php foreach ($table_p as $row): ?>
+                                        <?php if ($row['visible']=='0') continue;?>
+                                        <option value="<?=$row['id_pozaplan'] ?>"><?= $row['name_pozaplan'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="modal-page-2e" class="modal-page-edit">
 
                     </div>
-                    <div id="modal-page-3e" class="modal-page">
+                    <div id="modal-page-3e" class="modal-page-edit">
 
                     </div>
                 </form>
@@ -92,25 +130,25 @@
         immediateUpdates:true,
         todayHighlight: true
     });
-    $('#modal_edit_n').ready(function () {
-        $('.modal-page').addClass('hidden');
+/*    $('#modal_edit_n').ready(function () {
+        $('.modal-page-edit').addClass('hidden');
         $('#modal-page-1e').removeClass('hidden');
         $('#page-1e').addClass('active-warning');
-    });
+    });*/
     function click1e() {
-        $('.modal-page').addClass('hidden');
+        $('.modal-page-edit').addClass('hidden');
         $('#modal-page-1e').removeClass('hidden');
         $('.pagination li').removeClass('active-warning');
         $('#page-1e').addClass('active-warning');
     }
     function click2e() {
-        $('.modal-page').addClass('hidden');
+        $('.modal-page-edit').addClass('hidden');
         $('#modal-page-2e').removeClass('hidden');
         $('.pagination li').removeClass('active-warning');
         $('#page-2e').addClass('active-warning');
     }
     function click3e() {
-        $('.modal-page').addClass('hidden');
+        $('.modal-page-edit').addClass('hidden');
         $('#modal-page-3e').removeClass('hidden');
         $('.pagination li').removeClass('active-warning');
         $('#page-3e').addClass('active-warning');

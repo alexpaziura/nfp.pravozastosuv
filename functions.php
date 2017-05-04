@@ -37,7 +37,45 @@ function get_table_inspect()
 
     }
 }
+function get_row_inspect($id) {
+    global $link;
+    if (!mysqli_ping($link))
+    {
+        echo "Error: ". mysqli_error($link);
+        exit();
+    }
+    else
+    {
+        $sql = "SELECT id_inspekt, active, date_change, username, nzp, pidrozdil, short_name_fu, edrpo, name_type_fu, 
+              name_vid_perevirki, pidstava_pozaplan, d_start_perevirki, 
+              d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah, d_napr_proved, n_napr_proved,
+              ker_inspekt_group, ch_inspekt_group,
+              d_akt_perevirki, n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, name_akt_zu, d_rozp_usun, n_rozp_usun, 
+              strok_usun_por, b_usun_lic_umov, name_info_vik, d_dovidki_vik_rozp, dn_akt_nevik, d_post_shtraf,
+              n_post_shtraf, suma_shtraf, strok_splat_shtraf, info_splat_shtraf, info_usun_por, d_dovidki_vik_post,
+              dn_sluj_ur, sluj_perep_splat, dn_doc_splat, dn_sluj_nap_mat, name_sud_dn_roz, n_sud_sprav,
+              d_sud_rish, d_sud_rish_roz, short_zm_rish, name_apel_sud, n_sprav_apel, d_srish_apel, d_res_srish_apel,
+              short_zm_rish_apel, dn_kasac_scar, n_sprav_kasac, d_rish_kasac, d_rish_res_kasac, short_zm_rish_kasac,
+              primitka_sud_ros, splach_sud_zbir, poklad_sud_zbir, povern_sud_zbir, dn_list_dobro_splat, 
+              shtraf_slpach_dobro, dn_sluj_primus, dn_lz_vikon_list, dn_otrum_vikon_list, dn_napr_list_dvs, 
+              dn_rekv_otk_vp, short_opis_zah_dvs, dn_rekv_zak_vp, primitka_dod, napr_zap_derjrei, napr_zap_dfs,
+              napr_zai_police, napr_info_bank, napr_info_zasn, napr_info_prokuror, napr_info_oms, napr_info_dfs
+              FROM inspekt, dic_type_fu, users, dic_vid_perevirki, dic_info_vik, dic_akt_zu
+              WHERE type_fu=id_type_fu AND user=id_user AND vid_perevirki=id_vid_perevirki
+              AND info_vik_rozp=id_info_vik AND vid_akt_zu=id_akt_zu AND id_inspekt=$id AND inspekt.active=1
+              ORDER BY nzp";
+        $rowS = '';
+        if ($result=mysqli_query($link,$sql))
+        {
+            $row=mysqli_fetch_assoc($result);
+            $rowS = json_encode($row, JSON_UNESCAPED_UNICODE);
 
+            mysqli_free_result($result);
+        }
+        return $rowS;
+
+    }
+}
 function get_user()
 {
     global $link;
