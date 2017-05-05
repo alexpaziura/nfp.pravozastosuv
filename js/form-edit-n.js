@@ -134,14 +134,23 @@ $(document).ready(function () {
         var selectedRow = selection[0];
         var selectedRowJS = JSON.stringify(selectedRow);
         var rowTable = [];
-        $.post("requests.php", { id_inst_row: selectedRow.id_inspekt })
+
+        /*$.post("requests.php", { id_inst_row: selectedRow.id_inspekt })
             .done(function(data) {
                 alert("Data Loaded: " +  data);
                 rowTable = $.parseJSON(data);
-            });
-        $("#nzpE").val(rowTable['nzp']);
-        $('#short_name_fuE').val(rowTable.short_name_fu);
-        $('#edrpoEE').val(rowTable.edrpo);
+            });*/
+        $("#nzpE").val(selectedRow.nzp);
+        $('#short_name_fuE').val(selectedRow.short_name_fu);
+        $('#edrpoEE').val(selectedRow.edrpo);
+        var tmp1 = selectedRow.type_fo.substring(20);
+        var typeFU = tmp1.substring(0,tmp1.indexOf("</div>"));
+        $('#type_foE').find('option').filter(function( index ) {
+            return $( this ).attr( "visib" ) === "0";
+        }).attr("hidden", "hidden");
+        $("#type_foE [value='"+typeFU+"']").attr("selected", "selected");
+
+        //<div class="hidden">
     });
     /*$('#vid_perevirkiS').on('change', function () {
         if ($(this).val() == '3') {

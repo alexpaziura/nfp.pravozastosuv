@@ -63,8 +63,8 @@
                                 <select name="type_foE" id="type_foE" class="form-control">
                                     <option value="" hidden></option>
                                     <?php foreach ($table_type_fu as $row): ?>
-                                        <?php if ($row['visible']=='0') continue;?>
-                                        <option value="<?= $row['id_type_fu'] ?>"><?= $row['name_type_fu'] ?></option>
+                                        <?php //if ($row['visible']=='0') continue;?>
+                                        <option value="<?= $row['id_type_fu'] ?>" visib="<?=$row['visible']?>"><?= $row['name_type_fu'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

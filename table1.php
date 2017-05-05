@@ -626,10 +626,9 @@ if (isset($_POST['add_nag'])) {
                             <td><?= $row['pidrozdil'] ?></td>
                             <td><?= $row['short_name_fu'] ?></td>
                             <td><?= $row['edrpo'] ?></td>
-                            <td><?= $row['name_type_fu'] ?></td>
+                            <td><?= "<div class='hidden'>".$row['type_fu']."</div>".$row['name_type_fu'] ?></td>
                             <td><?= $row['name_vid_perevirki'] ?></td>
                             <td>
-
                                 <?
                                 $pidstavi = $row['pidstava_pozaplan'];
                                 $result = '';
@@ -643,7 +642,7 @@ if (isset($_POST['add_nag'])) {
                                         }
                                     }
                                 }
-                                echo $result;
+                                echo "<div class='hidden'>".$row['pidstava_pozaplan']."</div>".$result;
                                 ?></td>
                             <td><?= $row['d_start_perevirki'] == NULL ? '' : date($format_date, $row['d_start_perevirki']) ?></td>
                             <td><?= $row['d_end_perevirki'] == NULL ? '' : date($format_date, $row['d_end_perevirki']) ?></td>
