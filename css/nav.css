@@ -29,7 +29,7 @@
 .navbar-custom .navbar-nav > li > .dropdown-menu > li > a:hover,
 .navbar-custom .navbar-nav > li > .dropdown-menu > li > a:focus {
   color: #fbfdff;
-  background-color: #0e437e;
+  background-color: #a1c9f7;
 }
 .navbar-custom .navbar-nav > li > .dropdown-menu > li > .divider {
   background-color: #0e437e;
@@ -102,4 +102,12 @@
 .table-fixed tbody td, .table-fixed thead > tr> th {
   float: left;
   border-bottom-width: 0;
+}
+#nav-divider {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #0e437e;
+  margin: 0;
+  padding: 0;
 }

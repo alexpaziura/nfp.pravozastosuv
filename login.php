@@ -10,8 +10,8 @@ $correct_data = true;
     if(isset($_POST['login'])) {
             $username = trim(htmlspecialchars($_POST['username']));
             $pwd = trim(htmlspecialchars($_POST['password']));
-            require_once("database.php");
-            require_once("functions.php");
+            require_once("src/database.php");
+            require_once("src/functions.php");
             if (get_user()) {
                 header('Location:/');
                 exit;

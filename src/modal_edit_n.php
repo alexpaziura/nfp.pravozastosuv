@@ -31,7 +31,7 @@
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup></label>
                                     <input name="nzpE" type="text" class="form-control" id="nzpE" maxlength="11"
-                                           data-toggle="popover" data-trigger="hover">
+                                           data-toggle="popover" data-trigger="hover" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -63,7 +63,6 @@
                                 <select name="type_foE" id="type_foE" class="form-control">
                                     <option value="" hidden></option>
                                     <?php foreach ($table_type_fu as $row): ?>
-                                        <?php //if ($row['visible']=='0') continue;?>
                                         <option value="<?= $row['id_type_fu'] ?>" visib="<?=$row['visible']?>"><?= $row['name_type_fu'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -74,8 +73,7 @@
                                 <label for="vid_perevirkiSE">Вид перевірки</label>
                                 <select name="vid_perevirkiSE" id="vid_perevirkiSE" class="form-control">
                                     <?php foreach ($table_vid_perevirki as $row): ?>
-                                        <?php if ($row['visible']=='0') continue;?>
-                                        <option value="<?=$row['id_vid_perevirki'] ?>" <?=$row['id_vid_perevirki']=='1'?'selected':'' ?>><?= $row['name_vid_perevirki'] ?></option>
+                                        <option value="<?=$row['id_vid_perevirki'] ?>" visib="<?=$row['visible']?>"><?= $row['name_vid_perevirki'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

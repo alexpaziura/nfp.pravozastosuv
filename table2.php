@@ -3,8 +3,8 @@ session_start();
 $format_date = 'd.m.Y';
 $for_date_change = 'd.m.Y H:i:s';
 $state_add = '';
-require_once("database.php");
-require_once("functions.php");
+require_once("src/database.php");
+require_once("src/functions.php");
 if (!isset($_SESSION['user'])) {
     header('Location:login.php');
     exit();
@@ -116,7 +116,7 @@ if (isset($_POST['add_nag'])) {
         <ul class="nav navbar-nav">
             <li><a href="table1.php">Інспеційна діяльність</a></li>
             <li  class="active"><a href="table2.php">Інші види діяльності</a></li>
-            <li class="<?= $_SESSION['group'] == 'ДеРЗІТ' ? 'hidden' : 'hidden' ?>"><a href="cms.php">Адміністрування</a></li>
+            <li class="<?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="cms.php">Адміністрування</a></li>
         </ul>
         <form method="post" class="navbar-form navbar-right">
             <div class="form-group">

@@ -27,7 +27,9 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/nav.css">
-
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/jasny-bootstrap.css">
 
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +37,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link href="css/font-awesome.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -49,29 +51,58 @@
             <li><a href="table2.php">Інші види діяльності</a></li>
             <li class="active <?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="cms.php">Адміністрування</a></li>
         </ul>
-
         <form method="post" class="navbar-form navbar-right">
             <div class="form-group">
-                <button class="btn btn-danger" type="submit" name="log_out" id="log_out">
-                    <i class="fa fa-sign-out"></i> Вийти
+                <button class="btn btn-danger btn-labeled" type="submit" name="log_out" id="log_out">
+                    <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Вийти
                 </button>
             </div>
         </form>
         <p class="navbar-text navbar-right">Ви ввійши, як <?=$_SESSION['full_name']?>!</p>
-    </div>
-</div>
 
-<div class="container">
-<h2>Адміністративнивна панель</h2>
+    </div>
+    <hr id="nav-divider">
+    <div class="container" id="nav2row">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#tabUser" data-toggle="tab">Користувачі</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown">Довідники <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#tab2primary" data-toggle="tab">Default 4</a></li>
+                    <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
+                </ul>
+            </li>
+            <li><a href="#tabLogs" data-toggle="tab">Default 2</a></li>
+        </ul>
+    </div>
+
+</div>
+<div class="container-fluid">
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="tabUser">Users</div>
+        <div class="tab-pane fade" id="tab2primary">Primary 2</div>
+        <div class="tab-pane fade" id="tab3primary">Primary 3</div>
+        <div class="tab-pane fade" id="tabLogs">Logs</div>
+    </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
+<script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
+    });
+    // Add slideDown animation to Bootstrap dropdown when expanding.
+    $('.dropdown').on('show.bs.dropdown', function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+    });
+
+    // Add slideUp animation to Bootstrap dropdown when collapsing.
+    $('.dropdown').on('hide.bs.dropdown', function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
     });
 </script>
 

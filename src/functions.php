@@ -159,8 +159,7 @@ function get_dic($dic){
 
 }
 
-function add_inspekt()
-{
+function add_inspekt() {
     if(!isUserActive()) {
         return false;
     }
@@ -269,6 +268,18 @@ function add_inspekt()
         fwrite($logs, $txt);
         fclose($logs);
         return false;
+    }
+
+}
+
+function edit_nag () {
+    if(!isUserActive()) {
+        return false;
+    }
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: ". mysqli_error($link);
+        exit();
     }
 
 }

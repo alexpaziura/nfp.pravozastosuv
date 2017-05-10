@@ -4,8 +4,8 @@ session_start();
 $format_date = 'd.m.Y';
 $for_date_change = 'd.m.Y H:i:s';
 $state_add = '';
-require_once("database.php");
-require_once("functions.php");
+require_once("src/database.php");
+require_once("src/functions.php");
 if ((isset($_POST['log_out']))||(!isUserActive())) {
     unset($_SESSION['id_user']);
     unset($_SESSION['user']);
@@ -30,6 +30,17 @@ if (isset($_POST['add_nag'])) {
     //echo '</pre>';
     //unset($_POST);
 }
+/*if (isset($_POST['edit_nag'])) {
+    if (add_inspekt()) {
+        $state_add = 'success';
+    } else {
+        $state_add = 'error';
+    }
+    //echo '<pre>';
+    //var_dump($_POST);
+    //echo '</pre>';
+    //unset($_POST);
+}*/
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -51,7 +62,6 @@ if (isset($_POST['add_nag'])) {
     <link href="./css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
-    <link rel="stylesheet" href="css/jquery.selectBoxIt.css">
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -76,7 +86,7 @@ if (isset($_POST['add_nag'])) {
 <script src="./js/bootstrap-datepicker.uk.min.js" type="text/javascript"></script>
 <script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-<script type="text/javascript" src="js/jquery.selectBoxIt.js"></script>
+<!--<script type="text/javascript" src="js/jquery.selectBoxIt.js"></script>-->
 <script>
     $(document).ready(function () {
         $("#editBtn").click(function () {
@@ -811,10 +821,10 @@ echo "Difference: ".($time2-$time1);*/
         </div>
     </div>
 </div>
-<?php require_once 'modal_add_naglyad.php'; ?>
+<?php require_once 'src/modal_add_naglyad.php'; ?>
 <script src="js/form-add.js"></script>
 
-<?php require_once 'modal_edit_n.php'; ?>
+<?php require_once 'src/modal_edit_n.php'; ?>
 <script src="js/form-edit-n.js"></script>
 
 
