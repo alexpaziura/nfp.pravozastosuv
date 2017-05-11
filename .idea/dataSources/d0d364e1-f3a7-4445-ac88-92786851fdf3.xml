@@ -351,6 +351,7 @@
       <Position>26</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
     <column id="92" parent="19" name="d_rozp_usun">
       <Position>27</Position>
@@ -372,6 +373,7 @@
       <Position>31</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
     </column>
     <column id="97" parent="19" name="d_dovidki_vik_rozp">
       <Position>32</Position>

@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require_once("src/database.php");
+    require_once("src/functions.php");
     if(!isset($_SESSION['user'])){
         header('Location:login.php');
     } else if ($_SESSION['group']!='ДеРЗІТ') {
@@ -30,7 +32,8 @@
     <link href="css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/jasny-bootstrap.css">
-
+    <link rel="stylesheet" href="./css/bootstrap-table.css">
+    <link rel="stylesheet" href="./css/table-fixed-header.css">
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -64,32 +67,40 @@
     <hr id="nav-divider">
     <div class="container" id="nav2row">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#tabUser" data-toggle="tab">Користувачі</a></li>
+            <li class="active"><a href="#tabUser" data-toggle="tab"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
             <li class="dropdown">
-                <a href="#" data-toggle="dropdown">Довідники <span class="caret"></span></a>
+                <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#tab2primary" data-toggle="tab">Default 4</a></li>
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
-            <li><a href="#tabLogs" data-toggle="tab">Default 2</a></li>
+            <li><a href="#tabLogs" data-toggle="tab"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
+            <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a></li>
         </ul>
     </div>
 
 </div>
 <div class="container-fluid">
     <div class="tab-content">
-        <div class="tab-pane fade in active" id="tabUser">Users</div>
+        <div class="tab-pane fade in active" id="tabUser"><? require_once 'src/tab_users.php';?></div>
+
         <div class="tab-pane fade" id="tab2primary">Primary 2</div>
         <div class="tab-pane fade" id="tab3primary">Primary 3</div>
+
         <div class="tab-pane fade" id="tabLogs">Logs</div>
+        <div class="tab-pane fade" id="tabSQL">SQL</div>
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
+<script src="./js/bootstrap-table.js" type="text/javascript"></script>
+<script src="./js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
+<script src="./js/table-fixed-header.js" type="text/javascript"></script>
 <script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
+<script src="./js/tabs/tab_user.js" type="text/javascript"></script>
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
@@ -105,7 +116,12 @@
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
     });
 </script>
-
+<script>
+    setTimeout(function () {
+        $('#success_add').alert("close");
+        $('#success_err').alert("close");
+    }, 7000);
+</script>
 </body>
 
 </html>

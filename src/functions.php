@@ -82,9 +82,6 @@ function get_user()
                 $_SESSION['user'] = $row['username'];
                 $_SESSION['group'] = $row['memberof'];
                 $_SESSION['full_name'] = $row['full_name'];
-                if (strcmp('ДеРЗІТ', $row['memberof']) == 0) {
-                    mysqli_change_user($link, 'pravadmin', "!AD_dfp?2004_1", "pravozastosuv");
-                }
             }
             break;
         }
@@ -112,6 +109,24 @@ function isUserActive() {
         mysqli_free_result($result);
     }
     return $isActive;
+}
+
+function get_users(){
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: ". mysqli_error($link);
+        exit();
+    }
+
+    $sql = "SELECT * FROM users";
+
+
+    $result = mysqli_query($link, $sql);
+
+    $table_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $table_users;
+
 }
 
 function get_dics() {
@@ -153,9 +168,9 @@ function get_dic($dic){
 
     $result = mysqli_query($link, $sql);
 
-    $table_type_fu = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $table_dic = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
-    return $table_type_fu;
+    return $table_dic;
 
 }
 
@@ -282,4 +297,62 @@ function edit_nag () {
         exit();
     }
 
+}
+
+function add_user () {
+    if(!isUserActive()) {
+        return false;
+    }
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: ". mysqli_error($link);
+        exit();
+    }
+    $username = "'".trim(htmlspecialchars($_POST['username']))."'";
+    $password = "'".md5(trim(htmlspecialchars($_POST['password'])))."'";
+    $pib = "'".trim(htmlspecialchars($_POST['pib']))."'";
+    $memberof = '';
+    switch ($_POST['memberof']) {
+        case "DeRZIT":
+            $memberof = 'ДеРЗІТ';
+            break;
+        case "NPZ":
+            $memberof = 'НПЗ';
+            break;
+        case "UR":
+            $memberof = 'ЮР';
+            break;
+        case "SK":
+            $memberof = 'СК';
+            break;
+        case "FK":
+            $memberof = 'ФК';
+            break;
+        case "KS":
+            $memberof = 'КС';
+            break;
+        case "RRFP":
+            $memberof = 'РРФП';
+            break;
+        case "All_read":
+            $memberof = 'Read';
+            break;
+    }
+    $active = 0;
+    if(isset($_POST['active'])) {
+        $active = 1;
+    }
+
+    $sql = "INSERT INTO users (username, pwd, full_name, memberof, active_user) VALUES ($username, $password, $pib, 
+            '$memberof', $active)";
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        return true;
+    } else {
+        $logs = fopen("logs.txt", "w") or die("Unable to open file!");
+        $txt = "Error: " . $sql . "\n" . mysqli_error($link);
+        fwrite($logs, $txt);
+        fclose($logs);
+        return false;
+    }
 }

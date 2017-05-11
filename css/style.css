@@ -125,6 +125,24 @@ legend {
 .hoverable:hover {
   transition: box-shadow .45s;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+
+.tog.active {
+  display: none;
+}
+
+.tog span:nth-of-type(1)  {
+  display: none;
+}
+.tog span:last-child  {
+  display: block;
+}
+
+.tog.active  span:nth-of-type(1)  {
+  display: block;
+}
+.tog.active span:last-child  {
+  display: none;
+}
 /*.selectboxit-container .selectboxit, .selectboxit-container .selectboxit-options {
   width: 100%;
   border-radius:0;

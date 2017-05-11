@@ -67,12 +67,12 @@ $correct_data = true;
                         <a class="close" href="#" onclick="$('#wrong_field').addClass('hidden');">×</a>Невірний логін чи пароль!
                     </div>
                     <div style="margin-bottom: 12px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user fa-lg"></i></span>
                         <input id="username" type="text" class="form-control" name="username" value="" placeholder="Ім'я користувача">
                     </div>
 
                     <div style="margin-bottom: 12px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
                         <input id="password" type="password" class="form-control" name="password" placeholder="Пароль">
                     </div>
 
