@@ -203,6 +203,7 @@ if (isset($_POST['add_nag'])) {
                         data-toolbar="#toolbar"
                         data-search="true"
                         data-height="850"
+                        data-checkbox-header="false"
                         data-searchOnEnterKey="true"
                         data-click-to-select="true"
                         data-resizable="true"

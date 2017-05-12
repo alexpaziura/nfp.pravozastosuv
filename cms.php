@@ -101,6 +101,8 @@
 <script src="./js/table-fixed-header.js" type="text/javascript"></script>
 <script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
 <script src="./js/tabs/tab_user.js" type="text/javascript"></script>
+<script src="extensions/export/bootstrap-table-export.js"></script>
+<script src="js/tableExport.js"></script>
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
@@ -119,7 +121,9 @@
 <script>
     setTimeout(function () {
         $('#success_add').alert("close");
-        $('#success_err').alert("close");
+        $('#error_add').alert("close");
+        $('#success_edit').alert("close");
+        $('#error_edit').alert("close");
     }, 7000);
 </script>
 </body>

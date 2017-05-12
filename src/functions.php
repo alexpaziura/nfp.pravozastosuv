@@ -356,3 +356,92 @@ function add_user () {
         return false;
     }
 }
+
+function edit_user () {
+    if(!isUserActive()) {
+        return false;
+    }
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: ". mysqli_error($link);
+        exit();
+    }
+    $sql = "SELECT * FROM users WHERE id_user=".$_POST['id_user'].";";
+    $us = [];
+    if ($result=mysqli_query($link,$sql))
+    {
+        $row=mysqli_fetch_assoc($result);
+        $us = $row;
+
+        mysqli_free_result($result);
+    } else {
+        return false;
+    }
+
+    $username_new = trim(htmlspecialchars($_POST['username_edit']));
+    $password_new = trim(htmlspecialchars($_POST['password_edit']));
+    $full_name_new = trim(htmlspecialchars($_POST['pib_edit']));
+    $memberof_new = '';
+    switch ($_POST['memberof_edit']) {
+        case "DeRZIT":
+            $memberof_new = 'ДеРЗІТ';
+            break;
+        case "NPZ":
+            $memberof_new = 'НПЗ';
+            break;
+        case "UR":
+            $memberof_new = 'ЮР';
+            break;
+        case "SK":
+            $memberof_new = 'СК';
+            break;
+        case "FK":
+            $memberof_new = 'ФК';
+            break;
+        case "KS":
+            $memberof_new = 'КС';
+            break;
+        case "RRFP":
+            $memberof_new = 'РРФП';
+            break;
+        case "All_read":
+            $memberof_new = 'Read';
+            break;
+    }
+    $active_user_new = isset($_POST['active_edit']) ? 1 : 0;
+
+    extract($us);
+    $sql_set = "";
+    if ($username != $username_new ) {
+        $sql_set .= "username = '$username_new', ";
+    }
+    if($password_new != ''){
+        if ($pwd != md5($password_new) ) {
+            $sql_set .= "pwd = '$password_new', ";
+        }
+    }
+    if ($full_name != $full_name_new ) {
+        $sql_set .= "full_name = '$full_name_new', ";
+    }
+    if ($memberof != $memberof_new ) {
+        $sql_set .= "memberof = '$memberof_new', ";
+    }
+    if ($active_user != $active_user_new) {
+        $sql_set .= "active_user = $active_user_new, ";
+    }
+    if ($sql_set == '') {
+        return true;
+    }
+
+    $sql = "UPDATE users SET ".$sql_set."WHERE id_user=".$_POST['id_user'].";";
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        return true;
+    } else {
+        $logs = fopen("logs.txt", "w") or die("Unable to open file!");
+        $txt = "Error: " . $sql . "\n" . mysqli_error($link);
+        fwrite($logs, $txt);
+        fclose($logs);
+        return false;
+    }
+}
