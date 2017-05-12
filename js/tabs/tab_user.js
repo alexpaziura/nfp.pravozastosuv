@@ -25,14 +25,17 @@ $(document).ready(function () {
         var selection = $table.bootstrapTable('getSelections');
         if (selection.length > 1) {
             $("#modal-ch-multi").modal({backdrop: "static"});
-        } else if (selection.length == 1) {
+        } else if (selection.length === 1) {
             $("#modal_edit_user").modal({backdrop: "static"});
-        } else if (selection.length == 0) {
+        } else if (selection.length === 0) {
             $("#modal-ch-0").modal({backdrop: "static"});
         }
     });
     $("#addUser").click(function () {
         $("#modal_add_user").modal({backdrop: "static"});
+    });
+    $("#deleteUser").click(function () {
+        $("#modal-timer").modal({backdrop: "static"});
     });
 });
 $('#username').keyup(function () {

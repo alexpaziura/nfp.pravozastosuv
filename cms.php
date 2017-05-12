@@ -11,6 +11,15 @@
         unset($_SESSION['user']);
         unset($_SESSION['group']);
         unset($_SESSION['full_name']);
+        unset($_SESSION['action_time']);
+        session_destroy();
+        header('Location:login.php');
+    }
+    if (isset($_POST['relogin'])) {
+        unset($_SESSION['user']);
+        unset($_SESSION['group']);
+        unset($_SESSION['full_name']);
+        unset($_SESSION['action_time']);
         session_destroy();
         header('Location:login.php');
     }
@@ -92,6 +101,50 @@
         <div class="tab-pane fade" id="tabSQL">SQL</div>
     </div>
 </div>
+<div class="modal fade" id="modal-ch-multi">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header modal-header-warning">
+                <button class="close" type="button" data-dismiss="modal">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Вибрано більше одного запису для
+                    редагування.</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-ch-0">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header modal-header-warning">
+                <button class="close" type="button" data-dismiss="modal">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Не вибрано запис для редагування.</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-timer" style="margin-top: 15%;">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна авторизація!</h2>
+            </div>
+            <div class="modal-body" style="background-color: #e8e1ca;"> <!--f1c2c0-->
+                <form id="form-relogin" method="post" autocomplete="off">
+                <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit" form="form-relogin">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                    Авторизуватись
+                </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -107,6 +160,10 @@
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
+        checkTime();
+        setInterval(function (){
+        checkTime();
+        }, 60000);
     });
     // Add slideDown animation to Bootstrap dropdown when expanding.
     $('.dropdown').on('show.bs.dropdown', function() {
@@ -117,6 +174,15 @@
     $('.dropdown').on('hide.bs.dropdown', function() {
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
     });
+    function checkTime() {
+        var action_time = <?=$_SESSION['action_time']?>;
+        var d = new Date();
+        var sec = d.getTime()/1000;
+        var diff = action_time - sec;
+        if (diff < -3600) {
+            $("#modal-timer").modal({backdrop: "static"});
+        }
+    }
 </script>
 <script>
     setTimeout(function () {
@@ -125,6 +191,7 @@
         $('#success_edit').alert("close");
         $('#error_edit').alert("close");
     }, 7000);
+
 </script>
 </body>
 

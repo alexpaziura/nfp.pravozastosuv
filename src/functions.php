@@ -82,6 +82,7 @@ function get_user()
                 $_SESSION['user'] = $row['username'];
                 $_SESSION['group'] = $row['memberof'];
                 $_SESSION['full_name'] = $row['full_name'];
+                $_SESSION['action_time'] = microtime(true);
             }
             break;
         }

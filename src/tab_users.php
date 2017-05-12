@@ -149,31 +149,6 @@ echo '</pre><br>';
 echo mb_detect_encoding('ДеРЗІТ');
 
 ?>
-<div class="modal fade" id="modal-ch-multi">
-    <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-            <div class="modal-header modal-header-warning">
-                <button class="close" type="button" data-dismiss="modal">
-                    <i class="fa fa-close"></i>
-                </button>
-                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Вибрано більше одного запису для
-                    редагування.</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-ch-0">
-    <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-            <div class="modal-header modal-header-warning">
-                <button class="close" type="button" data-dismiss="modal">
-                    <i class="fa fa-close"></i>
-                </button>
-                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Не вибрано запис для редагування.</h2>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade container-fluid" id="modal_add_user">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -193,7 +168,7 @@ echo mb_detect_encoding('ДеРЗІТ');
                     </div>
                 </div>
             </div>
-            <div class="modal-body" style="background-color: #cae8ca;">
+            <div class="modal-body" style="background-color: #e8e1ca;"> <!--cae8ca-->
                 <form id="add-user" method="post" autocomplete="off">
                         <p style="color: red">
                             <sup>
