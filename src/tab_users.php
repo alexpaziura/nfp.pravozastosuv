@@ -146,7 +146,7 @@ echo '</pre>';
 echo '<pre>';
 mb_list_encodings();
 echo '</pre><br>';
-echo mb_detect_encoding('ДеРЗІТ');
+echo $_SERVER['SERVER_ADDR'];
 
 ?>
 <div class="modal fade container-fluid" id="modal_add_user">
