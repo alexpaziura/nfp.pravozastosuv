@@ -1,3 +1,2 @@
-Error: INSERT INTO users (username, pwd, full_name, memberof, active_user) VALUES ('', 'd41d8cd98f00b204e9800998ecf8427e', '', 
-            '', 0)
-Duplicate entry '' for key 'username_UNIQUE'
+Error: INSERT INTO logs (time_exec, type, user, query, status) VALUES (1494679777, 'AUTH', , 'LOGIN', '0')
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' 'LOGIN', '0')' at line 1

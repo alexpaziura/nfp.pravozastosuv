@@ -8,6 +8,7 @@
         header('Location:/');
     }
     if(isset($_POST['log_out'])){
+        writeLog('AUTH','LOGOUT',1);
         unset($_SESSION['user']);
         unset($_SESSION['group']);
         unset($_SESSION['full_name']);
@@ -97,7 +98,7 @@
         <div class="tab-pane fade" id="tab2primary">Primary 2</div>
         <div class="tab-pane fade" id="tab3primary">Primary 3</div>
 
-        <div class="tab-pane fade" id="tabLogs">Logs</div>
+        <div class="tab-pane fade" id="tabLogs"><? require_once 'src/tab_logs.php';?></div>
         <div class="tab-pane fade" id="tabSQL">SQL</div>
     </div>
 </div>

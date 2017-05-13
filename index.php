@@ -1,9 +1,12 @@
 <?php
     session_start();
+    require_once("src/database.php");
+    require_once("src/functions.php");
     if(!isset($_SESSION['user'])){
         header('Location:login.php');
     }
     if(isset($_POST['log_out'])){
+        writeLog('AUTH','LOGOUT',1);
         unset($_SESSION['user']);
         unset($_SESSION['group']);
         unset($_SESSION['full_name']);

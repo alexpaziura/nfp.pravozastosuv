@@ -7,6 +7,7 @@ $state_add = '';
 require_once("src/database.php");
 require_once("src/functions.php");
 if ((isset($_POST['log_out']))||(!isUserActive())) {
+    writeLog('AUTH','LOGOUT',1);
     unset($_SESSION['id_user']);
     unset($_SESSION['user']);
     unset($_SESSION['group']);

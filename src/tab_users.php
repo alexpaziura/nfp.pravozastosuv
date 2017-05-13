@@ -7,13 +7,15 @@ if(isset($_POST['add_user'])){
     } else {
         $state_add = 'error';
     }
+    $_SESSION['action_time'] = microtime(true);
 }
 if(isset($_POST['edit_user'])){
-    if (add_user()) {
+    if (edit_user()) {
         $state_edit = 'success';
     } else {
         $state_edit = 'error';
     }
+    $_SESSION['action_time'] = microtime(true);
 }
 
 ?>
@@ -77,11 +79,6 @@ if(isset($_POST['edit_user'])){
                         <span class="btn-label"><i class="fa fa-pencil fa-lg"></i></span>Редагувати користувача
                     </button>
                 </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-labeled" id="deleteUser">
-                        <span class="btn-label"><i class="fa fa-user-times fa-lg"></i></span>Видалити користувача
-                    </button>
-                </div>
             </div>
             <div class="">
                 <table
@@ -139,16 +136,6 @@ if(isset($_POST['edit_user'])){
         </div>
     </div>
 </div>
-<?php
-echo '<pre>';
-var_dump($_POST);
-echo '</pre>';
-echo '<pre>';
-mb_list_encodings();
-echo '</pre><br>';
-echo $_SERVER['SERVER_ADDR'];
-
-?>
 <div class="modal fade container-fluid" id="modal_add_user">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">

@@ -87,7 +87,11 @@ function get_user()
             break;
         }
     }
-
+    if ($exist) {
+        writeLog('AUTH','LOGIN',1);
+    } else {
+        writeLog('AUTH','LOGIN',0);
+    }
     return $exist;
 }
 function isUserActive() {
@@ -119,7 +123,7 @@ function get_users(){
         exit();
     }
 
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM users WHERE id_user <> 0";
 
 
     $result = mysqli_query($link, $sql);
@@ -277,8 +281,10 @@ function add_inspekt() {
     $result = mysqli_query($link, $sql);
 
     if ($result) {
+        writeLog('QUERY',$sql,1);
         return true;
     } else {
+        writeLog('QUERY',$sql,0);
         $logs = fopen("logs.txt", "w") or die("Unable to open file!");
         $txt = "Error: " . $sql . "\n" . mysqli_error($link);
         fwrite($logs, $txt);
@@ -348,8 +354,10 @@ function add_user () {
             '$memberof', $active)";
     $result = mysqli_query($link, $sql);
     if ($result) {
+        writeLog('QUERY',$sql,1);
         return true;
     } else {
+        writeLog('QUERY',$sql,0);
         $logs = fopen("logs.txt", "w") or die("Unable to open file!");
         $txt = "Error: " . $sql . "\n" . mysqli_error($link);
         fwrite($logs, $txt);
@@ -368,12 +376,19 @@ function edit_user () {
         exit();
     }
     $sql = "SELECT * FROM users WHERE id_user=".$_POST['id_user'].";";
-    $us = [];
+    $username = '';
+    $pwd = '';
+    $full_name = '';
+    $memberof = '';
+    $active_user = 0;
     if ($result=mysqli_query($link,$sql))
     {
         $row=mysqli_fetch_assoc($result);
-        $us = $row;
-
+        $username = $row['username'];
+        $pwd = $row['pwd'];
+        $full_name = $row['full_name'];
+        $memberof = $row['memberof'];
+        $active_user = $row['active_user'];
         mysqli_free_result($result);
     } else {
         return false;
@@ -411,30 +426,74 @@ function edit_user () {
     }
     $active_user_new = isset($_POST['active_edit']) ? 1 : 0;
 
-    extract($us);
-    $sql_set = "";
+    $sql_set = array(
+        "username" => "",
+        "pwd" => "",
+        "full_name" => "",
+        "memberof" => "",
+        "active_user" => ""
+    );
     if ($username != $username_new ) {
-        $sql_set .= "username = '$username_new', ";
+        $sql_set["username"] = "'$username_new'";
     }
     if($password_new != ''){
         if ($pwd != md5($password_new) ) {
-            $sql_set .= "pwd = '$password_new', ";
+            $sql_set["pwd"] = "'".md5($password_new)."'";
         }
     }
     if ($full_name != $full_name_new ) {
-        $sql_set .= "full_name = '$full_name_new', ";
+        $sql_set["full_name"] = "'$full_name_new'";
     }
     if ($memberof != $memberof_new ) {
-        $sql_set .= "memberof = '$memberof_new', ";
+        $sql_set["memberof"] = "'$memberof_new'";
     }
     if ($active_user != $active_user_new) {
-        $sql_set .= "active_user = $active_user_new, ";
+        $sql_set["active_user"] = "$active_user_new";
     }
-    if ($sql_set == '') {
+    $query = "";
+    $isNoChanged = true;
+    foreach ($sql_set as $key => $value) {
+        if ($value != "") {
+            $isNoChanged = false;
+        }
+    }
+    if ($isNoChanged == true) {
         return true;
     }
+    $i = 1;
+    foreach ($sql_set as $key => $value) {
+        if (($value != "")&&($i == 1)) {
+            $query .= $key."=".$value;
+            $i++;
+        } elseif ($value != "") {
+            $query .= ", ".$key."=".$value;
+            $i++;
+        }
+    }
+    $sql = "UPDATE users SET ".$query." WHERE id_user=".$_POST['id_user'].";";
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        writeLog('QUERY',$sql,1);
+        return true;
+    } else {
+        writeLog('QUERY',$sql,0);
+        $logs = fopen("logs.txt", "w") or die("Unable to open file!");
+        $txt = "Error: " . $sql . "\n" . mysqli_error($link);
+        fwrite($logs, $txt);
+        fclose($logs);
+        return false;
+    }
+}
 
-    $sql = "UPDATE users SET ".$sql_set."WHERE id_user=".$_POST['id_user'].";";
+function writeLog($type, $query, $status) {
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: ". mysqli_error($link);
+        exit();
+    }
+    $time = strtotime(date('d.m.Y H:i:s'));
+    $user = isset($_SESSION['id_user'])? $_SESSION['id_user']: 0;
+    $sql = "INSERT INTO logs (time_exec, type, user, query, status) VALUES ($time, '$type', $user, '$query', '$status')";
     $result = mysqli_query($link, $sql);
     if ($result) {
         return true;
@@ -445,4 +504,23 @@ function edit_user () {
         fclose($logs);
         return false;
     }
+
+}
+
+function get_logs(){
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: ". mysqli_error($link);
+        exit();
+    }
+
+    $sql = "SELECT id_log, time_exec, type, username, query, status FROM logs, users WHERE user=id_user";
+
+
+    $result = mysqli_query($link, $sql);
+
+    $table_logs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $table_logs;
+
 }
