@@ -26,10 +26,7 @@ if (isset($_POST['add_nag'])) {
     } else {
         $state_add = 'error';
     }
-    //echo '<pre>';
-    //var_dump($_POST);
-    //echo '</pre>';
-    //unset($_POST);
+    $_SESSION['action_time'] = microtime(true);
 }
 /*if (isset($_POST['edit_nag'])) {
     if (add_inspekt()) {
@@ -106,9 +103,6 @@ if (isset($_POST['add_nag'])) {
             $("#modal-add-naglyad").modal({backdrop: "static"});
             click1();
         });
-        /*$("#modal-add-naglyad").on('show.bs.modal', function () {
-         $('.form-control').val('');
-         });*/
 
     });
 
@@ -639,7 +633,7 @@ if (isset($_POST['add_nag'])) {
                             <td><?= $row['short_name_fu'] ?></td>
                             <td><?= $row['edrpo'] ?></td>
                             <td><?= "<div class='hidden'>".$row['type_fu']."</div>".$row['name_type_fu'] ?></td>
-                            <td><?= $row['name_vid_perevirki'] ?></td>
+                            <td><?= "<div class='hidden'>".$row['vid_perevirki']."</div>".$row['name_vid_perevirki'] ?></td>
                             <td>
                                 <?
                                 $pidstavi = $row['pidstava_pozaplan'];
@@ -653,9 +647,8 @@ if (isset($_POST['add_nag'])) {
                                             break;
                                         }
                                     }
-                                }
-                                echo "<div class='hidden'>".$row['pidstava_pozaplan']."</div>".$result;
-                                ?></td>
+                                }?>
+                                <?= "<div class='hidden'>".$row['pidstava_pozaplan']."</div>".$result;?></td>
                             <td><?= $row['d_start_perevirki'] == NULL ? '' : date($format_date, $row['d_start_perevirki']) ?></td>
                             <td><?= $row['d_end_perevirki'] == NULL ? '' : date($format_date, $row['d_end_perevirki']) ?></td>
                             <td><?= $row['d_start_dialnist'] == NULL ? '' : date($format_date, $row['d_start_dialnist']) ?></td>
@@ -756,11 +749,16 @@ if (isset($_POST['add_nag'])) {
     </div>
 </div>
 <?php
-/*if (isset($_POST['add_nag'])) {
+if (isset($_POST['edit_nag'])) {
     echo '<br><pre>';
     var_dump($_POST);
     echo '</pre>';
+    echo '<br><pre>';
+    var_dump(edit_nag());
+    echo '</pre>';
+    //echo edit_nag();
 }
+/*
 echo 'Время выполнения скрипта tables: '.$time1.' сек.';
 echo "<br>";
 echo 'Время выполнения скрипта all tables: '.$time2.' сек.';

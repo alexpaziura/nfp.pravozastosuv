@@ -140,30 +140,61 @@ $(document).ready(function () {
                 alert("Data Loaded: " +  data);
                 rowTable = $.parseJSON(data);
             });*/
+        $('#id_inspekt').val(selectedRow.id_inspekt);
         $("#nzpE").val(selectedRow.nzp);
-        $('#short_name_fuE').val(selectedRow.short_name_fu);
+        //$('#short_name_fuE').val(selectedRow.short_name_fu);
+        $('#short_name_fuE').val(selectedRowJS);
         $('#edrpoEE').val(selectedRow.edrpo);
         var tmp1 = selectedRow.type_fo.substring(20);
         var typeFU = tmp1.substring(0,tmp1.indexOf("</div>"));
         $('#type_foE').find('option').filter(function( index ) {
             return $( this ).attr( "visib" ) === "0";
         }).attr("hidden", "hidden");
+        $('#type_foE').find('option').attr("selected", false);
         $("#type_foE [value='"+typeFU+"']").attr("selected", "selected");
-
-        //<div class="hidden">
-    });
-    /*$('#vid_perevirkiS').on('change', function () {
-        if ($(this).val() == '3') {
-            $('#pidstava_pozaplanS').prop('disabled', false);
-            $('#pidstava_pozaplanS').multiselect('refresh');
-            $("#pidstava_pozaplanS").multiselect('enable');
+        tmp1 = selectedRow.vid_perevirki.substring(20);
+        var vid_perev = tmp1.substring(0, tmp1.indexOf("</div>"));
+        $('#vid_perevirkiSE').find('option').filter(function ( index ) {
+            return $(this).attr("visib") === "0";
+        }).attr("hidden", "hidden");
+        $('#vid_perevirkiSE').find('option').attr("selected", false);
+        $("#vid_perevirkiSE [value='"+vid_perev+"']").prop("selected","selected");
+        tmp1 = selectedRow.pidstava_pozaplan.trim().substring(20);
+        var pozaplan = tmp1.substring(0, tmp1.indexOf("</div>"));
+        if ($('#vid_perevirkiSE').val() === '3') {
+            $('#pidstava_pozaplanSE').prop('disabled', false);
+            $('#pidstava_pozaplanSE').multiselect('refresh');
+            $("#pidstava_pozaplanSE").multiselect('enable');
         }
         else {
-            $('#pidstava_pozaplanS').prop('disabled', 'disabled');
-            $('#pidstava_pozaplanS').multiselect('refresh');
-            $('#pidstava_pozaplanS').multiselect('disable');
+            $('#pidstava_pozaplanSE').prop('disabled', 'disabled');
+            $('#pidstava_pozaplanSE').multiselect('refresh');
+            $('#pidstava_pozaplanSE').multiselect('disable');
         }
-    });*/
+        $('#pidstava_pozaplanSE').multiselect('deselectAll', false);
+        $('#pidstava_pozaplanSE').multiselect('refresh');
+        if (pozaplan.length !== 0) {
+            var re = /\s*;\s*/;
+            var pidstavs = pozaplan.split(re);
+            for (var i=0; i<pidstavs.length-1;i++) {
+                $('#pidstava_pozaplanSE').multiselect('select', pidstavs[i])
+            }
+        }
+
+
+    });
+    $('#vid_perevirkiSE').on('change', function () {
+        if ($(this).val() == '3') {
+            $('#pidstava_pozaplanSE').prop('disabled', false);
+            $('#pidstava_pozaplanSE').multiselect('refresh');
+            $("#pidstava_pozaplanSE").multiselect('enable');
+        }
+        else {
+            $('#pidstava_pozaplanSE').prop('disabled', 'disabled');
+            $('#pidstava_pozaplanSE').multiselect('refresh');
+            $('#pidstava_pozaplanSE').multiselect('disable');
+        }
+    });
     $('#pidstava_pozaplanSE').multiselect({
         nonSelectedText: 'Виберіть підставу!',
         allSelectedText: 'Вибрано всі підстави',

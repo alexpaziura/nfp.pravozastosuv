@@ -17,6 +17,7 @@
         header('Location:login.php');
     }
     if (isset($_POST['relogin'])) {
+        writeLog('AUTH','LOGOUT',1);
         unset($_SESSION['user']);
         unset($_SESSION['group']);
         unset($_SESSION['full_name']);

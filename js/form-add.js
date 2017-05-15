@@ -117,6 +117,12 @@ $('#type_fo').on('change', function () {
         $(this).addClass('accepted_field');
     }
 });
+$("#modal-add-naglyad").on('show.bs.modal', function () {
+    $('#add-form')[0].reset();
+    $('#add-form .form-control').removeClass('required_field');
+    $('#add-form .form-control').removeClass('accepted_field');
+    $('#add-form .form-control').popover('hide');
+});
 $(document).ready(function(){
     $('#nzp').popover({title: "Поле обов'язкове для заповнення!", content: "Допускаються тільки цифри!",
         trigger: "manual", placement: "top", animation:true });
@@ -128,8 +134,7 @@ $(document).ready(function(){
     $('#suma_shtraf').popover({title: "Допускаються тільки цифри і крапка!",
         content: "Формат запису: 999999999.99", trigger: "manual", placement: "top",
         animation: true});
-});
-$(document).ready(function () {
+
     $('#vid_perevirkiS').on('change', function () {
         if ($(this).val() == '3') {
             $('#pidstava_pozaplanS').prop('disabled', false);

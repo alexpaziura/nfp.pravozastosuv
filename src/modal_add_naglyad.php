@@ -88,7 +88,6 @@
                                     <label for="pidstava_pozaplanS">Підстава проведення позапланової перевірки</label>
                                     <select name="pidstava_pozaplanS[]" multiple="multiple" id="pidstava_pozaplanS" class="form-control" disabled>
                                         <?php foreach ($table_p as $row): ?>
-                                            <?php if ($row['visible']=='0') continue;?>
                                             <option value="<?=$row['id_pozaplan'] ?>"><?= $row['name_pozaplan'] ?></option>
                                         <?php endforeach; ?>
                                     </select>

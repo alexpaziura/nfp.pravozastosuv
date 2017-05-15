@@ -24,6 +24,7 @@
                             <sup>
                                 <i class="fa fa-asterisk" style="color: red"></i>
                             </sup> - Обов'язкове поле!</p>
+                        <input type="hidden" name="id_inspekt" id="id_inspekt" value="">
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
@@ -83,7 +84,6 @@
                                 <label for="pidstava_pozaplanSE">Підстава проведення позапланової перевірки</label>
                                 <select name="pidstava_pozaplanSE[]" multiple="multiple" id="pidstava_pozaplanSE" class="form-control" disabled>
                                     <?php foreach ($table_p as $row): ?>
-                                        <?php if ($row['visible']=='0') continue;?>
                                         <option value="<?=$row['id_pozaplan'] ?>"><?= $row['name_pozaplan'] ?></option>
                                     <?php endforeach; ?>
                                 </select>

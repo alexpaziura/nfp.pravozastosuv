@@ -11,7 +11,7 @@ function get_table_inspect()
     else
     {
     $sql = "SELECT id_inspekt, active, date_change, username, nzp, pidrozdil, short_name_fu, edrpo, type_fu, name_type_fu, 
-              name_vid_perevirki, pidstava_pozaplan, d_start_perevirki, 
+              vid_perevirki, name_vid_perevirki, pidstava_pozaplan, d_start_perevirki, 
               d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah, d_napr_proved, n_napr_proved,
               ker_inspekt_group, ch_inspekt_group,
               d_akt_perevirki, n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, name_akt_zu, d_rozp_usun, n_rozp_usun, 
@@ -303,6 +303,20 @@ function edit_nag () {
         echo "Error: ". mysqli_error($link);
         exit();
     }
+    $sql = "SELECT * FROM inspekt WHERE id_inspekt=".$_POST['id_inspekt'].";";
+    if ($result=mysqli_query($link,$sql))
+    {
+        $row=mysqli_fetch_assoc($result);
+        extract($row,EXTR_PREFIX_ALL,'old');
+        mysqli_free_result($result);
+    } else {
+        return false;
+    }
+
+    $new_nzp = trim(htmlspecialchars($_POST['nzp'], ENT_QUOTES));
+
+
+
 
 }
 
@@ -376,19 +390,10 @@ function edit_user () {
         exit();
     }
     $sql = "SELECT * FROM users WHERE id_user=".$_POST['id_user'].";";
-    $username = '';
-    $pwd = '';
-    $full_name = '';
-    $memberof = '';
-    $active_user = 0;
     if ($result=mysqli_query($link,$sql))
     {
         $row=mysqli_fetch_assoc($result);
-        $username = $row['username'];
-        $pwd = $row['pwd'];
-        $full_name = $row['full_name'];
-        $memberof = $row['memberof'];
-        $active_user = $row['active_user'];
+        extract($row,EXTR_PREFIX_ALL,'old');
         mysqli_free_result($result);
     } else {
         return false;
@@ -433,21 +438,21 @@ function edit_user () {
         "memberof" => "",
         "active_user" => ""
     );
-    if ($username != $username_new ) {
+    if ($old_username != $username_new ) {
         $sql_set["username"] = "'$username_new'";
     }
     if($password_new != ''){
-        if ($pwd != md5($password_new) ) {
+        if ($old_pwd != md5($password_new) ) {
             $sql_set["pwd"] = "'".md5($password_new)."'";
         }
     }
-    if ($full_name != $full_name_new ) {
+    if ($old_full_name != $full_name_new ) {
         $sql_set["full_name"] = "'$full_name_new'";
     }
-    if ($memberof != $memberof_new ) {
+    if ($old_memberof != $memberof_new ) {
         $sql_set["memberof"] = "'$memberof_new'";
     }
-    if ($active_user != $active_user_new) {
+    if ($old_active_user != $active_user_new) {
         $sql_set["active_user"] = "$active_user_new";
     }
     $query = "";
