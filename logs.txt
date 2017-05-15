@@ -1,2 +1,2 @@
-Error: INSERT INTO logs (time_exec, type, user, query, status) VALUES (1494679777, 'AUTH', , 'LOGIN', '0')
-You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' 'LOGIN', '0')' at line 1
+Error: INSERT INTO logs (time_exec, type, user, query, status) VALUES (1494867789, 'AUTH', 0, 'LOGIN', '0')
+INSERT command denied to user 'pravuser'@'bootstrap3' for table 'logs'

@@ -529,3 +529,4 @@ function get_logs(){
     return $table_logs;
 
 }
+
