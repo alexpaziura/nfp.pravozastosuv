@@ -128,7 +128,7 @@ if (isset($_POST['add_nag'])) {
         <ul class="nav navbar-nav">
             <li class="active"><a href="table1.php">Інспеційна діяльність</a></li>
             <li><a href="table2.php">Інші види діяльності</a></li>
-            <li class="<?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="cms.php">Адміністрування</a></li>
+            <li class="<?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="cms/">Адміністрування</a></li>
         </ul>
         <form method="post" class="navbar-form navbar-right">
             <div class="form-group">

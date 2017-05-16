@@ -1,9 +1,9 @@
 <?php
     session_start();
-    require_once("src/database.php");
-    require_once("src/functions.php");
+    require_once("../src/database.php");
+    require_once("../src/functions.php");
     if(!isset($_SESSION['user'])){
-        header('Location:login.php');
+        header('Location: ../login.php');
     } else if ($_SESSION['group']!='ДеРЗІТ') {
         header('Location:/');
     }
@@ -14,7 +14,7 @@
         unset($_SESSION['full_name']);
         unset($_SESSION['action_time']);
         session_destroy();
-        header('Location:login.php');
+        header('Location: ../login.php');
     }
     if (isset($_POST['relogin'])) {
         writeLog('AUTH','LOGOUT',1);
@@ -23,7 +23,7 @@
         unset($_SESSION['full_name']);
         unset($_SESSION['action_time']);
         session_destroy();
-        header('Location:login.php');
+        header('Location: ../login.php');
     }
 
 ?>
@@ -38,13 +38,13 @@
     <title>Правозастосування</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/nav.css">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/jasny-bootstrap.css">
-    <link rel="stylesheet" href="./css/bootstrap-table.css">
-    <link rel="stylesheet" href="./css/table-fixed-header.css">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/jasny-bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap-table.css">
+    <link rel="stylesheet" href="../css/table-fixed-header.css">
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -61,9 +61,9 @@
             <a href="/" class="navbar-brand"><i class="fa fa-balance-scale fa-lg"></i> Правозастосування</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="table1.php">Інспеційна діяльність</a></li>
-            <li><a href="table2.php">Інші види діяльності</a></li>
-            <li class="active <?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="cms.php">Адміністрування</a></li>
+            <li><a href="../table1.php">Інспеційна діяльність</a></li>
+            <li><a href="../table2.php">Інші види діяльності</a></li>
+            <li class="active <?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="/cms/">Адміністрування</a></li>
         </ul>
         <form method="post" class="navbar-form navbar-right">
             <div class="form-group">
@@ -78,7 +78,7 @@
     <hr id="nav-divider">
     <div class="container" id="nav2row">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#tabUser" data-toggle="tab"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
+            <li><a href="users.php"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -86,85 +86,34 @@
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
-            <li><a href="#tabLogs" data-toggle="tab"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
+            <li><a href="logs.php"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
             <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a></li>
         </ul>
     </div>
 
 </div>
 <div class="container-fluid">
-    <div class="tab-content">
-        <div class="tab-pane fade in active" id="tabUser"><? require_once 'src/tab_users.php';?></div>
 
-        <div class="tab-pane fade" id="tabTypeFu"><? require_once 'src/tab_type_fu.php';?></div>
-        <div class="tab-pane fade" id="tab3primary">Primary 3</div>
+</div>
 
-        <div class="tab-pane fade" id="tabLogs"><? require_once 'src/tab_logs.php';?></div>
-        <div class="tab-pane fade" id="tabSQL">SQL query</div>
-    </div>
-</div>
-<div class="modal fade" id="modal-ch-multi">
-    <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-            <div class="modal-header modal-header-warning">
-                <button class="close" type="button" data-dismiss="modal">
-                    <i class="fa fa-close"></i>
-                </button>
-                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Вибрано більше одного запису для
-                    редагування.</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-ch-0">
-    <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-            <div class="modal-header modal-header-warning">
-                <button class="close" type="button" data-dismiss="modal">
-                    <i class="fa fa-close"></i>
-                </button>
-                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Не вибрано запис для редагування.</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modal-timer" style="margin-top: 15%;">
-    <div class="modal-dialog modal-lg ">
-        <div class="modal-content">
-            <div class="modal-header modal-header-danger">
-                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна авторизація!</h2>
-            </div>
-            <div class="modal-body" style="background-color: #e8e1ca;"> <!--f1c2c0-->
-                <form id="form-relogin" method="post" autocomplete="off">
-                <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit" form="form-relogin">
-                    <span class="btn-label">
-                        <i class="fa fa-floppy-o fa-lg"></i>
-                    </span>
-                    Авторизуватись
-                </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery-2.1.1.js"></script>
+<script src="../js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.js"></script>
-<script src="./js/bootstrap-table.js" type="text/javascript"></script>
-<script src="./js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
-<script src="./js/table-fixed-header.js" type="text/javascript"></script>
-<script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
-<script src="./js/tabs/tab_user.js" type="text/javascript"></script>
-<script src="extensions/export/bootstrap-table-export.js"></script>
-<script src="js/tableExport.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/bootstrap-table.js" type="text/javascript"></script>
+<script src="../js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
+<script src="../js/table-fixed-header.js" type="text/javascript"></script>
+<script src="../js/jasny-bootstrap.js" type="text/javascript"></script>
+<script src="../js/tabs/tab_user.js" type="text/javascript"></script>
+<script src="../extensions/export/bootstrap-table-export.js"></script>
+<script src="../js/tableExport.js"></script>
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
         checkTime();
         setInterval(function (){
-        checkTime();
+            checkTime();
         }, 60000);
     });
     // Add slideDown animation to Bootstrap dropdown when expanding.

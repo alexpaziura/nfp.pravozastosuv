@@ -95,7 +95,7 @@ width: 60%;
     z-index: 3;
     color: #fff;
     cursor: default;
-    background-color: #1270d9;
+    background-color: #428BCA;
     border-color: #0e437e;
 }
 .accepted_field, .accepted_field:focus {
