@@ -82,7 +82,7 @@
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#tab2primary" data-toggle="tab">Default 4</a></li>
+                    <li><a href="#tabTypeFu" data-toggle="tab">Тип суб'єкта нагляду</a></li>
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
@@ -96,7 +96,7 @@
     <div class="tab-content">
         <div class="tab-pane fade in active" id="tabUser"><? require_once 'src/tab_users.php';?></div>
 
-        <div class="tab-pane fade" id="tab2primary">Primary 2</div>
+        <div class="tab-pane fade" id="tabTypeFu"><? require_once 'src/tab_type_fu.php';?></div>
         <div class="tab-pane fade" id="tab3primary">Primary 3</div>
 
         <div class="tab-pane fade" id="tabLogs"><? require_once 'src/tab_logs.php';?></div>
