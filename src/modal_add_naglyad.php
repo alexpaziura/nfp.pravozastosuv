@@ -5,7 +5,7 @@
 <div class="modal container-fluid" id="modal-add-naglyad">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header modal-header-success">
+            <div class="modal-header modal-header-primary">
                 <button class="close" type="button" data-dismiss="modal">
                     <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-body" style="background-color: #cae8ca;">
+            <div class="modal-body" style="background-color: #d9d9d9;">
                 <form id="add-form" method="post" autocomplete="off">
                     <div id="modal-page-1" class="modal-page">
                         <p style="color: red">
@@ -553,14 +553,14 @@
                         </fieldset>
                     </div>
                     <div id="modal-page-4" class="modal-page">
-                    <!--    <fieldset>
+                      <fieldset>
                             <legend>Інформація щодо розподілу судових витрат</legend>
                             <div class="form-group">
                                 <label>Повернуто судовий збір за рішенням суду до бюджету</label>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="n_povern_sud_zbir">Номер</label>
+                                            <label for="n_povern_sud_zbir">№ п/д</label>
                                             <input name="n_povern_sud_zbir" type="text" class="form-control"
                                                    id="n_povern_sud_zbir"
                                                    maxlength="34">
@@ -581,7 +581,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="s_povern_sud_zbir">Сума штрафу, грн</label>
+                                            <label for="s_povern_sud_zbir">Сума, грн</label>
                                             <input name="s_povern_sud_zbir" type="text" class="form-control"
                                                    id="s_povern_sud_zbir" maxlength="12">
                                         </div>
@@ -589,9 +589,9 @@
                                 </div>
                             </div>
                         </fieldset>
-                            <div class="form-group">
-                                <label for="dn_sluj_ur">Дата та номер службової записки до ЮрДеп щодо стягнення штрафної
-                                    санкції у судовому порядку</label>
+                            <div class="form-group" style="margin-top: -20px;">
+                                <label for="dn_sluj_ur">Дата/номер листа до суб'єкту нагляду про добровільнк сплату
+                                    штрафної санкції (судового збору) за рішенням суду</label>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="d_sluj_urD">Дата</label>
@@ -612,13 +612,13 @@
                                 </div>
                             </div>
                         <fieldset>
-                            <legend>Інформація щодо розподілу судових витрат</legend>
+                            <legend>Процедури примусового стягнення за рішенням суду</legend>
                             <div class="form-group">
-                                <label>Повернуто судовий збір за рішенням суду до бюджету</label>
+                                <label>Штрафна санкція сплачена добровільно за рішенням суду</label>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="n_povern_sud_zbir">Номер</label>
+                                            <label for="n_povern_sud_zbir">№ п/д</label>
                                             <input name="n_povern_sud_zbir" type="text" class="form-control"
                                                    id="n_povern_sud_zbir"
                                                    maxlength="34">
@@ -639,7 +639,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="s_povern_sud_zbir">Сума штрафу, грн</label>
+                                            <label for="s_povern_sud_zbir">Сума, грн</label>
                                             <input name="s_povern_sud_zbir" type="text" class="form-control"
                                                    id="s_povern_sud_zbir" maxlength="12">
                                         </div>
@@ -647,8 +647,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="dn_sluj_ur">Дата та номер службової записки до ЮрДеп щодо стягнення штрафної
-                                    санкції у судовому порядку</label>
+                                <label for="dn_sluj_ur">Дата/номер службової записки щодо необхідності примусового
+                                    виконання рішення суду</label>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="d_sluj_urD">Дата</label>
@@ -668,11 +668,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </fieldset>-->
+                        </fieldset>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer" style="background-color: #cae8ca;">
+            <div class="modal-footer" style="background-color: #d9d9d9;">
                 <nav class="text-center" style="margin-top: -20px; margin-bottom: -15px;">
                     <ul class="pagination">
                         <li id="page-1"><a href="#" onclick="click1()">1</a></li>
@@ -711,26 +711,26 @@
     function click1() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-1').removeClass('hidden');
-        $('.pagination li').removeClass('active-success');
-        $('#page-1').addClass('active-success');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-1').addClass('active-primary');
     }
     function click2() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-2').removeClass('hidden');
-        $('.pagination li').removeClass('active-success');
-        $('#page-2').addClass('active-success');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-2').addClass('active-primary');
     }
     function click3() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-3').removeClass('hidden');
-        $('.pagination li').removeClass('active-success');
-        $('#page-3').addClass('active-success');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-3').addClass('active-primary');
     }
     function click4() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-4').removeClass('hidden');
-        $('.pagination li').removeClass('active-success');
-        $('#page-4').addClass('active-success');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-4').addClass('active-primary');
     }
     /*var formIsOk = true;
      $('#add-form').submit(function () {

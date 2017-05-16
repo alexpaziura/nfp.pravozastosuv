@@ -182,7 +182,7 @@ if (isset($_POST['add_nag'])) {
         <div class="container-fluid">
             <div id="toolbar" class="btn-toolbar">
                 <div class="btn-group <?= $_SESSION['group'] != 'ЮР' ? '' : 'hidden' ?>">
-                    <button type="button" class="btn btn-success btn-labeled add" id="addBtn">
+                    <button type="button" class="btn btn-primary btn-labeled add" id="addBtn">
                         <span class="btn-label"><i class="fa fa-plus fa-lg"></i></span>Додати запис
                     </button>
                 </div>
