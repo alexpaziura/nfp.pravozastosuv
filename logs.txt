@@ -1,2 +1,14 @@
-Error: INSERT INTO logs (time_exec, type, user, query, status) VALUES (1494679777, 'AUTH', , 'LOGIN', '0')
-You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ' 'LOGIN', '0')' at line 1
+Error: INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_name_fu, edrpo, type_fu, vid_perevirki, pidstava_pozaplan,
+            d_start_perevirki, d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah,
+            d_napr_proved, n_napr_proved, ker_inspekt_group, ch_inspekt_group, d_akt_perevirki,
+            n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, d_rozp_usun, n_rozp_usun, strok_usun_por,
+            b_usun_lic_umov, info_vik_rozp, d_dovidki_vik_rozp, dn_akt_nevik, d_post_shtraf, n_post_shtraf, suma_shtraf,
+            strok_splat_shtraf, info_splat_shtraf, info_usun_por, d_dovidki_vik_post, dn_sluj_ur, sluj_perep_splat, 
+            dn_doc_splat, dn_sluj_nap_mat) 
+            VALUES (1, 1494918441, 1, 34343, 10, 'fdfdfdf','4343434344',7,1,NULL,
+            NULL, NULL, NULL, NULL, NULL, 'ээ 'fdfdfd'',
+            NULL, NULL, NULL, NULL, NULL,
+            NULL, NULL, NULL, 1, NULL, NULL, NULL,
+            NULL, 1, NULL, ' ', NULL, NULL,
+            NULL, NULL, NULL, NULL, NULL, ' ',
+            NULL, ' ', ' ')

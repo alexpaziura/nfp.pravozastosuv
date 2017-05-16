@@ -27,6 +27,7 @@ if (isset($_POST['add_nag'])) {
         $state_add = 'error';
     }
     $_SESSION['action_time'] = microtime(true);
+    //header ("location: ".$_SERVER['REQUEST_URI']);
 }
 /*if (isset($_POST['edit_nag'])) {
     if (add_inspekt()) {
@@ -92,10 +93,10 @@ if (isset($_POST['add_nag'])) {
             var selection = $table.bootstrapTable('getSelections');
             if (selection.length > 1) {
                 $("#modal-ch-multi").modal({backdrop: "static"});
-            } else if (selection.length == 1) {
+            } else if (selection.length === 1) {
                 $("#modal_edit_n").modal({backdrop: "static"});
                 click1e();
-            } else if (selection.length == 0) {
+            } else if (selection.length === 0) {
                 $("#modal-ch-0").modal({backdrop: "static"});
             }
         });
@@ -144,7 +145,14 @@ if (isset($_POST['add_nag'])) {
 <button id="button" class="btn btn-default">getSelectedRow</button></div>-->
     <div class="row">
         <div class="container">
-            <div class="alert alert-success alert-dismissable alert-fixed <?= $state_add == 'success' ? '' : 'hidden' ?>"
+            <div class="alert alert-success alert-dismissable alert-fixed
+            <?php
+            if ($state_add == 'success') {
+                echo '';
+            } else {
+                echo 'hidden';
+            }
+            ?>"
                  id="success_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
                     <i class="fa fa-close"></i>
@@ -155,7 +163,13 @@ if (isset($_POST['add_nag'])) {
     </div>
     <div class="row">
         <div class="container">
-            <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_add == 'error' ? '' : 'hidden' ?>"
+            <div class="alert alert-danger alert-dismissable alert-fixed <?php
+            if ($state_add == 'error') {
+                echo '';
+            } else {
+                echo 'hidden';
+            }
+            ?>"
                  id="success_err">
                 <button type="button" class="close alert-close" data-dismiss="alert">
                     <i class="fa fa-close"></i>
@@ -259,12 +273,9 @@ if (isset($_POST['add_nag'])) {
                         <th colspan="8" data-halign="center" data-align="center">Постанова про застосування штрафної
                             санкції
                         </th>
-                        <th colspan="22" data-halign="center" data-align="center">Процедури стягнення в судовому порядку
+                        <th colspan="23" data-halign="center" data-align="center">Процедури стягнення в судовому порядку
                         </th>
-                        <th data-field="dn_list_dobro_splat" data-sortable="true" rowspan="4" data-halign="center"
-                            data-align="center">Дата/№ листа до суб'єкту <br>нагляду про добровільну сплату<br> штрафної
-                            санкції (судового<br> збору) за рішенням суду
-                        </th>
+
                         <th colspan="8" data-halign="center" data-align="center">Процедури примусового стягнення за рішенням
                             суду
                         </th>
@@ -383,13 +394,17 @@ if (isset($_POST['add_nag'])) {
                         <th colspan="15" data-halign="center" data-align="center">Судовий розгляд</th>
                         <th colspan="3" data-halign="center" data-align="center">Інформація щодо розподілу судових витрат
                         </th>
+                        <th data-field="dn_list_dobro_splat" data-sortable="true" rowspan="3" data-halign="center"
+                            data-align="center">Дата/№ листа до суб'єкту <br>нагляду про добровільну сплату<br> штрафної
+                            санкції (судового<br> збору) за рішенням суду<br>[60]
+                        </th>
                         <th data-field="shtraf_splach_dobro" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Штрафна санкція сплачена <br>добровільно за рішенням суду<br>(№п/д, дата,
-                            сума)
+                            сума)<br>[61]
                         </th>
                         <th data-field="dn_sluj_primus" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Дата/№ службової<br>записки щодо необхідності<br>примусового виконання<br>рішення
-                            суду
+                            суду<br>[62]
                         </th>
                         <th data-field="dn_lz_vikon_list" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Подано до суду лист-заяву<br>про видачу виконавчого<br>листа (дата/№)
@@ -467,7 +482,7 @@ if (isset($_POST['add_nag'])) {
                             data-align="center">Покладено сплату<br>судового збору на<br>позивача/відповідача
                         </th>
                         <th data-field="povern_sud_zbir" data-sortable="true" rowspan="2" data-halign="center"
-                            data-align="center">Повернуто судовий збір <br>за рішенням суду до бюджету<br>(№п/д, дата, сума)
+                            data-align="center">Повернуто судовий збір <br>за рішенням суду до бюджету<br>(№п/д, дата, сума)<br>[59]
                         </th>
                         <th data-field="dn_napr_list_dvs" data-sortable="true" rowspan="2" data-halign="center"
                             data-align="center">Направлено виконавчий<br>лист до органів ДВС<br>(№/дата листа)
@@ -850,14 +865,25 @@ echo "Difference: ".($time2-$time1);*/
             $(this).parents("tr").removeClass(classColor);
         }
     });*/
+    var classColor = 'success';
     $("#table").on('click-row.bs.table', function (e, row, $element) {
-     var classColor = 'success';
      if($($element).hasClass(classColor)) {
      $($element).removeClass(classColor);
      } else {
      $($element).addClass(classColor);
      }
-     });
+     }).on('check.bs.table', function (e, row, $element) {
+        $($element).parent().parent().addClass(classColor);
+    })
+        .on('uncheck.bs.table', function (e, row, $element) {
+            $($element).parent().parent().removeClass(classColor);
+        })
+        .on('check-all.bs.table', function (e, $element) {
+            $($element).parent().parent().addClass(classColor);
+        })
+        .on('uncheck-all.bs.table', function (e, $element) {
+            $($element).parent().parent().removeClass(classColor);
+        });
 
 </script>
 <script>

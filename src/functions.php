@@ -212,12 +212,12 @@ function add_inspekt() {
             $index_pidrozdil = 17;
             break;
     }
-    $nzp = trim(htmlspecialchars($_POST['nzp'], ENT_QUOTES));
+    $nzp = full_trim(htmlspecialchars($_POST['nzp'], ENT_QUOTES));
     $active = 1;
     $date_change = strtotime(date('d.m.Y H:i:s'));
     $user = $_SESSION['id_user'];
-    $short_name_fu = "'" . trim(htmlspecialchars($_POST['short_name_fu'], ENT_QUOTES)) . "'";
-    $edrpo = "'" .trim(htmlspecialchars($_POST['edrpoE'])). "'";
+    $short_name_fu = "'" . full_trim(htmlspecialchars($_POST['short_name_fu'], ENT_QUOTES)) . "'";
+    $edrpo = "'" .full_trim(htmlspecialchars($_POST['edrpoE'])). "'";
     $type_fo = htmlspecialchars($_POST['type_fo']);
     $vid_perevirki = htmlspecialchars($_POST['vid_perevirkiS']);
     $pidstava_pozaplanS = 'NULL';
@@ -234,34 +234,34 @@ function add_inspekt() {
     $d_start_dialnist = $_POST['d_start_dialnist'] != '' ? strtotime($_POST['d_start_dialnist']) : 'NULL';
     $d_end_dialnist = $_POST['d_end_dialnist'] != '' ? strtotime($_POST['d_end_dialnist']) : 'NULL';
     $d_nak_zah = $_POST['d_nak_zah'] != '' ? strtotime($_POST['d_nak_zah']) : 'NULL';
-    $n_nak_zah = $_POST['n_nak_zah'] != '' ? "'".trim(htmlspecialchars($_POST['n_nak_zah']))."'" : 'NULL';
+    $n_nak_zah = $_POST['n_nak_zah'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_nak_zah'],ENT_QUOTES))."'" : 'NULL';
     $d_napr_proved = $_POST['d_napr_proved'] != '' ? strtotime($_POST['d_napr_proved']) : 'NULL';
-    $n_napr_proved = $_POST['n_napr_proved'] != '' ? "'".trim(htmlspecialchars($_POST['n_napr_proved']))."'" : 'NULL';
-    $ker_inspekt_group = $_POST['ker_inspekt_group'] != '' ? "'".trim(htmlspecialchars($_POST['ker_inspekt_group'], ENT_QUOTES))."'" : 'NULL';
-    $ch_inspekt_group = $_POST['ch_inspekt_group'] != '' ? "'".trim(htmlspecialchars($_POST['ch_inspekt_group'], ENT_QUOTES))."'" : 'NULL';
+    $n_napr_proved = $_POST['n_napr_proved'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_napr_proved'],ENT_QUOTES))."'" : 'NULL';
+    $ker_inspekt_group = $_POST['ker_inspekt_group'] != '' ? "'".full_trim(htmlspecialchars($_POST['ker_inspekt_group'], ENT_QUOTES))."'" : 'NULL';
+    $ch_inspekt_group = $_POST['ch_inspekt_group'] != '' ? "'".full_trim(htmlspecialchars($_POST['ch_inspekt_group'], ENT_QUOTES))."'" : 'NULL';
     $d_akt_perevirki = $_POST['d_akt_perevirki'] != '' ? strtotime($_POST['d_akt_perevirki']) : 'NULL';
-    $n_akt_perevirki = $_POST['n_akt_perevirki'] != '' ? trim(htmlspecialchars($_POST['n_akt_perevirki'])) : 'NULL';
+    $n_akt_perevirki = $_POST['n_akt_perevirki'] != '' ? full_trim(htmlspecialchars($_POST['n_akt_perevirki'],ENT_QUOTES)) : 'NULL';
     $d_akt_zu = $_POST['d_akt_zu'] != '' ? strtotime($_POST['d_akt_zu']) : 'NULL';
-    $n_akt_zu = $_POST['n_akt_zu'] != '' ? "'".trim(htmlspecialchars($_POST['n_akt_zu']))."'" : 'NULL';
+    $n_akt_zu = $_POST['n_akt_zu'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_akt_zu'],ENT_QUOTES))."'" : 'NULL';
     $vid_akt_zu = htmlspecialchars($_POST['vid_akt_zu']);
     $d_rozp_usun = $_POST['d_rozp_usun'] != '' ? strtotime($_POST['d_rozp_usun']) : 'NULL';
-    $n_rozp_usun = $_POST['n_rozp_usun'] != '' ? "'".htmlspecialchars($_POST['n_rozp_usun'])."'" : 'NULL';
-    $strok_usun_por = $_POST['strok_usun_por'] != '' ? "'".trim(htmlspecialchars($_POST['strok_usun_por']))."'" : 'NULL';
+    $n_rozp_usun = $_POST['n_rozp_usun'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_rozp_usun'],ENT_QUOTES))."'" : 'NULL';
+    $strok_usun_por = $_POST['strok_usun_por'] != '' ? "'".full_trim(htmlspecialchars($_POST['strok_usun_por'],ENT_QUOTES))."'" : 'NULL';
     $b_usun_lic_umov = $_POST['b_usun_lic_umov'] == '' ? 'NULL' : htmlspecialchars($_POST['b_usun_lic_umov']);
     $info_vik_rozp = htmlspecialchars($_POST['info_vik_rozp']);
     $d_dovidki_vik_rozp = $_POST['d_dovidki_vik_rozp'] != '' ? strtotime($_POST['d_dovidki_vik_rozp']) : 'NULL';
-    $dn_akt_nevik = "'".$_POST['d_akt_nevik'].' '.trim(htmlspecialchars($_POST['n_akt_nevik']))."'";
+    $dn_akt_nevik = "'".$_POST['d_akt_nevik'].' '.full_trim(htmlspecialchars($_POST['n_akt_nevik'],ENT_QUOTES))."'";
     $d_post_shtraf = $_POST['d_post_shtraf'] != '' ? strtotime($_POST['d_post_shtraf']) : 'NULL';
-    $n_post_shtraf = $_POST['n_post_shtraf'] != '' ? "'".htmlspecialchars($_POST['n_post_shtraf'])."'" : 'NULL';
-    $suma_shtraf = $_POST['suma_shtraf'] != '' ? trim(htmlspecialchars($_POST['suma_shtraf'])) : 'NULL';
+    $n_post_shtraf = $_POST['n_post_shtraf'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_post_shtraf'],ENT_QUOTES))."'" : 'NULL';
+    $suma_shtraf = $_POST['suma_shtraf'] != '' ? full_trim(htmlspecialchars($_POST['suma_shtraf'],ENT_QUOTES)) : 'NULL';
     $strok_splat_shtraf = $_POST['strok_splat_shtraf'] != '' ? strtotime($_POST['strok_splat_shtraf']) : 'NULL';
     $info_splat_shtraf = $_POST['info_splat_shtraf'] != '' ? strtotime($_POST['info_splat_shtraf']) : 'NULL';
-    $info_usun_por = $_POST['info_usun_por'] != '' ? "'".trim(htmlspecialchars($_POST['info_usun_por']))."'" : 'NULL';
+    $info_usun_por = $_POST['info_usun_por'] != '' ? "'".full_trim(htmlspecialchars($_POST['info_usun_por'],ENT_QUOTES))."'" : 'NULL';
     $d_dovidki_vik_post = $_POST['d_dovidki_vik_post'] != '' ? strtotime($_POST['d_dovidki_vik_post']) : 'NULL';
-    $dn_sluj_ur = "'".$_POST['d_sluj_ur'].' '.trim(htmlspecialchars($_POST['n_sluj_ur']))."'";
-    $sluj_perep_splat = $_POST['sluj_perep_splat'] != '' ? "'".trim(htmlspecialchars($_POST['sluj_perep_splat']))."'" : 'NULL';
-    $dn_doc_splat = "'".$_POST['d_doc_splat'].' '.trim(htmlspecialchars($_POST['n_doc_splat']))."'";
-    $dn_sluj_nap_mat = "'".$_POST['d_sluj_nap_mat'].' '.trim(htmlspecialchars($_POST['n_sluj_nap_mat']))."'";
+    $dn_sluj_ur = "'".$_POST['d_sluj_ur'].' '.full_trim(htmlspecialchars($_POST['n_sluj_ur'],ENT_QUOTES))."'";
+    $sluj_perep_splat = $_POST['sluj_perep_splat'] != '' ? "'".full_trim(htmlspecialchars($_POST['sluj_perep_splat'],ENT_QUOTES))."'" : 'NULL';
+    $dn_doc_splat = "'".$_POST['d_doc_splat'].' '.full_trim(htmlspecialchars($_POST['n_doc_splat'],ENT_QUOTES))."'";
+    $dn_sluj_nap_mat = "'".$_POST['d_sluj_nap_mat'].' '.full_trim(htmlspecialchars($_POST['n_sluj_nap_mat'],ENT_QUOTES))."'";
 
 
     $sql = "INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_name_fu, edrpo, type_fu, vid_perevirki, pidstava_pozaplan,
@@ -313,7 +313,7 @@ function edit_nag () {
         return false;
     }
 
-    $new_nzp = trim(htmlspecialchars($_POST['nzp'], ENT_QUOTES));
+    $new_nzp = full_trim(htmlspecialchars($_POST['nzp'], ENT_QUOTES));
 
 
 
@@ -399,9 +399,9 @@ function edit_user () {
         return false;
     }
 
-    $username_new = trim(htmlspecialchars($_POST['username_edit']));
-    $password_new = trim(htmlspecialchars($_POST['password_edit']));
-    $full_name_new = trim(htmlspecialchars($_POST['pib_edit']));
+    $username_new = full_trim(htmlspecialchars($_POST['username_edit']));
+    $password_new = full_trim(htmlspecialchars($_POST['password_edit']));
+    $full_name_new = full_trim(htmlspecialchars($_POST['pib_edit']));
     $memberof_new = '';
     switch ($_POST['memberof_edit']) {
         case "DeRZIT":
@@ -498,6 +498,7 @@ function writeLog($type, $query, $status) {
     }
     $time = strtotime(date('d.m.Y H:i:s'));
     $user = isset($_SESSION['id_user'])? $_SESSION['id_user']: 0;
+    $query = mysqli_real_escape_string($link, $query);
     $sql = "INSERT INTO logs (time_exec, type, user, query, status) VALUES ($time, '$type', $user, '$query', '$status')";
     $result = mysqli_query($link, $sql);
     if ($result) {
@@ -527,5 +528,11 @@ function get_logs(){
     $table_logs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
     return $table_logs;
+
+}
+
+function full_trim($str)
+{
+    return trim(preg_replace('/\s{2,}/', ' ', $str));
 
 }

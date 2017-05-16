@@ -15,31 +15,40 @@ $('#edit-form-n').submit(function () {
         $('#wrong_fields').removeClass('hidden');
         $nzp_field.addClass('required_field');
         noError = false;
+    } else {
+        noError = true;
     }
     if (short_name_fu === '') {
         $('#wrong_fields').removeClass('hidden');
         $short_name_fu.addClass('required_field');
         noError = false;
+    } else {
+        noError = true;
     }
     if (edrpoE === '') {
         $('#wrong_fields').removeClass('hidden');
         $edrpoE.addClass('required_field');
         noError = false;
+    } else {
+        noError = true;
     }
     if (type_fo === '') {
         $('#wrong_fields').removeClass('hidden');
         $type_fo.addClass('required_field');
         noError = false;
+    } else {
+        noError = true;
     }
     /*if (($('#vid_perevirkiS').val()!=3)&&($('#pidstava_pozaplanS').isDisabled)) {
      alert("($('#vid_perevirkiS').val()!=2)&&($('#pidstava_pozaplanS').isDisabled()");
      $('#pidstava_pozaplanS').addClass('required_field');
      noError = false;
      }*/
-    noError = $alert.hasClass('hidden');
+    if (!$alert.hasClass('hidden')) {
+        noError = false;
+    }
     return noError;
 });
-
 $('#nzpE').keyup(function() {
     var $field  = $(this);
     var val = $.trim($field.val());
