@@ -100,7 +100,7 @@
         <div class="tab-pane fade" id="tab3primary">Primary 3</div>
 
         <div class="tab-pane fade" id="tabLogs"><? require_once 'src/tab_logs.php';?></div>
-        <div class="tab-pane fade" id="tabSQL">SQL</div>
+        <div class="tab-pane fade" id="tabSQL">SQL query</div>
     </div>
 </div>
 <div class="modal fade" id="modal-ch-multi">
