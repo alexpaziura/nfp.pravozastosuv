@@ -7,7 +7,7 @@ if(!isset($_SESSION['user'])){
 } else if ($_SESSION['group']!='ДеРЗІТ') {
     header('Location:/');
 }
-if(isset($_POST['log_out'])){
+if ((isset($_POST['log_out']))||(!isUserActive())) {
     writeLog('AUTH','LOGOUT',1);
     unset($_SESSION['user']);
     unset($_SESSION['group']);
@@ -25,8 +25,11 @@ if (isset($_POST['relogin'])) {
     session_destroy();
     header('Location: ../login.php');
 }
+
 $state_add = '';
 $state_edit = '';
+$state_del = '';
+
 if(isset($_POST['add_user'])){
     if (add_user()) {
         $state_add = 'success';
@@ -43,7 +46,14 @@ if(isset($_POST['edit_user'])){
     }
     $_SESSION['action_time'] = microtime(true);
 }
-
+if(isset($_POST['delete_user'])){
+    if (delete_user()) {
+        $state_del = 'success';
+    } else {
+        $state_del = 'error';
+    }
+    $_SESSION['action_time'] = microtime(true);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -118,9 +128,9 @@ if(isset($_POST['edit_user'])){
             <div class="alert alert-success alert-dismissable alert-fixed <?= $state_add == 'success' ? '' : 'hidden' ?>"
                  id="success_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
-                <h4>Запис успішно додано!</h4>
+                <h4>Користувача успішно додано!</h4>
             </div>
         </div>
     </div>
@@ -129,9 +139,9 @@ if(isset($_POST['edit_user'])){
             <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_add == 'error' ? '' : 'hidden' ?>"
                  id="error_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
-                <h4>Виникла помилка при додаванні запису!</h4>
+                <h4>Виникла помилка при додаванні користувача!</h4>
             </div>
         </div>
     </div>
@@ -140,9 +150,9 @@ if(isset($_POST['edit_user'])){
             <div class="alert alert-success alert-dismissable alert-fixed <?= $state_edit == 'success' ? '' : 'hidden' ?>"
                  id="success_edit">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
-                <h4>Запис успішно змінено!</h4>
+                <h4>Користувача успішно змінено!</h4>
             </div>
         </div>
     </div>
@@ -151,9 +161,31 @@ if(isset($_POST['edit_user'])){
             <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_edit == 'error' ? '' : 'hidden' ?>"
                  id="error_edit">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
-                <h4>Виникла помилка при редагуванні запису!</h4>
+                <h4>Виникла помилка при редагуванні користувача!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-success alert-dismissable alert-fixed <?= $state_del == 'success' ? '' : 'hidden' ?>"
+                 id="success_del">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
+                </button>
+                <h4>Користувача успішно видалено!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_del == 'error' ? '' : 'hidden' ?>"
+                 id="error_del">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
+                </button>
+                <h4>Виникла помилка при видаленні користувача!</h4>
             </div>
         </div>
     </div>
@@ -161,13 +193,18 @@ if(isset($_POST['edit_user'])){
         <div class="container">
             <div id="toolbar" class="btn-toolbar">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-labeled add" id="addUser">
+                    <button type="button" class="btn btn-success btn-labeled" id="addUser">
                         <span class="btn-label"><i class="fa fa-user-plus fa-lg"></i></span>Додати користувача
                     </button>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-warning btn-labeled edit" id="editUser">
+                    <button type="button" class="btn btn-warning btn-labeled" id="editUser">
                         <span class="btn-label"><i class="fa fa-pencil fa-lg"></i></span>Редагувати користувача
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger btn-labeled" id="deleteUser">
+                        <span class="btn-label"><i class="fa fa-user-times fa-lg"></i></span>Редагувати користувача
                     </button>
                 </div>
             </div>
@@ -209,7 +246,8 @@ if(isset($_POST['edit_user'])){
                     </thead>
                     <tbody >
                     <?php $table_users = get_users();
-                    foreach ($table_users as $row): ?>
+                    foreach ($table_users as $row):
+                        if ($row['visible']=='0') continue;?>
                         <tr>
                             <td></td>
                             <td class="hidden"><?= $row['id_user'] ?></td>
@@ -231,8 +269,8 @@ if(isset($_POST['edit_user'])){
     <div class="modal-dialog modal-lg ">
         <div class="modal-content">
             <div class="modal-header modal-header-warning">
-                <button class="close" type="button" data-dismiss="modal">
-                    <i class="fa fa-close"></i>
+                <button class="close" type="button" data-dismiss="modal" style="color: red;">
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Вибрано більше одного запису для
                     редагування.</h2>
@@ -244,8 +282,8 @@ if(isset($_POST['edit_user'])){
     <div class="modal-dialog modal-lg ">
         <div class="modal-content">
             <div class="modal-header modal-header-warning">
-                <button class="close" type="button" data-dismiss="modal">
-                    <i class="fa fa-close"></i>
+                <button class="close" type="button" data-dismiss="modal" style="color: red;">
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Не вибрано запис для редагування.</h2>
             </div>
@@ -274,13 +312,13 @@ if(isset($_POST['edit_user'])){
 <div class="modal fade container-fluid" id="modal_add_user">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header modal-header-success">
+            <div class="modal-header modal-header-primary">
                 <button class="close" type="button" data-dismiss="modal">
                     <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2 class="modal-title"><i class="fa fa-plus fa-lg" style="color: "></i> &nbsp;&nbsp;Додавання користувача</h2>
+                        <h2 class="modal-title"><i class="fa fa-user-plus fa-lg" style="color: "></i> &nbsp;&nbsp;Додавання користувача</h2>
                     </div>
                     <div class="col-sm-5" style="margin-bottom: -20px">
                         <div class="alert alert-danger hidden"
@@ -290,7 +328,7 @@ if(isset($_POST['edit_user'])){
                     </div>
                 </div>
             </div>
-            <div class="modal-body" style="background-color: #e8e1ca;"> <!--cae8ca-->
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--cae8ca-->
                 <form id="add-user" method="post" autocomplete="off">
                     <p style="color: red">
                         <sup>
@@ -357,8 +395,8 @@ if(isset($_POST['edit_user'])){
                     </div>
                 </form>
             </div>
-            <div class="modal-footer" style="background-color: #cae8ca;">
-                <button class="btn btn-success center-block btn-labeled" name="add_user" type="submit" form="add-user">
+            <div class="modal-footer" style="background-color: #d9d9d9;">
+                <button class="btn btn-primary center-block btn-labeled" name="add_user" type="submit" form="add-user">
                     <span class="btn-label">
                         <i class="fa fa-floppy-o fa-lg"></i>
                     </span>
@@ -371,13 +409,13 @@ if(isset($_POST['edit_user'])){
 <div class="modal fade container-fluid" id="modal_edit_user">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header modal-header-warning">
+            <div class="modal-header modal-header-primary">
                 <button class="close" type="button" data-dismiss="modal">
                     <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2 class="modal-title"><i class="fa fa-plus fa-lg" style="color: "></i> &nbsp;&nbsp;Редагування користувача</h2>
+                        <h2 class="modal-title"><i class="fa fa-pencil fa-lg" style="color: "></i> &nbsp;&nbsp;Редагування користувача</h2>
                     </div>
                     <div class="col-sm-5" style="margin-bottom: -20px">
                         <div class="alert alert-danger hidden"
@@ -387,7 +425,7 @@ if(isset($_POST['edit_user'])){
                     </div>
                 </div>
             </div>
-            <div class="modal-body" style="background-color: #e8e1ca;">
+            <div class="modal-body" style="background-color: #d9d9d9;">
                 <form id="edit-user" method="post" autocomplete="off">
                     <p style="color: red">
                         <sup>
@@ -458,13 +496,41 @@ if(isset($_POST['edit_user'])){
 
                 </form>
             </div>
-            <div class="modal-footer" style="background-color: #e8e1ca;">
-                <button class="btn btn-success center-block btn-labeled" name="edit_user" type="submit" form="edit-user">
+            <div class="modal-footer" style="background-color: #d9d9d9;">
+                <button class="btn btn-primary center-block btn-labeled" name="edit_user" type="submit" form="edit-user">
                     <span class="btn-label">
                         <i class="fa fa-floppy-o fa-lg"></i>
                     </span>
                     Зберегти
                 </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_delete_user">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <button class="close" type="button" data-dismiss="modal">
+                    <i class="fa fa-close fa-2x" style="color: #0F0F0F;"></i>
+                </button>
+                <h2 class="modal-title"><i class="fa fa-user-times"></i> &nbsp;&nbsp;Видалення користувача!</h2>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--f1c2c0-->
+                <form id="delete-user" method="post" autocomplete="off">
+                    <input type="hidden" name="id_user_delete" id="id_user_delete" value="">
+                    <p id="del_user_textT" class="hidden"></p>
+                    <div class="form-group">
+                        <p style="font-weight: bold;">Підтвердіть видалення наступних користувачів:</p>
+                        <div id="del_user_text" style="font-weight: bold;"></div>
+                    </div>
+                    <button class="btn btn-danger center-block btn-labeled" name="delete_user" type="submit" form="delete-user">
+                    <span class="btn-label">
+                        <i class="fa fa-trash fa-lg"></i>
+                    </span>
+                        Видалити
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -478,12 +544,8 @@ if(isset($_POST['edit_user'])){
 <script src="../js/table-fixed-header.js" type="text/javascript"></script>
 <script src="../js/jasny-bootstrap.js" type="text/javascript"></script>
 <script src="../js/tabs/tab_user.js" type="text/javascript"></script>
-<script src="../extensions/export/bootstrap-table-export.js"></script>
-<script src="../js/tableExport.js"></script>
 <script>
     $(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-        $('[data-toggle="popover"]').popover();
         checkTime();
         setInterval(function (){
             checkTime();
@@ -514,6 +576,8 @@ if(isset($_POST['edit_user'])){
         $('#error_add').alert("close");
         $('#success_edit').alert("close");
         $('#error_edit').alert("close");
+        $('#success_del').alert("close");
+        $('#error_del').alert("close");
     }, 7000);
 
 </script>

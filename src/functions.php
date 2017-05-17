@@ -3,14 +3,11 @@
 function get_table_inspect()
 {
     global $link;
-    if (!mysqli_ping($link))
-    {
-        echo "Error: ". mysqli_error($link);
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
         exit();
-    }
-    else
-    {
-    $sql = "SELECT id_inspekt, active, date_change, username, nzp, pidrozdil, short_name_fu, edrpo, type_fu, name_type_fu, 
+    } else {
+        $sql = "SELECT id_inspekt, active, date_change, username, nzp, pidrozdil, short_name_fu, edrpo, type_fu, name_type_fu, 
               vid_perevirki, name_vid_perevirki, pidstava_pozaplan, d_start_perevirki, 
               d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah, d_napr_proved, n_napr_proved,
               ker_inspekt_group, ch_inspekt_group,
@@ -30,31 +27,29 @@ function get_table_inspect()
               ORDER BY nzp";
 
 
-    $result = mysqli_query($link, $sql);
-    $table_inspekt = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $result = mysqli_query($link, $sql);
+        $table_inspekt = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);
-    return $table_inspekt;
+        return $table_inspekt;
 
     }
 }
-function get_row_inspect($id) {
+
+function get_row_inspect($id)
+{
     global $link;
-    if (!mysqli_ping($link))
-    {
-        echo "Error: ". mysqli_error($link);
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
         exit();
-    }
-    else
-    {
+    } else {
         $sql = "SELECT id_inspekt, type_fu, vid_perevirki, pidstava_pozaplan, vid_akt_zu, info_vik_rozp
               FROM inspekt, dic_type_fu, users, dic_vid_perevirki, dic_info_vik, dic_akt_zu
               WHERE type_fu=id_type_fu AND vid_perevirki=id_vid_perevirki
               AND info_vik_rozp=id_info_vik AND vid_akt_zu=id_akt_zu AND id_inspekt=$id AND inspekt.active=1
               ORDER BY nzp";
         $rowS = '';
-        if ($result=mysqli_query($link,$sql))
-        {
-            $row=mysqli_fetch_assoc($result);
+        if ($result = mysqli_query($link, $sql)) {
+            $row = mysqli_fetch_assoc($result);
             $rowS = json_encode($row, JSON_UNESCAPED_UNICODE);
 
             mysqli_free_result($result);
@@ -63,6 +58,7 @@ function get_row_inspect($id) {
 
     }
 }
+
 function get_user()
 {
     global $link;
@@ -76,7 +72,7 @@ function get_user()
     foreach ($users as $row) {
         if ((strcmp($row['username'], $username) == 0) && (strcasecmp($row['pwd'], md5($pwd)) == 0)) {
             session_start();
-            if ($row['active_user']==1) {
+            if ($row['active_user'] == 1) {
                 $exist = true;
                 $_SESSION['id_user'] = $row['id_user'];
                 $_SESSION['user'] = $row['username'];
@@ -88,27 +84,26 @@ function get_user()
         }
     }
     if ($exist) {
-        writeLog('AUTH','LOGIN',1);
+        writeLog('AUTH', 'LOGIN', 1);
     } else {
-        writeLog('AUTH','LOGIN',0);
+        writeLog('AUTH', 'LOGIN', 0);
     }
     return $exist;
 }
-function isUserActive() {
+
+function isUserActive()
+{
     global $link;
-    if (!mysqli_ping($link))
-    {
-        echo "Error: ". mysqli_error($link);
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
         exit();
     }
     $isActive = false;
     $sql = "SELECT active_user FROM users WHERE id_user=" . $_SESSION['id_user'];
-    if ($result=mysqli_query($link,$sql))
-    {
-        while ($row=mysqli_fetch_row($result))
-        {
+    if ($result = mysqli_query($link, $sql)) {
+        while ($row = mysqli_fetch_row($result)) {
             if ($row[0] == 1) {
-               $isActive = true;
+                $isActive = true;
             }
         }
         mysqli_free_result($result);
@@ -116,10 +111,11 @@ function isUserActive() {
     return $isActive;
 }
 
-function get_users(){
+function get_users()
+{
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
         exit();
     }
 
@@ -134,11 +130,11 @@ function get_users(){
 
 }
 
-function get_dics() {
+function get_dics()
+{
     global $link;
-    if (!mysqli_ping($link))
-    {
-        echo "Error: ". mysqli_error($link);
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
         exit();
     }
 
@@ -161,14 +157,15 @@ function get_dics() {
 
 }
 
-function get_dic($dic){
+function get_dic($dic)
+{
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
         exit();
     }
 
-    $sql = "SELECT * FROM ".$dic;
+    $sql = "SELECT * FROM " . $dic;
 
 
     $result = mysqli_query($link, $sql);
@@ -179,13 +176,14 @@ function get_dic($dic){
 
 }
 
-function add_inspekt() {
-    if(!isUserActive()) {
+function add_inspekt()
+{
+    if (!isUserActive()) {
         return false;
     }
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
         exit();
     }
     $index_pidrozdil = 0;
@@ -217,51 +215,51 @@ function add_inspekt() {
     $date_change = strtotime(date('d.m.Y H:i:s'));
     $user = $_SESSION['id_user'];
     $short_name_fu = "'" . full_trim(htmlspecialchars($_POST['short_name_fu'], ENT_QUOTES)) . "'";
-    $edrpo = "'" .full_trim(htmlspecialchars($_POST['edrpoE'])). "'";
+    $edrpo = "'" . full_trim(htmlspecialchars($_POST['edrpoE'])) . "'";
     $type_fo = htmlspecialchars($_POST['type_fo']);
     $vid_perevirki = htmlspecialchars($_POST['vid_perevirkiS']);
     $pidstava_pozaplanS = 'NULL';
-    if(isset($_POST['pidstava_pozaplanS'])) {
+    if (isset($_POST['pidstava_pozaplanS'])) {
         $pidstavi = $_POST['pidstava_pozaplanS'];
         $pidstava_pozaplanS = "'";
         foreach ($pidstavi as $value) {
-            $pidstava_pozaplanS = $pidstava_pozaplanS.$value."; ";
+            $pidstava_pozaplanS = $pidstava_pozaplanS . $value . "; ";
         }
-        $pidstava_pozaplanS = $pidstava_pozaplanS."'";
+        $pidstava_pozaplanS = $pidstava_pozaplanS . "'";
     }
     $d_start_perevirki = $_POST['d_start_perevirki'] != '' ? strtotime($_POST['d_start_perevirki']) : 'NULL';
     $d_end_perevirki = $_POST['d_end_perevirki'] != '' ? strtotime($_POST['d_end_perevirki']) : 'NULL';
     $d_start_dialnist = $_POST['d_start_dialnist'] != '' ? strtotime($_POST['d_start_dialnist']) : 'NULL';
     $d_end_dialnist = $_POST['d_end_dialnist'] != '' ? strtotime($_POST['d_end_dialnist']) : 'NULL';
     $d_nak_zah = $_POST['d_nak_zah'] != '' ? strtotime($_POST['d_nak_zah']) : 'NULL';
-    $n_nak_zah = $_POST['n_nak_zah'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_nak_zah'],ENT_QUOTES))."'" : 'NULL';
+    $n_nak_zah = $_POST['n_nak_zah'] != '' ? "'" . full_trim(htmlspecialchars($_POST['n_nak_zah'], ENT_QUOTES)) . "'" : 'NULL';
     $d_napr_proved = $_POST['d_napr_proved'] != '' ? strtotime($_POST['d_napr_proved']) : 'NULL';
-    $n_napr_proved = $_POST['n_napr_proved'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_napr_proved'],ENT_QUOTES))."'" : 'NULL';
-    $ker_inspekt_group = $_POST['ker_inspekt_group'] != '' ? "'".full_trim(htmlspecialchars($_POST['ker_inspekt_group'], ENT_QUOTES))."'" : 'NULL';
-    $ch_inspekt_group = $_POST['ch_inspekt_group'] != '' ? "'".full_trim(htmlspecialchars($_POST['ch_inspekt_group'], ENT_QUOTES))."'" : 'NULL';
+    $n_napr_proved = $_POST['n_napr_proved'] != '' ? "'" . full_trim(htmlspecialchars($_POST['n_napr_proved'], ENT_QUOTES)) . "'" : 'NULL';
+    $ker_inspekt_group = $_POST['ker_inspekt_group'] != '' ? "'" . full_trim(htmlspecialchars($_POST['ker_inspekt_group'], ENT_QUOTES)) . "'" : 'NULL';
+    $ch_inspekt_group = $_POST['ch_inspekt_group'] != '' ? "'" . full_trim(htmlspecialchars($_POST['ch_inspekt_group'], ENT_QUOTES)) . "'" : 'NULL';
     $d_akt_perevirki = $_POST['d_akt_perevirki'] != '' ? strtotime($_POST['d_akt_perevirki']) : 'NULL';
-    $n_akt_perevirki = $_POST['n_akt_perevirki'] != '' ? full_trim(htmlspecialchars($_POST['n_akt_perevirki'],ENT_QUOTES)) : 'NULL';
+    $n_akt_perevirki = $_POST['n_akt_perevirki'] != '' ? full_trim(htmlspecialchars($_POST['n_akt_perevirki'], ENT_QUOTES)) : 'NULL';
     $d_akt_zu = $_POST['d_akt_zu'] != '' ? strtotime($_POST['d_akt_zu']) : 'NULL';
-    $n_akt_zu = $_POST['n_akt_zu'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_akt_zu'],ENT_QUOTES))."'" : 'NULL';
+    $n_akt_zu = $_POST['n_akt_zu'] != '' ? "'" . full_trim(htmlspecialchars($_POST['n_akt_zu'], ENT_QUOTES)) . "'" : 'NULL';
     $vid_akt_zu = htmlspecialchars($_POST['vid_akt_zu']);
     $d_rozp_usun = $_POST['d_rozp_usun'] != '' ? strtotime($_POST['d_rozp_usun']) : 'NULL';
-    $n_rozp_usun = $_POST['n_rozp_usun'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_rozp_usun'],ENT_QUOTES))."'" : 'NULL';
-    $strok_usun_por = $_POST['strok_usun_por'] != '' ? "'".full_trim(htmlspecialchars($_POST['strok_usun_por'],ENT_QUOTES))."'" : 'NULL';
+    $n_rozp_usun = $_POST['n_rozp_usun'] != '' ? "'" . full_trim(htmlspecialchars($_POST['n_rozp_usun'], ENT_QUOTES)) . "'" : 'NULL';
+    $strok_usun_por = $_POST['strok_usun_por'] != '' ? "'" . full_trim(htmlspecialchars($_POST['strok_usun_por'], ENT_QUOTES)) . "'" : 'NULL';
     $b_usun_lic_umov = $_POST['b_usun_lic_umov'] == '' ? 'NULL' : htmlspecialchars($_POST['b_usun_lic_umov']);
     $info_vik_rozp = htmlspecialchars($_POST['info_vik_rozp']);
     $d_dovidki_vik_rozp = $_POST['d_dovidki_vik_rozp'] != '' ? strtotime($_POST['d_dovidki_vik_rozp']) : 'NULL';
-    $dn_akt_nevik = "'".$_POST['d_akt_nevik'].' '.full_trim(htmlspecialchars($_POST['n_akt_nevik'],ENT_QUOTES))."'";
+    $dn_akt_nevik = "'" . $_POST['d_akt_nevik'] . ' ' . full_trim(htmlspecialchars($_POST['n_akt_nevik'], ENT_QUOTES)) . "'";
     $d_post_shtraf = $_POST['d_post_shtraf'] != '' ? strtotime($_POST['d_post_shtraf']) : 'NULL';
-    $n_post_shtraf = $_POST['n_post_shtraf'] != '' ? "'".full_trim(htmlspecialchars($_POST['n_post_shtraf'],ENT_QUOTES))."'" : 'NULL';
-    $suma_shtraf = $_POST['suma_shtraf'] != '' ? full_trim(htmlspecialchars($_POST['suma_shtraf'],ENT_QUOTES)) : 'NULL';
+    $n_post_shtraf = $_POST['n_post_shtraf'] != '' ? "'" . full_trim(htmlspecialchars($_POST['n_post_shtraf'], ENT_QUOTES)) . "'" : 'NULL';
+    $suma_shtraf = $_POST['suma_shtraf'] != '' ? full_trim(htmlspecialchars($_POST['suma_shtraf'], ENT_QUOTES)) : 'NULL';
     $strok_splat_shtraf = $_POST['strok_splat_shtraf'] != '' ? strtotime($_POST['strok_splat_shtraf']) : 'NULL';
     $info_splat_shtraf = $_POST['info_splat_shtraf'] != '' ? strtotime($_POST['info_splat_shtraf']) : 'NULL';
-    $info_usun_por = $_POST['info_usun_por'] != '' ? "'".full_trim(htmlspecialchars($_POST['info_usun_por'],ENT_QUOTES))."'" : 'NULL';
+    $info_usun_por = $_POST['info_usun_por'] != '' ? "'" . full_trim(htmlspecialchars($_POST['info_usun_por'], ENT_QUOTES)) . "'" : 'NULL';
     $d_dovidki_vik_post = $_POST['d_dovidki_vik_post'] != '' ? strtotime($_POST['d_dovidki_vik_post']) : 'NULL';
-    $dn_sluj_ur = "'".$_POST['d_sluj_ur'].' '.full_trim(htmlspecialchars($_POST['n_sluj_ur'],ENT_QUOTES))."'";
-    $sluj_perep_splat = $_POST['sluj_perep_splat'] != '' ? "'".full_trim(htmlspecialchars($_POST['sluj_perep_splat'],ENT_QUOTES))."'" : 'NULL';
-    $dn_doc_splat = "'".$_POST['d_doc_splat'].' '.full_trim(htmlspecialchars($_POST['n_doc_splat'],ENT_QUOTES))."'";
-    $dn_sluj_nap_mat = "'".$_POST['d_sluj_nap_mat'].' '.full_trim(htmlspecialchars($_POST['n_sluj_nap_mat'],ENT_QUOTES))."'";
+    $dn_sluj_ur = "'" . $_POST['d_sluj_ur'] . ' ' . full_trim(htmlspecialchars($_POST['n_sluj_ur'], ENT_QUOTES)) . "'";
+    $sluj_perep_splat = $_POST['sluj_perep_splat'] != '' ? "'" . full_trim(htmlspecialchars($_POST['sluj_perep_splat'], ENT_QUOTES)) . "'" : 'NULL';
+    $dn_doc_splat = "'" . $_POST['d_doc_splat'] . ' ' . full_trim(htmlspecialchars($_POST['n_doc_splat'], ENT_QUOTES)) . "'";
+    $dn_sluj_nap_mat = "'" . $_POST['d_sluj_nap_mat'] . ' ' . full_trim(htmlspecialchars($_POST['n_sluj_nap_mat'], ENT_QUOTES)) . "'";
 
 
     $sql = "INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_name_fu, edrpo, type_fu, vid_perevirki, pidstava_pozaplan,
@@ -281,10 +279,10 @@ function add_inspekt() {
     $result = mysqli_query($link, $sql);
 
     if ($result) {
-        writeLog('QUERY',$sql,1);
+        writeLog('QUERY', $sql, 1);
         return true;
     } else {
-        writeLog('QUERY',$sql,0);
+        writeLog('QUERY', $sql, 0);
         $logs = fopen("logs.txt", "w") or die("Unable to open file!");
         $txt = "Error: " . $sql . "\n" . mysqli_error($link);
         fwrite($logs, $txt);
@@ -294,20 +292,20 @@ function add_inspekt() {
 
 }
 
-function edit_nag () {
-    if(!isUserActive()) {
+function edit_nag()
+{
+    if (!isUserActive()) {
         return false;
     }
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
         exit();
     }
-    $sql = "SELECT * FROM inspekt WHERE id_inspekt=".$_POST['id_inspekt'].";";
-    if ($result=mysqli_query($link,$sql))
-    {
-        $row=mysqli_fetch_assoc($result);
-        extract($row,EXTR_PREFIX_ALL,'old');
+    $sql = "SELECT * FROM inspekt WHERE id_inspekt=" . $_POST['id_inspekt'] . ";";
+    if ($result = mysqli_query($link, $sql)) {
+        $row = mysqli_fetch_assoc($result);
+        extract($row, EXTR_PREFIX_ALL, 'old');
         mysqli_free_result($result);
     } else {
         return false;
@@ -316,22 +314,21 @@ function edit_nag () {
     $new_nzp = full_trim(htmlspecialchars($_POST['nzp'], ENT_QUOTES));
 
 
-
-
 }
 
-function add_user () {
-    if(!isUserActive()) {
+function add_user()
+{
+    if (!isUserActive()) {
         return false;
     }
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
         exit();
     }
-    $username = "'".trim(htmlspecialchars($_POST['username']))."'";
-    $password = "'".md5(trim(htmlspecialchars($_POST['password'])))."'";
-    $pib = "'".trim(htmlspecialchars($_POST['pib']))."'";
+    $username = "'" . trim(htmlspecialchars($_POST['username'])) . "'";
+    $password = "'" . md5(trim(htmlspecialchars($_POST['password']))) . "'";
+    $pib = "'" . trim(htmlspecialchars($_POST['pib'])) . "'";
     $memberof = '';
     switch ($_POST['memberof']) {
         case "DeRZIT":
@@ -360,7 +357,7 @@ function add_user () {
             break;
     }
     $active = 0;
-    if(isset($_POST['active'])) {
+    if (isset($_POST['active'])) {
         $active = 1;
     }
 
@@ -368,10 +365,10 @@ function add_user () {
             '$memberof', $active)";
     $result = mysqli_query($link, $sql);
     if ($result) {
-        writeLog('QUERY',$sql,1);
+        writeLog('QUERY', $sql, 1);
         return true;
     } else {
-        writeLog('QUERY',$sql,0);
+        writeLog('QUERY', $sql, 0);
         $logs = fopen("logs.txt", "w") or die("Unable to open file!");
         $txt = "Error: " . $sql . "\n" . mysqli_error($link);
         fwrite($logs, $txt);
@@ -380,20 +377,20 @@ function add_user () {
     }
 }
 
-function edit_user () {
-    if(!isUserActive()) {
+function edit_user()
+{
+    if (!isUserActive()) {
         return false;
     }
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
         exit();
     }
-    $sql = "SELECT * FROM users WHERE id_user=".$_POST['id_user'].";";
-    if ($result=mysqli_query($link,$sql))
-    {
-        $row=mysqli_fetch_assoc($result);
-        extract($row,EXTR_PREFIX_ALL,'old');
+    $sql = "SELECT * FROM users WHERE id_user=" . $_POST['id_user'] . ";";
+    if ($result = mysqli_query($link, $sql)) {
+        $row = mysqli_fetch_assoc($result);
+        extract($row, EXTR_PREFIX_ALL, 'old');
         mysqli_free_result($result);
     } else {
         return false;
@@ -438,18 +435,18 @@ function edit_user () {
         "memberof" => "",
         "active_user" => ""
     );
-    if ($old_username != $username_new ) {
+    if ($old_username != $username_new) {
         $sql_set["username"] = "'$username_new'";
     }
-    if($password_new != ''){
-        if ($old_pwd != md5($password_new) ) {
-            $sql_set["pwd"] = "'".md5($password_new)."'";
+    if ($password_new != '') {
+        if ($old_pwd != md5($password_new)) {
+            $sql_set["pwd"] = "'" . md5($password_new) . "'";
         }
     }
-    if ($old_full_name != $full_name_new ) {
+    if ($old_full_name != $full_name_new) {
         $sql_set["full_name"] = "'$full_name_new'";
     }
-    if ($old_memberof != $memberof_new ) {
+    if ($old_memberof != $memberof_new) {
         $sql_set["memberof"] = "'$memberof_new'";
     }
     if ($old_active_user != $active_user_new) {
@@ -467,21 +464,21 @@ function edit_user () {
     }
     $i = 1;
     foreach ($sql_set as $key => $value) {
-        if (($value != "")&&($i == 1)) {
-            $query .= $key."=".$value;
+        if (($value != "") && ($i == 1)) {
+            $query .= $key . "=" . $value;
             $i++;
         } elseif ($value != "") {
-            $query .= ", ".$key."=".$value;
+            $query .= ", " . $key . "=" . $value;
             $i++;
         }
     }
-    $sql = "UPDATE users SET ".$query." WHERE id_user=".$_POST['id_user'].";";
+    $sql = "UPDATE users SET " . $query . " WHERE id_user=" . $_POST['id_user'] . ";";
     $result = mysqli_query($link, $sql);
     if ($result) {
-        writeLog('QUERY',$sql,1);
+        writeLog('QUERY', $sql, 1);
         return true;
     } else {
-        writeLog('QUERY',$sql,0);
+        writeLog('QUERY', $sql, 0);
         $logs = fopen("logs.txt", "w") or die("Unable to open file!");
         $txt = "Error: " . $sql . "\n" . mysqli_error($link);
         fwrite($logs, $txt);
@@ -490,14 +487,51 @@ function edit_user () {
     }
 }
 
-function writeLog($type, $query, $status) {
+function delete_user()
+{
+    if (!isUserActive()) {
+        return false;
+    }
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
+        exit();
+    }
+    $ids = $_POST['id_user_delete'];
+    $pieces = explode("; ", $ids);
+    $pieces = array_diff($pieces,['']);
+    $iter = new CachingIterator(new ArrayIterator($pieces));
+    $umov = '';
+    foreach ($iter as $val) {
+        $umov .= "id_user = " . $val;
+            if ($iter->hasNext()) {
+                $umov .= " OR ";
+            }
+    }
+    $sql = "UPDATE users SET active_user = 0, visible = 0 WHERE $umov;";
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        writeLog('QUERY', $sql, 1);
+        return true;
+    } else {
+        writeLog('QUERY', $sql, 0);
+        $logs = fopen("logs.txt", "w") or die("Unable to open file!");
+        $txt = "Error: " . $sql . "\n" . mysqli_error($link);
+        fwrite($logs, $txt);
+        fclose($logs);
+        return false;
+    }
+}
+
+function writeLog($type, $query, $status)
+{
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
         exit();
     }
     $time = strtotime(date('d.m.Y H:i:s'));
-    $user = isset($_SESSION['id_user'])? $_SESSION['id_user']: 0;
+    $user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : 0;
     $query = mysqli_real_escape_string($link, $query);
     $sql = "INSERT INTO logs (time_exec, type, user, query, status) VALUES ($time, '$type', $user, '$query', '$status')";
     $result = mysqli_query($link, $sql);
@@ -513,10 +547,11 @@ function writeLog($type, $query, $status) {
 
 }
 
-function get_logs(){
+function get_logs()
+{
     global $link;
     if (!mysqli_ping($link)) {
-        echo "Error: ". mysqli_error($link);
+        echo "Error: " . mysqli_error($link);
         exit();
     }
 
