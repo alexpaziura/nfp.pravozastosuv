@@ -182,7 +182,7 @@ if (isset($_POST['add_nag'])) {
         <div class="container-fluid">
             <div id="toolbar" class="btn-toolbar">
                 <div class="btn-group <?= $_SESSION['group'] != 'ЮР' ? '' : 'hidden' ?>">
-                    <button type="button" class="btn btn-primary btn-labeled add" id="addBtn">
+                    <button type="button" class="btn btn-success btn-labeled add" id="addBtn">
                         <span class="btn-label"><i class="fa fa-plus fa-lg"></i></span>Додати запис
                     </button>
                 </div>
@@ -418,34 +418,37 @@ if (isset($_POST['add_nag'])) {
                         </th>
                         <th data-field="napr_zap_derjrei" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено запит до <br>держреєстра на встановлення <br>місцезнаходження
+                            <br>[70]
                         </th>
                         <th data-field="napr_zap_dfs" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено запит до <br>органів ДФС щодо<br>здійснення
                             фінансово-господарської<br>діяльності та пов'язаних осіб
+                            <br>[71]
                         </th>
                         <th data-field="napr_zai_police" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено запит до <br>органів національної поліції<br>про ухилення від
                             виконання<br>рішення суду
+                            <br>[72]
                         </th>
                         <th data-field="napr_info_bank" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено інформацію до<br>банківських установ про<br>наявність несплачених<br>штрафних
-                            санкцій
+                            санкцій<br>[73]
                         </th>
                         <th data-field="napr_info_zasn" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено інформацію до<br>засновників та посадових осіб про<br>наявність
-                            несплаченої<br>штрафної санкції
+                            несплаченої<br>штрафної санкції<br>[74]
                         </th>
                         <th data-field="napr_info_prokuror" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено інформацію до<br>органів прокуратури про<br>наявність несплаченої<br>штрафної
-                            санкції
+                            санкції<br>[75]
                         </th>
                         <th data-field="napr_info_oms" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено інформацію до<br>органів місцевого самоврядування про<br>наявність
-                            несплаченої<br>штрафної санкції
+                            несплаченої<br>штрафної санкції<br>[76]
                         </th>
                         <th data-field="napr_info_dfs" data-sortable="true" rowspan="3" data-halign="center"
                             data-align="center">Направлено інформацію до<br>органів ДФС про<br>наявність несплаченої<br>штрафної
-                            санкції
+                            санкції<br>[77]
                         </th>
                     </tr>
                     <tr>

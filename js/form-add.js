@@ -125,6 +125,11 @@ $('#type_fo').on('change', function () {
         $(this).addClass('accepted_field');
     }
 });
+$('.input-nomer').keydown(function (e) {
+    if (e.keyCode === 32) {
+        return false;
+    }
+});
 $("#modal-add-naglyad").on('show.bs.modal', function () {
     $('#add-form')[0].reset();
     $('#add-form .form-control').removeClass('required_field');

@@ -61,7 +61,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                <div class="form-group">
+                                <div class="form-group" style="margin-top: 20px;">
                                     <label for="type_fo">Тип суб'єкта нагляду <sup>
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup></label>
@@ -75,9 +75,10 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="form-group">
+                                <div class="form-group" style="margin-top: 20px;">
                                     <label for="vid_perevirkiS">Вид перевірки</label>
-                                    <select name="vid_perevirkiS" id="vid_perevirkiS" class="form-control">
+                                    <select name="vid_perevirkiS" id="vid_perevirkiS" class="form-control"
+                                            >
                                         <?php foreach ($table_vid_perevirki as $row): ?>
                                             <?php if ($row['visible'] == '0') continue; ?>
                                             <option value="<?= $row['id_vid_perevirki'] ?>" <?= $row['id_vid_perevirki'] == '1' ? 'selected' : '' ?>><?= $row['name_vid_perevirki'] ?></option>
@@ -178,7 +179,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_nak_zah">Номер</label>
-                                        <input name="n_nak_zah" type="text" class="form-control" id="n_nak_zah"
+                                        <input name="n_nak_zah" type="text" class="form-control input-nomer" id="n_nak_zah"
                                                maxlength="45">
                                     </div>
                                 </div>
@@ -203,7 +204,8 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_napr_proved">Номер</label>
-                                        <input name="n_napr_proved" type="text" class="form-control" id="n_napr_proved"
+                                        <input name="n_napr_proved" type="text" class="form-control input-nomer"
+                                               id="n_napr_proved"
                                                maxlength="45">
                                     </div>
                                 </div>
@@ -249,7 +251,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_akt_perevirki">Номер</label>
-                                        <input name="n_akt_perevirki" type="text" class="form-control"
+                                        <input name="n_akt_perevirki" type="text" class="form-control input-nomer"
                                                id="n_akt_perevirki" maxlength="45">
                                     </div>
                                 </div>
@@ -274,7 +276,8 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_akt_zu">Номер</label>
-                                        <input name="n_akt_zu" type="text" class="form-control" id="n_akt_zu"
+                                        <input name="n_akt_zu" type="text" class="form-control input-nomer"
+                                               id="n_akt_zu"
                                                maxlength="45">
                                     </div>
                                 </div>
@@ -312,7 +315,8 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="n_rozp_usun">Номер</label>
-                                        <input name="n_rozp_usun" type="text" class="form-control" id="n_rozp_usun"
+                                        <input name="n_rozp_usun" type="text" class="form-control input-nomer"
+                                               id="n_rozp_usun"
                                                maxlength="45">
                                     </div>
                                 </div>
@@ -337,7 +341,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-top: 20px;">
                                         <label for="info_vik_rozp">Інформація про виконання розпорядження</label>
                                         <select name="info_vik_rozp" id="info_vik_rozp" class="form-control">
                                             <?php foreach ($table_info_vik as $row): ?>
@@ -348,7 +352,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-top: 20px;">
                                         <label for="d_dovidki_vik_rozp">Дата Довідки про виконання розпорядження</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_dovidki_vik_rozpD">
@@ -380,7 +384,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="n_akt_nevik">Номер</label>
-                                    <input name="n_akt_nevik" type="text" class="form-control" id="dn_akt_nevik"
+                                    <input name="n_akt_nevik" type="text" class="form-control input-nomer"
+                                           id="dn_akt_nevik"
                                            maxlength="34">
                                 </div>
                             </div>
@@ -404,14 +409,14 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="n_post_shtraf">№ постанови про штраф</label>
-                                        <input name="n_post_shtraf" type="text" class="form-control"
+                                        <input name="n_post_shtraf" type="text" class="form-control input-nomer"
                                                id="n_post_shtraf" maxlength="45">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="suma_shtraf">Сума штрафу, грн</label>
-                                        <input name="suma_shtraf" type="text" class="form-control"
+                                        <input name="suma_shtraf" type="text" class="form-control input-nomer"
                                                id="suma_shtraf" maxlength="12">
                                     </div>
                                 </div>
@@ -483,7 +488,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="n_sluj_ur">Номер</label>
-                                        <input name="n_sluj_ur" type="text" class="form-control" id="n_sluj_ur"
+                                        <input name="n_sluj_ur" type="text" class="form-control input-nomer"
+                                               id="n_sluj_ur"
                                                maxlength="34">
                                     </div>
                                 </div>
@@ -517,7 +523,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="n_doc_splat">Номер</label>
-                                                <input name="n_doc_splat" type="text" class="form-control"
+                                                <input name="n_doc_splat" type="text" class="form-control input-nomer"
                                                        id="n_doc_splat"
                                                        maxlength="34">
                                             </div>
@@ -542,7 +548,7 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="n_sluj_nap_mat">Номер</label>
-                                                <input name="n_sluj_nap_mat" type="text" class="form-control"
+                                                <input name="n_sluj_nap_mat" type="text" class="form-control input-nomer"
                                                        id="n_sluj_nap_mat"
                                                        maxlength="34">
                                             </div>
@@ -553,7 +559,7 @@
                         </fieldset>
                     </div>
                     <div id="modal-page-4" class="modal-page">
-                      <fieldset>
+                        <fieldset>
                             <legend>Інформація щодо розподілу судових витрат</legend>
                             <div class="form-group">
                                 <label>Повернуто судовий збір за рішенням суду до бюджету</label>
@@ -561,7 +567,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="n_povern_sud_zbir">№ п/д</label>
-                                            <input name="n_povern_sud_zbir" type="text" class="form-control"
+                                            <input name="n_povern_sud_zbir" type="text" class="form-control input-nomer"
                                                    id="n_povern_sud_zbir"
                                                    maxlength="34">
                                         </div>
@@ -582,35 +588,36 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="s_povern_sud_zbir">Сума, грн</label>
-                                            <input name="s_povern_sud_zbir" type="text" class="form-control"
+                                            <input name="s_povern_sud_zbir" type="text" class="form-control input-nomer"
                                                    id="s_povern_sud_zbir" maxlength="12">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
-                            <div class="form-group" style="margin-top: -20px;">
-                                <label for="dn_sluj_ur">Дата/номер листа до суб'єкту нагляду про добровільнк сплату
-                                    штрафної санкції (судового збору) за рішенням суду</label>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="d_sluj_urD">Дата</label>
-                                        <div class="input-group date dp" data-provide="datepicker"
-                                             id="d_sluj_urD">
-                                            <input name="d_sluj_ur" data-mask="99.99.9999" type="text"
-                                                   class="form-control">
-                                            <span class="input-group-addon">
+                        <div class="form-group" style="margin-top: -20px;">
+                            <label for="dn_list_dobro_splat">Дата/номер листа до суб'єкту нагляду про добровільнк сплату
+                                штрафної санкції (судового збору) за рішенням суду</label>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="d_list_dobro_splatD">Дата</label>
+                                    <div class="input-group date dp" data-provide="datepicker"
+                                         id="d_list_dobro_splatD">
+                                        <input name="d_list_dobro_splat" data-mask="99.99.9999" type="text"
+                                               class="form-control">
+                                        <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="n_sluj_ur">Номер</label>
-                                        <input name="n_sluj_ur" type="text" class="form-control" id="n_sluj_ur"
-                                               maxlength="34">
                                     </div>
                                 </div>
+                                <div class="col-sm-6">
+                                    <label for="n_list_dobro_splat">Номер</label>
+                                    <input name="n_list_dobro_splat" type="text" class="form-control input-nomer"
+                                           id="n_list_dobro_splat"
+                                           maxlength="34">
+                                </div>
                             </div>
+                        </div>
                         <fieldset>
                             <legend>Процедури примусового стягнення за рішенням суду</legend>
                             <div class="form-group">
@@ -618,18 +625,18 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="n_povern_sud_zbir">№ п/д</label>
-                                            <input name="n_povern_sud_zbir" type="text" class="form-control"
-                                                   id="n_povern_sud_zbir"
+                                            <label for="n_shtraf_splach_dobro">№ п/д</label>
+                                            <input name="n_shtraf_splach_dobro" type="text" class="form-control input-nomer"
+                                                   id="n_shtraf_splach_dobro"
                                                    maxlength="34">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="d_povern_sud_zbir">Дата</label>
+                                            <label for="d_shtraf_splach_dobroD">Дата</label>
                                             <div class="input-group date dp" data-provide="datepicker"
-                                                 id="d_povern_sud_zbirD">
-                                                <input name="d_povern_sud_zbir" data-mask="99.99.9999" type="text"
+                                                 id="d_shtraf_splach_dobroD">
+                                                <input name="d_shtraf_splach_dobro" data-mask="99.99.9999" type="text"
                                                        class="form-control">
                                                 <span class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
@@ -639,22 +646,22 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="s_povern_sud_zbir">Сума, грн</label>
-                                            <input name="s_povern_sud_zbir" type="text" class="form-control"
-                                                   id="s_povern_sud_zbir" maxlength="12">
+                                            <label for="s_shtraf_splach_dobro">Сума, грн</label>
+                                            <input name="s_shtraf_splach_dobro" type="text" class="form-control input-nomer"
+                                                   id="s_shtraf_splach_dobro" maxlength="12">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="dn_sluj_ur">Дата/номер службової записки щодо необхідності примусового
+                                <label>Дата/номер службової записки щодо необхідності примусового
                                     виконання рішення суду</label>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="d_sluj_urD">Дата</label>
+                                        <label for="d_sluj_primus">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
-                                             id="d_sluj_urD">
-                                            <input name="d_sluj_ur" data-mask="99.99.9999" type="text"
+                                             id="dn_sluj_primusD">
+                                            <input name="d_sluj_primus" data-mask="99.99.9999" type="text"
                                                    class="form-control">
                                             <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -662,13 +669,99 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="n_sluj_ur">Номер</label>
-                                        <input name="n_sluj_ur" type="text" class="form-control" id="n_sluj_ur"
+                                        <label for="n_sluj_primus">Номер</label>
+                                        <input name="n_sluj_primus" type="text" class="form-control input-nomer"
+                                               id="n_sluj_primus"
                                                maxlength="34">
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
+                        <fieldset>
+                            <legend>Додатково зібрана інформація</legend>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="napr_zap_derjrei">
+                                            Направлено запит до держреєстра на встановлення
+                                            місцезнаходження</label>
+                                        <input name="napr_zap_derjrei" type="text" class="form-control" id="napr_zap_derjrei"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="napr_zap_dfs">Направлено запит до органів ДФС щодо здійснення
+                                            фінансово-господарської діяльності та пов'язаних осіб</label>
+                                        <input name="napr_zap_dfs" type="text" class="form-control" id="napr_zap_dfs"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="modal-page-5" class="modal-page">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="napr_zai_police">
+                                            Направлено запит до органів національної поліції про ухилення від
+                                            виконання рішення суду</label>
+                                        <input name="napr_zai_police" type="text" class="form-control" id="napr_zai_police"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="napr_info_bank">Направлено інформацію до банківських установ
+                                            про наявність несплачених штрафних санкцій</label>
+                                        <input name="napr_info_bank" type="text" class="form-control" id="napr_info_bank"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="napr_info_zasn">
+                                            Направлено інформацію до засновників та посадових осіб про наявність
+                                            несплаченої штрафної санкції</label>
+                                        <input name="napr_info_zasn" type="text" class="form-control" id="napr_info_zasn"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="napr_info_prokuror">Направлено інформацію до органів прокуратури про
+                                            наявність несплаченої штрафної санкції</label>
+                                        <input name="napr_info_prokuror" type="text" class="form-control" id="napr_info_prokuror"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="napr_info_oms">
+                                            Направлено інформацію до органів місцевого самоврядування про наявність
+                                            несплаченої штрафної санкції</label>
+                                        <input name="napr_info_oms" type="text" class="form-control" id="napr_info_oms"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group" style="margin-top: 20px;">
+                                        <label for="napr_info_dfs">Направлено інформацію до органів ДФС про наявність
+                                            несплаченої штрафної санкції</label>
+                                        <input name="napr_info_dfs" type="text" class="form-control" id="napr_info_dfs"
+                                               maxlength="255">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </form>
             </div>
@@ -679,6 +772,7 @@
                         <li id="page-2"><a href="#" onclick="click2()">2</a></li>
                         <li id="page-3"><a href="#" onclick="click3()">3</a></li>
                         <li id="page-4"><a href="#" onclick="click4()">4</a></li>
+                        <li id="page-5"><a href="#" onclick="click5()">5</a></li>
                         <!--<li><a href="#">4</a></li>-->
                     </ul>
                 </nav>
@@ -731,6 +825,12 @@
         $('#modal-page-4').removeClass('hidden');
         $('.pagination li').removeClass('active-primary');
         $('#page-4').addClass('active-primary');
+    }
+    function click5() {
+        $('.modal-page').addClass('hidden');
+        $('#modal-page-5').removeClass('hidden');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-5').addClass('active-primary');
     }
     /*var formIsOk = true;
      $('#add-form').submit(function () {
