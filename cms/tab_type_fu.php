@@ -25,7 +25,6 @@ if (isset($_POST['relogin'])) {
     session_destroy();
     header('Location: ../login.php');
 }
-$for_date_change = 'd.m.Y H:i:s';
 
 ?>
 <!DOCTYPE html>
@@ -87,63 +86,113 @@ $for_date_change = 'd.m.Y H:i:s';
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
-            <li class="active"><a href="logs.php"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
+            <li><a href="logs.php"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
             <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a></li>
         </ul>
     </div>
 
 </div>
-<div class="container-fluid" id="content-body" style="margin-top:25px; height: 90%">
+<?php
+$state_add_1 = '';
+$state_edit_1 = '';
+
+?>
+<div class="container-fluid" id="content-body" style="height: 90%">
     <!--<div class="toolbar">
 <button id="button" class="btn btn-default">getSelectedRow</button></div>-->
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-success alert-dismissable alert-fixed <?= $state_add_1 == 'success' ? '' : 'hidden' ?>"
+                 id="success_add_1">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h4>Запис успішно додано!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_add_1 == 'error' ? '' : 'hidden' ?>"
+                 id="error_add_1">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h4>Виникла помилка при додаванні запису!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-success alert-dismissable alert-fixed <?= $state_edit_1 == 'success' ? '' : 'hidden' ?>"
+                 id="success_edit_1">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h4>Запис успішно змінено!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_edit_1 == 'error' ? '' : 'hidden' ?>"
+                 id="error_edit_1">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h4>Виникла помилка при редагуванні запису!</h4>
+            </div>
+        </div>
+    </div>
     <div class="row" style="margin-top: -20px;">
         <div class="container">
-            <div class="">
+            <div id="toolbar_1" class="btn-toolbar">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-labeled add" id="addUser">
+                        <span class="btn-label"><i class="fa fa-user-plus fa-lg"></i></span>Додати
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning btn-labeled edit" id="editUser">
+                        <span class="btn-label"><i class="fa fa-pencil fa-lg"></i></span>Редагувати
+                    </button>
+                </div>
+            </div>
+            <div class="center-block">
                 <table
                     data-toggle="table"
-                    id="table_user"
+                    id="table_type_fu"
                     class="table table-striped table-bordered table-fixed-header table-condensed"
-                    data-sort-name="time_exec"
-                    data-sort-order="desc"
-                    data-height="850"
+                    data-sort-name="id_user"
+                    data-sort-order="asc"
+                    data-toolbar="#toolbar_1"
+                    data-search="true"
+                    data-searchOnEnterKey="true"
                     data-click-to-select="true"
                     data-checkbox-header="false"
                     data-resizable="true"
                     style="background-color: seashell;">
                     <thead class="header" style="background-color: seashell;">
                     <tr>
-                        <th data-field="id_log" data-sortable="true" data-halign="center" data-align="center">
-                            ID
-                        </th>
-                        <th data-field="time_exec" data-sortable="true" data-halign="center" data-align="center">
-                            Час
-                        </th>
-                        <th data-field="type" data-sortable="true" data-halign="center" data-align="center">
-                            Тип
+
+                        <th data-field="state" data-checkbox="true" data-events="clickCheck"></th>
+                        <th data-field="id_user" data-sortable="true" data-halign="center" data-align="center">
+                            id
                         </th>
                         <th data-field="username" data-sortable="true" data-halign="center" data-align="center">
-                            Ім'я користувача
-                        </th>
-                        <th data-field="query" data-sortable="true" data-halign="center" data-align="center">
-                            Запит
-                        </th>
-                        <th data-field="status" data-sortable="true"  data-halign="center" data-align="center">
-                            Статус
+                            Тип суб'єкта нагляду
                         </th>
                     </tr>
                     </thead>
                     <tbody >
-                    <?php $table_logs = get_logs();
-                    foreach ($table_logs as $row): ?>
+                    <?php
+                    $table_type_fu = get_dic('dic_type_fu');
+                    foreach ($table_type_fu as $row):
+                        if ($row['visible']=='0') continue;?>
                         <tr>
-                            <td><?= $row['id_log'] ?></td>
-                            <td><?= date($for_date_change, $row['time_exec']) ?></td>
-                            <td><?= $row['type'] ?></td>
-                            <td><?= $row['username'] ?></td>
-                            <td><?= $row['query'] ?></td>
-                            <td><?= $row['status']=='1'?
-                                    "<i class='fa fa-check' style='color:#5cb85c;'></i>"
-                                    :"<i class='fa fa-times' style='color: #d9534f;'></i>"?></td>
+                            <td></td>
+                            <td><?= $row['id_type_fu'] ?></td>
+                            <td><?= $row['name_type_fu'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -152,6 +201,7 @@ $for_date_change = 'd.m.Y H:i:s';
         </div>
     </div>
 </div>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

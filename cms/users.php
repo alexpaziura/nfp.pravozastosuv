@@ -110,7 +110,7 @@ if(isset($_POST['delete_user'])){
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#tabTypeFu" data-toggle="tab">Тип суб'єкта нагляду</a></li>
+                    <li><a href="tab_type_fu.php">Тип суб'єкта нагляду</a></li>
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
