@@ -204,7 +204,7 @@ if(isset($_POST['delete_user'])){
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-danger btn-labeled" id="deleteUser">
-                        <span class="btn-label"><i class="fa fa-user-times fa-lg"></i></span>Редагувати користувача
+                        <span class="btn-label"><i class="fa fa-user-times fa-lg"></i></span>Видалити користувача
                     </button>
                 </div>
             </div>

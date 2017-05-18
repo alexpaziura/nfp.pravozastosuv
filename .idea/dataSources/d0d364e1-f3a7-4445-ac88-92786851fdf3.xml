@@ -519,72 +519,72 @@
       <Position>64</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="131" parent="19" name="dn_sluj_primus">
+    <column id="131" parent="19" name="shtraf_slpach_dobro">
+      <Position>65</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="132" parent="19" name="dn_sluj_primus">
       <Position>66</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="132" parent="19" name="dn_lz_vikon_list">
+    <column id="133" parent="19" name="dn_lz_vikon_list">
       <Position>67</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="133" parent="19" name="dn_otrum_vikon_list">
+    <column id="134" parent="19" name="dn_otrum_vikon_list">
       <Position>68</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="134" parent="19" name="dn_napr_list_dvs">
+    <column id="135" parent="19" name="dn_napr_list_dvs">
       <Position>69</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="135" parent="19" name="dn_rekv_otk_vp">
+    <column id="136" parent="19" name="dn_rekv_otk_vp">
       <Position>70</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="136" parent="19" name="short_opis_zah_dvs">
+    <column id="137" parent="19" name="short_opis_zah_dvs">
       <Position>71</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="137" parent="19" name="dn_rekv_zak_vp">
+    <column id="138" parent="19" name="dn_rekv_zak_vp">
       <Position>72</Position>
       <DataType>varchar(45)|0</DataType>
     </column>
-    <column id="138" parent="19" name="primitka_dod">
+    <column id="139" parent="19" name="primitka_dod">
       <Position>73</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="139" parent="19" name="napr_zap_derjrei">
+    <column id="140" parent="19" name="napr_zap_derjrei">
       <Position>74</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="140" parent="19" name="napr_zap_dfs">
+    <column id="141" parent="19" name="napr_zap_dfs">
       <Position>75</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="141" parent="19" name="napr_zai_police">
+    <column id="142" parent="19" name="napr_zai_police">
       <Position>76</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="142" parent="19" name="napr_info_bank">
+    <column id="143" parent="19" name="napr_info_bank">
       <Position>77</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="143" parent="19" name="napr_info_zasn">
+    <column id="144" parent="19" name="napr_info_zasn">
       <Position>78</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="144" parent="19" name="napr_info_prokuror">
+    <column id="145" parent="19" name="napr_info_prokuror">
       <Position>79</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="145" parent="19" name="napr_info_oms">
+    <column id="146" parent="19" name="napr_info_oms">
       <Position>80</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="146" parent="19" name="napr_info_dfs">
+    <column id="147" parent="19" name="napr_info_dfs">
       <Position>81</Position>
-      <DataType>varchar(255)|0</DataType>
-    </column>
-    <column id="147" parent="19" name="shtraf_slpach_dobro">
-      <Position>65</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
     <index id="148" parent="19" name="fk_info_vik_idx">
@@ -1147,18 +1147,16 @@
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="274" parent="22" name="username_UNIQUE">
-      <ColNames>username</ColNames>
-      <Unique>1</Unique>
-    </index>
+    <column id="274" parent="22" name="visible">
+      <Position>7</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
     <key id="275" parent="22" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_user</ColNames>
       <Primary>1</Primary>
-    </key>
-    <key id="276" parent="22" name="username_UNIQUE">
-      <ColNames>username</ColNames>
-      <UnderlyingIndexName>username_UNIQUE</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

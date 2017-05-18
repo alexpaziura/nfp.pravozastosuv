@@ -170,6 +170,13 @@ legend {
 .tog.active span:last-child  {
   display: none;
 }
+.input-group-addon {
+  background-color: #428BCA;
+}
+.input-group-addon i {
+  /*color: #0e437e;*/
+  color: #fff;
+}
 /*.selectboxit-container .selectboxit, .selectboxit-container .selectboxit-options {
   width: 100%;
   border-radius:0;

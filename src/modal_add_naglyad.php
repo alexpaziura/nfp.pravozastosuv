@@ -35,8 +35,13 @@
                                     <label for="nzp">№ з/п <sup>
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup></label>
-                                    <input name="nzp" type="text" class="form-control" id="nzp" maxlength="11"
-                                           data-toggle="popover" data-trigger="hover">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                        <input name="nzp" type="text" class="form-control" id="nzp" maxlength="11"
+                                               data-toggle="popover" data-trigger="hover">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -46,8 +51,13 @@
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup>
                                     </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-font fa-lg"></i>
+                                            </span>
                                     <input name="short_name_fu" type="text" class="form-control" id="short_name_fu"
                                            maxlength="255">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -55,7 +65,12 @@
                                     <label for="edrpoE">ЄДРПОУ ФУ або ІНН або паспорт <sup>
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup></label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
                                     <input name="edrpoE" type="text" class="form-control" id="edrpoE" maxlength="12">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +93,7 @@
                                 <div class="form-group" style="margin-top: 20px;">
                                     <label for="vid_perevirkiS">Вид перевірки</label>
                                     <select name="vid_perevirkiS" id="vid_perevirkiS" class="form-control"
-                                            >
+                                    >
                                         <?php foreach ($table_vid_perevirki as $row): ?>
                                             <?php if ($row['visible'] == '0') continue; ?>
                                             <option value="<?= $row['id_vid_perevirki'] ?>" <?= $row['id_vid_perevirki'] == '1' ? 'selected' : '' ?>><?= $row['name_vid_perevirki'] ?></option>
@@ -106,11 +121,11 @@
                                         <label for="d_start_perevirki">Дата початку</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_start_perevirkiD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_start_perevirki" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -119,11 +134,11 @@
                                         <label for="d_end_perevirki">Дата закінчення</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_end_perevirkiD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input type="text" name="d_end_perevirki" data-mask="99.99.9999"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -137,11 +152,11 @@
                                         <label for="d_start_dialnist">Дата початку</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_start_dialnistD">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_start_dialnist" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -150,11 +165,11 @@
                                         <label for="d_end_dialnist">Дата закінчення</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_end_dialnistD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input type="text" name="d_end_dialnist" data-mask="99.99.9999"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -168,19 +183,25 @@
                                         <label for="d_nak_zah">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_nak_zahD">
+                                             <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_nak_zah" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_nak_zah">Номер</label>
-                                        <input name="n_nak_zah" type="text" class="form-control input-nomer" id="n_nak_zah"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_nak_zah" type="text" class="form-control input-nomer"
+                                               id="n_nak_zah"
                                                maxlength="45">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -193,20 +214,25 @@
                                         <label for="d_napr_proved">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_napr_provedD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_napr_proved" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_napr_proved">Номер</label>
-                                        <input name="n_napr_proved" type="text" class="form-control input-nomer"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_napr_proved" type="text" class="form-control input-nomer"
                                                id="n_napr_proved"
                                                maxlength="45">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -219,15 +245,25 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="ker_inspekt_group">П.І.Б. керівника інспекційної групи</label>
-                                        <input name="ker_inspekt_group" type="text" class="form-control"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="ker_inspekt_group" type="text" class="form-control"
                                                id="ker_inspekt_group" maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="ch_inspekt_group">П.І.Б. членів інспекційної групи</label>
-                                        <input name="ch_inspekt_group" type="text" class="form-control"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="ch_inspekt_group" type="text" class="form-control"
                                                id="ch_inspekt_group" maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -240,19 +276,24 @@
                                         <label for="d_akt_perevirki">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_akt_perevirkiD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_akt_perevirki" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_akt_perevirki">Номер</label>
-                                        <input name="n_akt_perevirki" type="text" class="form-control input-nomer"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_akt_perevirki" type="text" class="form-control input-nomer"
                                                id="n_akt_perevirki" maxlength="45">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -265,20 +306,25 @@
                                         <label for="d_akt_zu">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_akt_zuD">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_akt_zu" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="n_akt_zu">Номер</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
                                         <input name="n_akt_zu" type="text" class="form-control input-nomer"
                                                id="n_akt_zu"
                                                maxlength="45">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -304,27 +350,37 @@
                                         <label for="d_rozp_usun">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_rozp_usunD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_rozp_usun" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="n_rozp_usun">Номер</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
                                         <input name="n_rozp_usun" type="text" class="form-control input-nomer"
                                                id="n_rozp_usun"
                                                maxlength="45">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="strok_usun_por">Строки усунення порушення</label>
-                                        <input name="strok_usun_por" type="text" class="form-control"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="strok_usun_por" type="text" class="form-control"
                                                id="strok_usun_por" maxlength="45">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -356,11 +412,11 @@
                                         <label for="d_dovidki_vik_rozp">Дата Довідки про виконання розпорядження</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_dovidki_vik_rozpD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_dovidki_vik_rozp" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -375,18 +431,23 @@
                                     <label for="d_akt_nevikD">Дата</label>
                                     <div class="input-group date dp" data-provide="datepicker"
                                          id="d_akt_nevikD">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-lg"></i>
+                                        </span>
                                         <input name="d_akt_nevik" data-mask="99.99.9999" type="text"
                                                class="form-control">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="n_akt_nevik">Номер</label>
-                                    <input name="n_akt_nevik" type="text" class="form-control input-nomer"
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                        </span>
+                                        <input name="n_akt_nevik" type="text" class="form-control input-nomer"
                                            id="dn_akt_nevik"
                                            maxlength="34">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -398,26 +459,37 @@
                                         <label for="d_post_shtrafD">Дата постанови про штраф</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_post_shtrafD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_post_shtraf" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="n_post_shtraf">№ постанови про штраф</label>
-                                        <input name="n_post_shtraf" type="text" class="form-control input-nomer"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_post_shtraf" type="text" class="form-control input-nomer"
                                                id="n_post_shtraf" maxlength="45">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="suma_shtraf">Сума штрафу, грн</label>
-                                        <input name="suma_shtraf" type="text" class="form-control input-nomer"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-money fa-lg"></i>
+                                                <!--<img src="../img/glyphicons-38-coins.png">-->
+                                            </span>
+                                            <input name="suma_shtraf" type="text" class="form-control input-nomer suma"
                                                id="suma_shtraf" maxlength="12">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -425,11 +497,11 @@
                                         <label for="strok_splat_shtrafD">Строк сплати штрафу</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="strok_splat_shtrafD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="strok_splat_shtraf" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -441,11 +513,11 @@
                                             платіжному дорученню)</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="info_splat_shtrafD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="info_splat_shtraf" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -453,8 +525,13 @@
                                     <div class="form-group">
                                         <label for="info_usun_por">Інформація про усунення порушення, за яке застосована
                                             штрафна санкція</label>
-                                        <input name="info_usun_por" type="text" class="form-control"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="info_usun_por" type="text" class="form-control"
                                                id="info_usun_por" maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -462,11 +539,11 @@
                                         <label for="d_dovidki_vik_postD">Дата Довідки про виконання постанови</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_dovidki_vik_postD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_dovidki_vik_post" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -479,18 +556,23 @@
                                         <label for="d_sluj_urD">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="d_sluj_urD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_sluj_ur" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="n_sluj_ur">Номер</label>
-                                        <input name="n_sluj_ur" type="text" class="form-control input-nomer"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_sluj_ur" type="text" class="form-control input-nomer"
                                                id="n_sluj_ur"
                                                maxlength="34">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -501,8 +583,13 @@
                                 <label for="sluj_perep_splat">Службова переписка щодо сплати судового збору (дата/номер
                                     службової записки) (фіксується подання на сплату - поверення з причинами про
                                     неможливість сплати - повторне подання, інше)</label>
-                                <input name="sluj_perep_splat" type="text" class="form-control"
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-font fa-lg"></i>
+                                    </span>
+                                    <input name="sluj_perep_splat" type="text" class="form-control"
                                        id="sluj_perep_splat" maxlength="255">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -514,18 +601,23 @@
                                                 <label for="d_doc_splatD">Дата</label>
                                                 <div class="input-group date dp" data-provide="datepicker"
                                                      id="d_doc_splatD">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar fa-lg"></i>
+                                                    </span>
                                                     <input name="d_doc_splat" data-mask="99.99.9999" type="text"
                                                            class="form-control">
-                                                    <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="n_doc_splat">Номер</label>
-                                                <input name="n_doc_splat" type="text" class="form-control input-nomer"
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-hashtag fa-lg"></i>
+                                                    </span>
+                                                    <input name="n_doc_splat" type="text" class="form-control input-nomer"
                                                        id="n_doc_splat"
                                                        maxlength="34">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -539,18 +631,24 @@
                                                 <label for="d_sluj_nap_matD">Дата</label>
                                                 <div class="input-group date dp" data-provide="datepicker"
                                                      id="d_sluj_nap_matD">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar fa-lg"></i>
+                                                    </span>
                                                     <input name="d_sluj_nap_mat" data-mask="99.99.9999" type="text"
                                                            class="form-control">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="n_sluj_nap_mat">Номер</label>
-                                                <input name="n_sluj_nap_mat" type="text" class="form-control input-nomer"
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-hashtag fa-lg"></i>
+                                                    </span>
+                                                    <input name="n_sluj_nap_mat" type="text"
+                                                       class="form-control input-nomer"
                                                        id="n_sluj_nap_mat"
                                                        maxlength="34">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -567,9 +665,14 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="n_povern_sud_zbir">№ п/д</label>
-                                            <input name="n_povern_sud_zbir" type="text" class="form-control input-nomer"
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-hashtag fa-lg"></i>
+                                                </span>
+                                                <input name="n_povern_sud_zbir" type="text" class="form-control input-nomer"
                                                    id="n_povern_sud_zbir"
                                                    maxlength="34">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -577,19 +680,25 @@
                                             <label for="d_povern_sud_zbir">Дата</label>
                                             <div class="input-group date dp" data-provide="datepicker"
                                                  id="d_povern_sud_zbirD">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar fa-lg"></i>
+                                                </span>
                                                 <input name="d_povern_sud_zbir" data-mask="99.99.9999" type="text"
                                                        class="form-control">
-                                                <span class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="s_povern_sud_zbir">Сума, грн</label>
-                                            <input name="s_povern_sud_zbir" type="text" class="form-control input-nomer"
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-money fa-lg"></i>
+                                                </span>
+                                                <input name="s_povern_sud_zbir" type="text" class="form-control input-nomer
+                                                    suma"
                                                    id="s_povern_sud_zbir" maxlength="12">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -603,18 +712,23 @@
                                     <label for="d_list_dobro_splatD">Дата</label>
                                     <div class="input-group date dp" data-provide="datepicker"
                                          id="d_list_dobro_splatD">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-lg"></i>
+                                        </span>
                                         <input name="d_list_dobro_splat" data-mask="99.99.9999" type="text"
                                                class="form-control">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="n_list_dobro_splat">Номер</label>
-                                    <input name="n_list_dobro_splat" type="text" class="form-control input-nomer"
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                        </span>
+                                        <input name="n_list_dobro_splat" type="text" class="form-control input-nomer"
                                            id="n_list_dobro_splat"
-                                           maxlength="34">
+                                           maxlength="33">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -626,9 +740,15 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="n_shtraf_splach_dobro">№ п/д</label>
-                                            <input name="n_shtraf_splach_dobro" type="text" class="form-control input-nomer"
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-hashtag fa-lg"></i>
+                                                </span>
+                                                <input name="n_shtraf_splach_dobro" type="text"
+                                                   class="form-control input-nomer"
                                                    id="n_shtraf_splach_dobro"
                                                    maxlength="34">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -636,19 +756,25 @@
                                             <label for="d_shtraf_splach_dobroD">Дата</label>
                                             <div class="input-group date dp" data-provide="datepicker"
                                                  id="d_shtraf_splach_dobroD">
+                                                <span class="input-group-addon">
+                                                        <i class="fa fa-calendar fa-lg"></i>
+                                                </span>
                                                 <input name="d_shtraf_splach_dobro" data-mask="99.99.9999" type="text"
                                                        class="form-control">
-                                                <span class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="s_shtraf_splach_dobro">Сума, грн</label>
-                                            <input name="s_shtraf_splach_dobro" type="text" class="form-control input-nomer"
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-money fa-lg"></i>
+                                                </span>
+                                                <input name="s_shtraf_splach_dobro" type="text"
+                                                   class="form-control input-nomer suma"
                                                    id="s_shtraf_splach_dobro" maxlength="12">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -661,18 +787,23 @@
                                         <label for="d_sluj_primus">Дата</label>
                                         <div class="input-group date dp" data-provide="datepicker"
                                              id="dn_sluj_primusD">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
                                             <input name="d_sluj_primus" data-mask="99.99.9999" type="text"
                                                    class="form-control">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="n_sluj_primus">Номер</label>
-                                        <input name="n_sluj_primus" type="text" class="form-control input-nomer"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_sluj_primus" type="text" class="form-control input-nomer"
                                                id="n_sluj_primus"
                                                maxlength="34">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -686,16 +817,27 @@
                                         <label for="napr_zap_derjrei">
                                             Направлено запит до держреєстра на встановлення
                                             місцезнаходження</label>
-                                        <input name="napr_zap_derjrei" type="text" class="form-control" id="napr_zap_derjrei"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_zap_derjrei" type="text" class="form-control"
+                                               id="napr_zap_derjrei"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="napr_zap_dfs">Направлено запит до органів ДФС щодо здійснення
                                             фінансово-господарської діяльності та пов'язаних осіб</label>
-                                        <input name="napr_zap_dfs" type="text" class="form-control" id="napr_zap_dfs"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_zap_dfs" type="text" class="form-control" id="napr_zap_dfs"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -709,16 +851,28 @@
                                         <label for="napr_zai_police">
                                             Направлено запит до органів національної поліції про ухилення від
                                             виконання рішення суду</label>
-                                        <input name="napr_zai_police" type="text" class="form-control" id="napr_zai_police"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_zai_police" type="text" class="form-control"
+                                               id="napr_zai_police"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="napr_info_bank">Направлено інформацію до банківських установ
                                             про наявність несплачених штрафних санкцій</label>
-                                        <input name="napr_info_bank" type="text" class="form-control" id="napr_info_bank"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_info_bank" type="text" class="form-control"
+                                               id="napr_info_bank"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -728,16 +882,28 @@
                                         <label for="napr_info_zasn">
                                             Направлено інформацію до засновників та посадових осіб про наявність
                                             несплаченої штрафної санкції</label>
-                                        <input name="napr_info_zasn" type="text" class="form-control" id="napr_info_zasn"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_info_zasn" type="text" class="form-control"
+                                               id="napr_info_zasn"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="napr_info_prokuror">Направлено інформацію до органів прокуратури про
                                             наявність несплаченої штрафної санкції</label>
-                                        <input name="napr_info_prokuror" type="text" class="form-control" id="napr_info_prokuror"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_info_prokuror" type="text" class="form-control"
+                                               id="napr_info_prokuror"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -747,16 +913,26 @@
                                         <label for="napr_info_oms">
                                             Направлено інформацію до органів місцевого самоврядування про наявність
                                             несплаченої штрафної санкції</label>
-                                        <input name="napr_info_oms" type="text" class="form-control" id="napr_info_oms"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_info_oms" type="text" class="form-control" id="napr_info_oms"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group" style="margin-top: 20px;">
                                         <label for="napr_info_dfs">Направлено інформацію до органів ДФС про наявність
                                             несплаченої штрафної санкції</label>
-                                        <input name="napr_info_dfs" type="text" class="form-control" id="napr_info_dfs"
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                            <input name="napr_info_dfs" type="text" class="form-control" id="napr_info_dfs"
                                                maxlength="255">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
