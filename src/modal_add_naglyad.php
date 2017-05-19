@@ -92,11 +92,10 @@
                             <div class="col-sm-4">
                                 <div class="form-group" style="margin-top: 20px;">
                                     <label for="vid_perevirkiS">Вид перевірки</label>
-                                    <select name="vid_perevirkiS" id="vid_perevirkiS" class="form-control"
-                                    >
+                                    <select name="vid_perevirkiS" id="vid_perevirkiS" class="form-control">
                                         <?php foreach ($table_vid_perevirki as $row): ?>
                                             <?php if ($row['visible'] == '0') continue; ?>
-                                            <option value="<?= $row['id_vid_perevirki'] ?>" <?= $row['id_vid_perevirki'] == '1' ? 'selected' : '' ?>><?= $row['name_vid_perevirki'] ?></option>
+                                            <option value="<?= $row['id_vid_perevirki'] ?>" <?= $row['id_vid_perevirki'] == 1 ? 'selected' : '' ?>><?= $row['name_vid_perevirki'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -335,7 +334,7 @@
                                         <select name="vid_akt_zu" id="vid_akt_zu" class="form-control">
                                             <?php foreach ($table_akt_zu as $row): ?>
                                                 <?php if ($row['visible'] == '0') continue; ?>
-                                                <option value="<?= $row['id_akt_zu'] ?>" <?= $row['id_akt_zu'] == '1' ? 'selected' : '' ?>><?= $row['name_akt_zu'] ?></option>
+                                                <option value="<?= $row['id_akt_zu'] ?>" <?= $row['id_akt_zu'] === 1 ? 'selected' : '' ?>><?= $row['name_akt_zu'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -402,7 +401,7 @@
                                         <select name="info_vik_rozp" id="info_vik_rozp" class="form-control">
                                             <?php foreach ($table_info_vik as $row): ?>
                                                 <?php if ($row['visible'] == '0') continue; ?>
-                                                <option value="<?= $row['id_info_vik'] ?>" <?= $row['id_info_vik'] == '1' ? 'selected' : '' ?>><?= $row['name_info_vik'] ?></option>
+                                                <option value="<?= $row['id_info_vik'] ?>" <?= $row['id_info_vik'] === 1 ? 'selected' : '' ?>><?= $row['name_info_vik'] ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

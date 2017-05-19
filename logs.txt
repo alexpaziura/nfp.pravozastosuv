@@ -4,11 +4,15 @@ Error: INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_nam
             n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, d_rozp_usun, n_rozp_usun, strok_usun_por,
             b_usun_lic_umov, info_vik_rozp, d_dovidki_vik_rozp, dn_akt_nevik, d_post_shtraf, n_post_shtraf, suma_shtraf,
             strok_splat_shtraf, info_splat_shtraf, info_usun_por, d_dovidki_vik_post, dn_sluj_ur, sluj_perep_splat, 
-            dn_doc_splat, dn_sluj_nap_mat) 
-            VALUES (1, 1494918441, 1, 34343, 10, 'fdfdfdf','4343434344',7,1,NULL,
-            NULL, NULL, NULL, NULL, NULL, 'ээ 'fdfdfd'',
+            dn_doc_splat, dn_sluj_nap_mat, povern_sud_zbir, dn_list_dobro_splat, shtraf_slpach_dobro, dn_sluj_primus, 
+            napr_zap_derjrei, napr_zap_dfs, napr_zai_police, napr_info_bank, napr_info_zasn, napr_info_prokuror,
+            napr_info_oms, napr_info_dfs) 
+            VALUES (1, 1495195078, 1, 4, 10, '4444444444444444','444444444444',11,,NULL,
+            NULL, NULL, NULL, NULL, NULL, NULL,
             NULL, NULL, NULL, NULL, NULL,
-            NULL, NULL, NULL, 1, NULL, NULL, NULL,
-            NULL, 1, NULL, ' ', NULL, NULL,
+            NULL, NULL, NULL, , NULL, NULL, NULL,
+            NULL, , NULL, ' №', NULL, NULL,
             NULL, NULL, NULL, NULL, NULL, ' ',
-            NULL, ' ', ' ')
+            NULL, ' №', ' №', '№  ', ' №', 
+            '№  ', ' №', NULL, NULL, NULL, NULL,
+            NULL, NULL, NULL, NULL)
