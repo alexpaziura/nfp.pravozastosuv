@@ -131,7 +131,7 @@ $('.input-nomer').keydown(function (e) {
     }
 });
 $("#modal-add-naglyad").on('shown.bs.modal', function () {
-    $('#add-form .form-control').val('');
+    $('#add-form input .form-control').val('');
     $('#add-form .form-control').removeClass('required_field');
     $('#add-form .form-control').removeClass('accepted_field');
     $('#add-form .form-control').popover('hide');

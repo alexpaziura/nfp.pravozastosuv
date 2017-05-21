@@ -340,7 +340,12 @@ if(isset($_POST['delete_user'])){
                                 <label for="username">Ім'я користувача <sup>
                                         <i class="fa fa-asterisk" style="color: red"></i>
                                     </sup></label>
+                                <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user fa-lg"></i>
+                                            </span>
                                 <input name="username" type="text" class="form-control" id="username" maxlength="255">
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -350,15 +355,25 @@ if(isset($_POST['delete_user'])){
                                         <i class="fa fa-asterisk" style="color: red"></i>
                                     </sup>
                                 </label>
+                                <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-lock fa-lg"></i>
+                                            </span>
                                 <input name="password" type="password" class="form-control" id="password" maxlength="255">
-                            </div>
+                                </div>
+                                </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="pib">ПІБ <sup>
                                         <i class="fa fa-asterisk" style="color: red"></i>
                                     </sup></label>
+                                <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
                                 <input name="pib" type="text" class="form-control" id="pib" maxlength="255">
+                                </div>
                             </div>
                         </div>
                     </div>

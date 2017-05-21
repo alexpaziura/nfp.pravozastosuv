@@ -51,11 +51,14 @@ $('#username').keyup(function () {
     if ((username === '') || ( !regex.test($(this).val()) )) {
         $user_field.removeClass('accepted_field');
         $user_field.addClass('required_field');
-        $('#wrong_fields').removeClass('hidden');
     } else {
         $user_field.removeClass('required_field');
         $user_field.addClass('accepted_field');
+    }
+    if(checkFields('#add-user')) {
         $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 }).keydown(function (e) {
     if (e.keyCode === 32) {
@@ -69,11 +72,14 @@ $('#password').keyup(function () {
     if ((password === '') || ( !regex.test($(this).val()) )) {
         $pass_field.removeClass('accepted_field');
         $pass_field.addClass('required_field');
-        $('#wrong_fields').removeClass('hidden');
     } else {
         $pass_field.removeClass('required_field');
         $pass_field.addClass('accepted_field');
+    }
+    if(checkFields('#add-user')) {
         $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 }).keydown(function (e) {
     if (e.keyCode === 32) {
@@ -86,17 +92,25 @@ $('#pib').keyup(function () {
     if (pib === '') {
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
-        $('#wrong_fields').removeClass('hidden');
     } else {
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
+    }
+    if(checkFields('#add-user')) {
         $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 });
 $('#memberof').on('change', function () {
     if ($(this).val() != '') {
         $(this).removeClass('required_field');
         $(this).addClass('accepted_field');
+    }
+    if(checkFields('#add-user')) {
+        $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 });
 $('#ltoggle').on('click', function () {
@@ -172,11 +186,25 @@ $('#add-user').submit(function () {
         noError = true;
     }
     if (!$alert.hasClass('hidden')) {
+        alert("hidden not");
         noError = false;
     }
     return noError;
 });
+function checkFields(form) {
+    var fields = $(form+" .form-control").filter('.required_field');
+    var bool = true;
+    if (fields.length !== 0) {
+        bool = false;
+    }
+    return bool;
+}
 $(document).ready(function () {
+    $("#modal_add_user").on('shown.bs.modal', function () {
+        $('#add-user input .form-control').val('');
+        $('#add-user .form-control').removeClass('required_field');
+        $('#add-user .form-control').removeClass('accepted_field');
+    });
     $("#modal_edit_user").on('show.bs.modal', function () {
         var $table = $('#table_user');
         var selection = $table.bootstrapTable('getSelections');
@@ -240,9 +268,9 @@ $(document).ready(function () {
         $('#del_user_text').html("<ul>"+usernames+"</ul>");
     });
 });
-var noError_edit = true;
-$('#edit-user').submit(function () {
 
+$('#edit-user').submit(function () {
+    var noError_edit = true;
     var $alert = $('#wrong_fields_edit');
     var $username = $('#username_edit');
     var user = $.trim($username.val());
@@ -288,7 +316,9 @@ $('#username_edit').keyup(function () {
     } else {
         $user_field.removeClass('required_field');
         $user_field.addClass('accepted_field');
-        $('#wrong_fields_edit').addClass('hidden');
+        if(!checkFields('#edit-user')) {
+            $('#wrong_fields_edit').addClass('hidden');
+        }
     }
 }).keydown(function (e) {
     if (e.keyCode === 32) {
@@ -306,11 +336,15 @@ $('#password_edit').keyup(function () {
     } else {
         $pass_field.removeClass('required_field');
         $pass_field.addClass('accepted_field');
-        $('#wrong_fields_edit').addClass('hidden');
+        if(!checkFields('#edit-user')) {
+            $('#wrong_fields_edit').addClass('hidden');
+        }
     }
     if (password === '') {
         $pass_field.removeClass('required_field');
-        $('#wrong_fields_edit').addClass('hidden');
+        if(!checkFields('#edit-user')) {
+            $('#wrong_fields_edit').addClass('hidden');
+        }
     }
 }).keydown(function (e) {
     if (e.keyCode === 32) {
@@ -327,7 +361,9 @@ $('#pib_edit').keyup(function () {
     } else {
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
-        $('#wrong_fields_edit').addClass('hidden');
+        if(!checkFields('#edit-user')) {
+            $('#wrong_fields_edit').addClass('hidden');
+        }
     }
 });
 $('#memberof_edit').on('change', function () {
