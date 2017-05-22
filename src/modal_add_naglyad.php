@@ -972,11 +972,6 @@
         immediateUpdates: true,
         todayHighlight: true
     });
-    /*    $('#modal-add-naglyad').ready(function () {
-     $('.modal-page').addClass('hidden');
-     $('#modal-page-1').removeClass('hidden');
-     $('#page-1').addClass('active-success');
-     });*/
     function click1() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-1').removeClass('hidden');
@@ -1007,63 +1002,6 @@
         $('.pagination li').removeClass('active-primary');
         $('#page-5').addClass('active-primary');
     }
-    /*var formIsOk = true;
-     $('#add-form').submit(function () {
-
-     var $user_field  = $('#username');
-     var $pass_field = $('#password');
-
-     var username = $.trim($user_field.val());
-     var password = $.trim($pass_field.val());
-     var noError = true;
-     if ((username === '')||(password === '')) {
-     $('#wrong_field').removeClass('hidden');
-     noError = false;
-     }
-     if (username === '') {
-     $user_field.addClass('required_field');
-     } else {
-     $user_field.removeClass('required_field');
-     }
-     if (password === '') {
-     $pass_field.addClass('required_field');
-     } else {
-     $pass_field.removeClass('required_field')
-     }
-     return noError;
-     });
-     $('#username').keyup(function() {
-     var $user_field  = $('#username');
-     var username = $.trim($user_field.val());
-     var regex = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-     if ( (username === '') || ( !regex.test( $(this).val() ) ) ) {
-     $('#login').prop('disabled',true);
-     $user_field.removeClass('accepted_field');
-     $user_field.addClass('required_field');
-     } else {
-     $user_field.removeClass('required_field');
-     $user_field.addClass('accepted_field');
-     if ($('#password').val()!=='') {
-     $('#login').prop('disabled',false);
-     }
-     }
-     });
-     $('#password').keyup(function() {
-     var $pass_field = $('#password');
-     var password = $.trim($pass_field.val());
-     var regex = /(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-     if ( (password === '') || ( !regex.test( $(this).val() ) ) ) {
-     $('#login').prop('disabled',true);
-     $pass_field.removeClass('accepted_field');
-     $pass_field.addClass('required_field');
-     } else {
-     $pass_field.removeClass('required_field');
-     $pass_field.addClass('accepted_field');
-     if ($('#username').val()!=='') {
-     $('#login').prop('disabled',false);
-     }
-     }
-     });*/
 </script>
 
 

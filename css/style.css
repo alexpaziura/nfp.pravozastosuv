@@ -177,33 +177,3 @@ legend {
   /*color: #0e437e;*/
   color: #fff;
 }
-/*.selectboxit-container .selectboxit, .selectboxit-container .selectboxit-options {
-  width: 100%;
-  border-radius:0;
-  max-height:240px;
-}
-
-.selectboxit-options .selectboxit-option .selectboxit-option-anchor {
-  white-space: normal;
-  min-height: 30px;
-  height: auto;
-}*/
-/*.table-bordered td, .table-bordered th{
-  border: 0.5px solid #24547f !important;
-}*/
-/*.modal {
-  text-align: center;
-  padding: 0!important;
-}
-.modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px;
-}
-.modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
-}*/

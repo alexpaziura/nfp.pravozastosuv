@@ -121,8 +121,6 @@ if(isset($_POST['delete_user'])){
 
 </div>
 <div class="container-fluid" id="content-body" style="height: 90%">
-    <!--<div class="toolbar">
-<button id="button" class="btn btn-default">getSelectedRow</button></div>-->
     <div class="row">
         <div class="container">
             <div class="alert alert-success alert-dismissable alert-fixed <?= $state_add == 'success' ? '' : 'hidden' ?>"
@@ -217,6 +215,7 @@ if(isset($_POST['delete_user'])){
                     data-sort-order="asc"
                     data-toolbar="#toolbar"
                     data-search="true"
+                    data-height="825"
                     data-searchOnEnterKey="true"
                     data-click-to-select="true"
                     data-checkbox-header="false"

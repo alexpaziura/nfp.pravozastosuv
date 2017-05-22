@@ -1,6 +1,10 @@
-var noError = true;
-$('#add-form').submit(function () {
+/**
+ * Обработчики для модального окна формы на добавление записи
+ * в 1 таблицу для надзорных департаментов
+ */
 
+$('#add-form').submit(function () {
+    var noError = true;
     var $alert = $('#wrong_fields');
     var $nzp_field  = $('#nzp');
     var nzp = $.trim($nzp_field.val());
@@ -55,30 +59,36 @@ $('#nzp').keyup(function() {
     var val = $.trim($field.val());
     var regex = /^[0-9]{1,11}$/;
     if ( (val === '') || ( !regex.test( val ) ) ) {
-        $('#wrong_fields').removeClass('hidden');
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
         $field.popover('show');
     } else {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
         $field.popover('hide');
+    }
+    if(checkFields()) {
+        $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 });
 $('#short_name_fu').keyup(function() {
     var $field  = $(this);
     var val = $.trim($field.val());
     if (val === '') {
-        $('#wrong_fields').removeClass('hidden');
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
         $field.popover('show');
     } else {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
         $field.popover('hide');
+    }
+    if(checkFields()) {
+        $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 });
 $('#edrpoE').keyup(function() {
@@ -86,15 +96,18 @@ $('#edrpoE').keyup(function() {
     var val = $.trim($field.val());
     var regex = /(([A-Z]{1,2}) ([0-9]{6}))|([0-9]{8,12})/;
     if ( (val === '') || ( !regex.test( val ) ) ) {
-        $('#wrong_fields').removeClass('hidden');
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
         $field.popover('show');
     } else {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
         $field.popover('hide');
+    }
+    if(checkFields()) {
+        $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 });
 $('.suma').keyup(function() {
@@ -102,21 +115,23 @@ $('.suma').keyup(function() {
     var val = $.trim($field.val());
     var regex = /^\d+(\.\d{1,2})?$/;
     if ( !regex.test( val ))   {
-        $('#wrong_fields').removeClass('hidden');
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
         $field.popover('show');
     } else {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
         $field.popover('hide');
     }
     if (val === '') {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.removeClass('accepted_field');
         $field.popover('hide');
+    }
+    if(checkFields()) {
+        $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
     }
 });
 $('#type_fo').on('change', function () {
@@ -124,14 +139,27 @@ $('#type_fo').on('change', function () {
         $(this).removeClass('required_field');
         $(this).addClass('accepted_field');
     }
+    if(checkFields()) {
+        $('#wrong_fields').addClass('hidden');
+    } else {
+        $('#wrong_fields').removeClass('hidden');
+    }
 });
+function checkFields() {
+    var fields = $(".form-control").filter('.required_field');
+    var bool = true;
+    if (fields.length !== 0) {
+        bool = false;
+    }
+    return bool;
+}
 $('.input-nomer').keydown(function (e) {
     if ( (e.keyCode === 32) || ( (e.shiftKey === true)&&(e.keyCode === 51) )) {
         return false;
     }
 });
 $("#modal-add-naglyad").on('shown.bs.modal', function () {
-    $('#add-form input .form-control').val('');
+    $('#add-form .form-control').val('');
     $('#add-form .form-control').removeClass('required_field');
     $('#add-form .form-control').removeClass('accepted_field');
     $('#add-form .form-control').popover('hide');
