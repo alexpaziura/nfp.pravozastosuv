@@ -7,7 +7,7 @@
     } else if ($_SESSION['group']!='ДеРЗІТ') {
         header('Location:/');
     }
-    if(isset($_POST['log_out'])){
+    if ((isset($_POST['log_out']))||(!isUserActive())) {
         writeLog('AUTH','LOGOUT',1);
         unset($_SESSION['user']);
         unset($_SESSION['group']);
@@ -95,7 +95,25 @@
 <div class="container-fluid">
 
 </div>
-
+<div class="modal fade" id="modal-timer" style="margin-top: 15%;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна авторизація!</h2>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--f1c2c0-->
+                <form id="form-relogin" method="post" autocomplete="off">
+                    <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit" form="form-relogin">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                        Авторизуватись
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

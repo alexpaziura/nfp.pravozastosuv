@@ -7,7 +7,7 @@ if(!isset($_SESSION['user'])){
 } else if ($_SESSION['group']!='ДеРЗІТ') {
     header('Location:/');
 }
-if(isset($_POST['log_out'])){
+if ((isset($_POST['log_out']))||(!isUserActive())) {
     writeLog('AUTH','LOGOUT',1);
     unset($_SESSION['user']);
     unset($_SESSION['group']);
@@ -101,7 +101,7 @@ $for_date_change = 'd.m.Y H:i:s';
             <div class="">
                 <table
                     data-toggle="table"
-                    id="table_user"
+                    id="table_logs"
                     class="table table-striped table-bordered table-fixed-header table-condensed"
                     data-sort-name="time_exec"
                     data-sort-order="desc"
@@ -152,6 +152,25 @@ $for_date_change = 'd.m.Y H:i:s';
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-timer" style="margin-top: 15%;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна авторизація!</h2>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--f1c2c0-->
+                <form id="form-relogin" method="post" autocomplete="off">
+                    <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit" form="form-relogin">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                        Авторизуватись
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -160,7 +179,6 @@ $for_date_change = 'd.m.Y H:i:s';
 <script src="../js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
 <script src="../js/table-fixed-header.js" type="text/javascript"></script>
 <script src="../js/jasny-bootstrap.js" type="text/javascript"></script>
-<script src="../js/tabs/tab_user.js" type="text/javascript"></script>
 <script src="../extensions/export/bootstrap-table-export.js"></script>
 <script src="../js/tableExport.js"></script>
 <script>
@@ -172,6 +190,27 @@ $for_date_change = 'd.m.Y H:i:s';
             checkTime();
         }, 60000);
     });
+    var classColor = 'success';
+    $("#table_logs")
+        .on('click-row.bs.table', function (e, row, $element) {
+            if ($($element).hasClass(classColor)) {
+                $($element).removeClass(classColor);
+            } else {
+                $($element).addClass(classColor);
+            }
+        })
+        .on('check.bs.table', function (e, row, $element) {
+            $($element).parent().parent().addClass(classColor);
+        })
+        .on('uncheck.bs.table', function (e, row, $element) {
+            $($element).parent().parent().removeClass(classColor);
+        })
+        .on('check-all.bs.table', function (e, $element) {
+            $($element).parent().parent().addClass(classColor);
+        })
+        .on('uncheck-all.bs.table', function (e, $element) {
+            $($element).parent().parent().removeClass(classColor);
+        });
     // Add slideDown animation to Bootstrap dropdown when expanding.
     $('.dropdown').on('show.bs.dropdown', function() {
         $(this).find('.dropdown-menu').first().stop(true, true).slideDown();

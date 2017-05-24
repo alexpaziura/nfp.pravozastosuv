@@ -2,13 +2,13 @@
 session_start();
 require_once("../src/database.php");
 require_once("../src/functions.php");
-if(!isset($_SESSION['user'])){
+if (!isset($_SESSION['user'])) {
     header('Location: ../login.php');
-} else if ($_SESSION['group']!='ДеРЗІТ') {
+} else if ($_SESSION['group'] != 'ДеРЗІТ') {
     header('Location:/');
 }
-if(isset($_POST['log_out'])){
-    writeLog('AUTH','LOGOUT',1);
+if ((isset($_POST['log_out'])) || (!isUserActive())) {
+    writeLog('AUTH', 'LOGOUT', 1);
     unset($_SESSION['user']);
     unset($_SESSION['group']);
     unset($_SESSION['full_name']);
@@ -17,7 +17,7 @@ if(isset($_POST['log_out'])){
     header('Location: ../login.php');
 }
 if (isset($_POST['relogin'])) {
-    writeLog('AUTH','LOGOUT',1);
+    writeLog('AUTH', 'LOGOUT', 1);
     unset($_SESSION['user']);
     unset($_SESSION['group']);
     unset($_SESSION['full_name']);
@@ -63,7 +63,8 @@ if (isset($_POST['relogin'])) {
         <ul class="nav navbar-nav">
             <li><a href="../table1.php">Інспеційна діяльність</a></li>
             <li><a href="../table2.php">Інші види діяльності</a></li>
-            <li class="active <?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="/cms/">Адміністрування</a></li>
+            <li class="active <?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="/cms/">Адміністрування</a>
+            </li>
         </ul>
         <form method="post" class="navbar-form navbar-right">
             <div class="form-group">
@@ -72,7 +73,7 @@ if (isset($_POST['relogin'])) {
                 </button>
             </div>
         </form>
-        <p class="navbar-text navbar-right">Ви ввійши, як <?=$_SESSION['full_name']?>!</p>
+        <p class="navbar-text navbar-right">Ви ввійши, як <?= $_SESSION['full_name'] ?>!</p>
 
     </div>
     <hr id="nav-divider">
@@ -80,14 +81,16 @@ if (isset($_POST['relogin'])) {
         <ul class="nav navbar-nav">
             <li><a href="users.php"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
             <li class="dropdown">
-                <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span class="caret"></span></a>
+                <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span
+                            class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="tab_type_fu.php">Тип суб'єкта нагляду</a></li>
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
             <li><a href="logs.php"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
-            <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a></li>
+            <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a>
+            </li>
         </ul>
     </div>
 
@@ -148,30 +151,35 @@ $state_edit_1 = '';
         <div class="container">
             <div id="toolbar_1" class="btn-toolbar">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-labeled add" id="addUser">
-                        <span class="btn-label"><i class="fa fa-user-plus fa-lg"></i></span>Додати
+                    <button type="button" class="btn btn-success btn-labeled add" id="add_row">
+                        <span class="btn-label"><i class="fa fa-plus fa-lg"></i></span>Додати
                     </button>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-warning btn-labeled edit" id="editUser">
+                    <button type="button" class="btn btn-warning btn-labeled edit" id="edit_row">
                         <span class="btn-label"><i class="fa fa-pencil fa-lg"></i></span>Редагувати
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger btn-labeled" id="delete_row">
+                        <span class="btn-label"><i class="fa fa-trash fa-lg"></i></span>Видалити
                     </button>
                 </div>
             </div>
             <div class="center-block">
                 <table
-                    data-toggle="table"
-                    id="table_type_fu"
-                    class="table table-striped table-bordered table-fixed-header table-condensed"
-                    data-sort-name="id_user"
-                    data-sort-order="asc"
-                    data-toolbar="#toolbar_1"
-                    data-search="true"
-                    data-searchOnEnterKey="true"
-                    data-click-to-select="true"
-                    data-checkbox-header="false"
-                    data-resizable="true"
-                    style="background-color: seashell;">
+                        data-toggle="table"
+                        id="table_type_fu"
+                        class="table table-striped table-bordered table-fixed-header table-condensed"
+                        data-sort-name="id_user"
+                        data-sort-order="asc"
+                        data-toolbar="#toolbar_1"
+                        data-search="true"
+                        data-searchOnEnterKey="true"
+                        data-click-to-select="true"
+                        data-checkbox-header="false"
+                        data-resizable="true"
+                        style="background-color: seashell;">
                     <thead class="header" style="background-color: seashell;">
                     <tr>
 
@@ -184,11 +192,11 @@ $state_edit_1 = '';
                         </th>
                     </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
                     <?php
                     $table_type_fu = get_dic('dic_type_fu');
                     foreach ($table_type_fu as $row):
-                        if ($row['visible']=='0') continue;?>
+                        if ($row['visible'] == '0') continue; ?>
                         <tr>
                             <td></td>
                             <td><?= $row['id_type_fu'] ?></td>
@@ -201,7 +209,100 @@ $state_edit_1 = '';
         </div>
     </div>
 </div>
-
+<div class="modal fade container-fluid" id="modal_add_row">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button class="close" type="button" data-dismiss="modal">
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
+                </button>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 class="modal-title"><i class="fa fa-plus fa-lg" style="color: "></i> &nbsp;&nbsp;Додавання</h2>
+                    </div>
+                    <div class="col-sm-5" style="margin-bottom: -20px">
+                        <div class="alert alert-danger "
+                             id="wrong_fields">
+                            <h4 style="margin-bottom: -5px;margin-top: -5px">Не заповнено поле!</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--cae8ca-->
+                <form id="add-row" method="post" autocomplete="off">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-offset-3">
+                            <div class="form-group">
+                                <label for="username">Тип суб'єкта нагляду</label>
+                                <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                    <input name="username" type="text" class="form-control" id="username"
+                                           maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: #d9d9d9;">
+                <button class="btn btn-primary center-block btn-labeled" name="add_row" type="submit" form="add-row">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                    Зберегти
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-ch-multi">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header modal-header-warning">
+                <button class="close" type="button" data-dismiss="modal" style="color: red;">
+                    <i class="fa fa-close fa-2x"></i>
+                </button>
+                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Вибрано більше одного запису для
+                    редагування.</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-ch-0">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header modal-header-warning">
+                <button class="close" type="button" data-dismiss="modal" style="color: red;">
+                    <i class="fa fa-close fa-2x"></i>
+                </button>
+                <h2 class="modal-title"><i class="fa fa-warning"></i> &nbsp;&nbsp;Не вибрано запис для редагування.</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-timer" style="margin-top: 15%;">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна
+                    авторизація!</h2>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--f1c2c0-->
+                <form id="form-relogin" method="post" autocomplete="off">
+                    <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit"
+                            form="form-relogin">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                        Авторизуватись
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -210,31 +311,31 @@ $state_edit_1 = '';
 <script src="../js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
 <script src="../js/table-fixed-header.js" type="text/javascript"></script>
 <script src="../js/jasny-bootstrap.js" type="text/javascript"></script>
-<script src="../js/tabs/tab_user.js" type="text/javascript"></script>
+<script src="../js/tabs/tab_type_fu.js" type="text/javascript"></script>
 <script src="../extensions/export/bootstrap-table-export.js"></script>
 <script src="../js/tableExport.js"></script>
 <script>
-    $(function() {
+    $(function () {
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
         checkTime();
-        setInterval(function (){
+        setInterval(function () {
             checkTime();
         }, 60000);
     });
     // Add slideDown animation to Bootstrap dropdown when expanding.
-    $('.dropdown').on('show.bs.dropdown', function() {
+    $('.dropdown').on('show.bs.dropdown', function () {
         $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
     });
 
     // Add slideUp animation to Bootstrap dropdown when collapsing.
-    $('.dropdown').on('hide.bs.dropdown', function() {
+    $('.dropdown').on('hide.bs.dropdown', function () {
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
     });
     function checkTime() {
         var action_time = <?=$_SESSION['action_time']?>;
         var d = new Date();
-        var sec = d.getTime()/1000;
+        var sec = d.getTime() / 1000;
         var diff = action_time - sec;
         if (diff < -3600) {
             $("#modal-timer").modal({backdrop: "static"});
