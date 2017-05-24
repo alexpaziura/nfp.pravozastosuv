@@ -1,13 +1,13 @@
 <div class="modal container-fluid" id="modal_edit_n">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header modal-header-warning">
+            <div class="modal-header modal-header-primary">
                 <button class="close" type="button" data-dismiss="modal">
                     <i class="fa fa-close fa-2x" style="color: red;"></i>
                 </button>
                 <div class="row">
                     <div class="col-sm-5">
-                        <h2 class="modal-title"><i class="fa fa-plus fa-lg" style="color: "></i> &nbsp;&nbsp;Редагування запису</h2>
+                        <h2 class="modal-title"><i class="fa fa-pencil fa-lg" style="color: "></i> &nbsp;&nbsp;Редагування запису</h2>
                     </div>
                     <div class="col-sm-6" style="margin-bottom: -20px">
                         <div class="alert alert-danger hidden"
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-body" style="background-color: #e8e1ca;">
+            <div class="modal-body" style="background-color: #d9d9d9;">
                 <form id="edit-form-n" method="post" autocomplete="off">
                     <div id="modal-page-1e" class="modal-page-edit">
                         <p style="color: red">
@@ -31,8 +31,13 @@
                                     <label for="nzpE">№ з/п <sup>
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup></label>
-                                    <input name="nzpE" type="text" class="form-control" id="nzpE" maxlength="11"
-                                           data-toggle="popover" data-trigger="hover" disabled="disabled">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                        <input name="nzpE" type="text" class="form-control" id="nzpE" maxlength="11"
+                                           data-toggle="popover" data-trigger="hover">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -42,7 +47,12 @@
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup>
                                     </label>
-                                    <input name="short_name_fuE" type="text" class="form-control" id="short_name_fuE" maxlength="255">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                        <input name="short_name_fuE" type="text" class="form-control" id="short_name_fuE" maxlength="255">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -50,14 +60,19 @@
                                     <label for="edrpoEE">ЄДРПОУ ФУ або ІНН або паспорт <sup>
                                             <i class="fa fa-asterisk" style="color: red"></i>
                                         </sup></label>
-                                    <input name="edrpoEE" type="text" class="form-control" id="edrpoEE" maxlength="12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                        <input name="edrpoEE" type="text" class="form-control" id="edrpoEE" maxlength="12">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group" style="margin-top: 20px;">
                                 <label for="type_foE">Тип суб'єкта нагляду <sup>
                                         <i class="fa fa-asterisk" style="color: red"></i>
                                     </sup></label>
@@ -70,7 +85,7 @@
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="form-group">
+                            <div class="form-group" style="margin-top: 20px;">
                                 <label for="vid_perevirkiSE">Вид перевірки</label>
                                 <select name="vid_perevirkiSE" id="vid_perevirkiSE" class="form-control">
                                     <?php foreach ($table_vid_perevirki as $row): ?>
@@ -90,6 +105,7 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                     <div id="modal-page-2e" class="modal-page-edit">
 
                     </div>
@@ -98,7 +114,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer" style="background-color: #e8e1ca;">
+            <div class="modal-footer" style="background-color: #d9d9d9;">
                 <nav class="text-center" style="margin-top: -20px; margin-bottom: -15px;">
                     <ul class="pagination">
                         <li id="page-1e"><a href="#" onclick="click1e()">1</a></li>
@@ -107,7 +123,7 @@
                         <!--<li><a href="#">4</a></li>-->
                     </ul>
                 </nav>
-                <button class="btn btn-warning center-block btn-labeled" name="edit_nag" type="submit" form="edit-form-n">
+                <button class="btn btn-primary center-block btn-labeled" name="edit_nag" type="submit" form="edit-form-n">
                     <span class="btn-label">
                         <i class="fa fa-floppy-o fa-lg"></i>
                     </span>
@@ -136,20 +152,20 @@
     function click1e() {
         $('.modal-page-edit').addClass('hidden');
         $('#modal-page-1e').removeClass('hidden');
-        $('.pagination li').removeClass('active-warning');
-        $('#page-1e').addClass('active-warning');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-1e').addClass('active-primary');
     }
     function click2e() {
         $('.modal-page-edit').addClass('hidden');
         $('#modal-page-2e').removeClass('hidden');
-        $('.pagination li').removeClass('active-warning');
-        $('#page-2e').addClass('active-warning');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-2e').addClass('active-primary');
     }
     function click3e() {
         $('.modal-page-edit').addClass('hidden');
         $('#modal-page-3e').removeClass('hidden');
-        $('.pagination li').removeClass('active-warning');
-        $('#page-3e').addClass('active-warning');
+        $('.pagination li').removeClass('active-primary');
+        $('#page-3e').addClass('active-primary');
     }
 </script>
 

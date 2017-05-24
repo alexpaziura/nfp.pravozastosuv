@@ -7,12 +7,12 @@ Error: INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_nam
             dn_doc_splat, dn_sluj_nap_mat, povern_sud_zbir, dn_list_dobro_splat, shtraf_slpach_dobro, dn_sluj_primus, 
             napr_zap_derjrei, napr_zap_dfs, napr_zai_police, napr_info_bank, napr_info_zasn, napr_info_prokuror,
             napr_info_oms, napr_info_dfs) 
-            VALUES (1, 1495195078, 1, 4, 10, '4444444444444444','444444444444',11,,NULL,
+            VALUES (1, 1495625444, 1, 4, 10, '4','4444444444',11,1,NULL,
             NULL, NULL, NULL, NULL, NULL, NULL,
             NULL, NULL, NULL, NULL, NULL,
-            NULL, NULL, NULL, , NULL, NULL, NULL,
-            NULL, , NULL, ' №', NULL, NULL,
+            NULL, NULL, NULL, 1, NULL, NULL, NULL,
+            NULL, 1, NULL, '', NULL, NULL,
             NULL, NULL, NULL, NULL, NULL, ' ',
-            NULL, ' №', ' №', '№  ', ' №', 
-            '№  ', ' №', NULL, NULL, NULL, NULL,
+            NULL, '', '', ' 05.05.2017', ' №4'', 
+            '№4 34', ', NULL, NULL, NULL, NULL,
             NULL, NULL, NULL, NULL)

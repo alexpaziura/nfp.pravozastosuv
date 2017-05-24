@@ -1,50 +1,36 @@
-var noError = true;
+var $alert_edit = $('#wrong_fields_edit');
 $('#edit-form-n').submit(function () {
-
-    var $alert = $('#wrong_fields_edit');
+    var noError = true;
     var $nzp_field  = $('#nzpE');
     var nzp = $.trim($nzp_field.val());
     var $short_name_fu = $('#short_name_fuE');
     var short_name_fu = $.trim($short_name_fu.val());
     var $edrpoE = $('#edrpoEE');
     var edrpoE = $.trim($edrpoE.val());
-    var $type_fo = $('#type_fo');
+    var $type_fo = $('#type_foE');
     var type_fo = $.trim($type_fo.val());
 
     if (nzp === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
         $nzp_field.addClass('required_field');
         noError = false;
-    } else {
-        noError = true;
     }
     if (short_name_fu === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
         $short_name_fu.addClass('required_field');
         noError = false;
-    } else {
-        noError = true;
     }
     if (edrpoE === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
         $edrpoE.addClass('required_field');
         noError = false;
-    } else {
-        noError = true;
     }
     if (type_fo === '') {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
         $type_fo.addClass('required_field');
         noError = false;
-    } else {
-        noError = true;
     }
-    /*if (($('#vid_perevirkiS').val()!=3)&&($('#pidstava_pozaplanS').isDisabled)) {
-     alert("($('#vid_perevirkiS').val()!=2)&&($('#pidstava_pozaplanS').isDisabled()");
-     $('#pidstava_pozaplanS').addClass('required_field');
-     noError = false;
-     }*/
-    if (!$alert.hasClass('hidden')) {
+    if (!$alert_edit.hasClass('hidden')) {
         noError = false;
     }
     return noError;
@@ -54,30 +40,36 @@ $('#nzpE').keyup(function() {
     var val = $.trim($field.val());
     var regex = /^[0-9]{1,11}$/;
     if ( (val === '') || ( !regex.test( val ) ) ) {
-        $('#wrong_fields').removeClass('hidden');
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
         $field.popover('show');
     } else {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
         $field.popover('hide');
+    }
+    if(checkFields()) {
+        $alert_edit.addClass('hidden');
+    } else {
+        $alert_edit.removeClass('hidden');
     }
 });
 $('#short_name_fuE').keyup(function() {
     var $field  = $(this);
     var val = $.trim($field.val());
     if (val === '') {
-        $('#wrong_fields').removeClass('hidden');
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
         $field.popover('show');
     } else {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
         $field.popover('hide');
+    }
+    if(checkFields()) {
+        $alert_edit.addClass('hidden');
+    } else {
+        $alert_edit.removeClass('hidden');
     }
 });
 $('#edrpoEE').keyup(function() {
@@ -85,15 +77,18 @@ $('#edrpoEE').keyup(function() {
     var val = $.trim($field.val());
     var regex = /(([A-Z]{1,2}) ([0-9]{6}))|([0-9]{8,12})/;
     if ( (val === '') || ( !regex.test( val ) ) ) {
-        $('#wrong_fields').removeClass('hidden');
         $field.removeClass('accepted_field');
         $field.addClass('required_field');
         $field.popover('show');
     } else {
-        $('#wrong_fields').addClass('hidden');
         $field.removeClass('required_field');
         $field.addClass('accepted_field');
         $field.popover('hide');
+    }
+    if(checkFields()) {
+        $alert_edit.addClass('hidden');
+    } else {
+        $alert_edit.removeClass('hidden');
     }
 });
 /*$('#suma_shtraf').keyup(function() {
@@ -118,12 +113,25 @@ $('#edrpoEE').keyup(function() {
         $field.popover('hide');
     }
 });*/
-$('#type_fo').on('change', function () {
+$('#type_foE').on('change', function () {
     if ($(this).val() != '') {
         $(this).removeClass('required_field');
         $(this).addClass('accepted_field');
     }
+    if(checkFields()) {
+        $alert_edit.addClass('hidden');
+    } else {
+        $alert_edit.removeClass('hidden');
+    }
 });
+function checkFields() {
+    var fields = $("#edit-form-n .form-control").filter('.required_field');
+    var bool = true;
+    if (fields.length !== 0) {
+        bool = false;
+    }
+    return bool;
+}
 $(document).ready(function(){
     $('#nzpE').popover({title: "Поле обов'язкове для заповнення!", content: "Допускаються тільки цифри!",
         trigger: "manual", placement: "top", animation:true });
@@ -137,7 +145,7 @@ $(document).ready(function(){
         animation: true});
 });
 $(document).ready(function () {
-    $("#modal_edit_n").on('show.bs.modal', function () {
+    $("#modal_edit_n").on('shown.bs.modal', function () {
         var $table = $('#table');
         var selection = $table.bootstrapTable('getSelections');
         var selectedRow = selection[0];
@@ -151,25 +159,27 @@ $(document).ready(function () {
             });*/
         $('#id_inspekt').val(selectedRow.id_inspekt);
         $("#nzpE").val(selectedRow.nzp);
-        //$('#short_name_fuE').val(selectedRow.short_name_fu);
-        $('#short_name_fuE').val(selectedRowJS);
+        $('#short_name_fuE').val(selectedRow.short_name_fu);
+        //$('#short_name_fuE').val(selectedRowJS);
         $('#edrpoEE').val(selectedRow.edrpo);
         var tmp1 = selectedRow.type_fo.substring(20);
         var typeFU = tmp1.substring(0,tmp1.indexOf("</div>"));
-        $('#type_foE').find('option').filter(function( index ) {
-            return $( this ).attr( "visib" ) === "0";
+        $('#type_foE option').filter(function( index ) {
+            return $( this ).prop( "visib" ) === "0";
         }).attr("hidden", "hidden");
-        $('#type_foE').find('option').attr("selected", false);
-        $("#type_foE [value='"+typeFU+"']").attr("selected", "selected");
-        tmp1 = selectedRow.vid_perevirki.substring(20);
-        var vid_perev = tmp1.substring(0, tmp1.indexOf("</div>"));
-        $('#vid_perevirkiSE').find('option').filter(function ( index ) {
-            return $(this).attr("visib") === "0";
+        $('#type_foE option').prop("selected", false);
+        $("#type_foE [value='"+typeFU+"']").prop("selected", "selected");
+
+        var tmp2 = selectedRow.vid_perevirki.substring(20);
+        var vid_perev = tmp2.substring(0, tmp2.indexOf("</div>"));
+        $('#vid_perevirkiSE option').filter(function ( index ) {
+            return $(this).prop("visib") === "0";
         }).attr("hidden", "hidden");
-        $('#vid_perevirkiSE').find('option').attr("selected", false);
+        $('#vid_perevirkiSE option').prop("selected", false);
         $("#vid_perevirkiSE [value='"+vid_perev+"']").prop("selected","selected");
-        tmp1 = selectedRow.pidstava_pozaplan.trim().substring(20);
-        var pozaplan = tmp1.substring(0, tmp1.indexOf("</div>"));
+
+        var tmp3 = selectedRow.pidstava_pozaplan.trim().substring(20);
+        var pozaplan = tmp3.substring(0, tmp3.indexOf("</div>"));
         if ($('#vid_perevirkiSE').val() === '3') {
             $('#pidstava_pozaplanSE').prop('disabled', false);
             $('#pidstava_pozaplanSE').multiselect('refresh');

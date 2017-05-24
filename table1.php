@@ -730,7 +730,7 @@ if (isset($_POST['add_nag'])) {
                             <td><?= $row['poklad_sud_zbir'] ?></td>
                             <td><?= $row['povern_sud_zbir'] ?></td>
                             <td><?= $row['dn_list_dobro_splat'] ?></td>
-                            <td><?= $row['shtraf_splach_dobro'] ?></td>
+                            <td><?= $row['shtraf_slpach_dobro'] ?></td>
                             <td><?= $row['dn_sluj_primus'] ?></td>
                             <td><?= $row['dn_lz_vikon_list'] ?></td>
                             <td><?= $row['dn_otrum_vikon_list'] ?></td>
@@ -767,7 +767,7 @@ if (isset($_POST['add_nag'])) {
     </div>
 </div>
 <?php
-if (isset($_POST['edit_nag'])) {
+if (isset($_POST['add_nag'])) {
     echo '<br><pre>';
     var_dump($_POST);
     echo '</pre>';
