@@ -90,7 +90,8 @@ $correct_data = true;
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
 <script>
-    $('#form-login').submit(function () {
+    var loginBtn = $('#login');
+    $('#form-login').on('submit', function () {
 
         var $user_field  = $('#username');
         var $pass_field = $('#password');
@@ -107,38 +108,34 @@ $correct_data = true;
         }
         return noError;
     });
-    $('#username').keyup(function() {
-        var $user_field  = $('#username');
+    $('#username').on('keyup', function() {
+        var $user_field  = $(this);
         var username = $.trim($user_field.val());
-        var regex = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-        if ( (username === '') || ( !regex.test( $(this).val() ) ) ) {
-            $user_field.removeClass('accepted_field');
-            $user_field.addClass('required_field');
+        var regex = /^[a-zA-Z][a-zA-Z0-9- \.]{1,20}$/;
+        if ( (username === '') || ( !regex.test( $user_field.val() ) ) ) {
+            $user_field.removeClass('accepted_field').addClass('required_field');
         } else {
-            $user_field.removeClass('required_field');
-            $user_field.addClass('accepted_field');
+            $user_field.removeClass('required_field').addClass('accepted_field');
         }
         if(checkFields()) {
-            $('#login').prop('disabled',false);
+            loginBtn.prop('disabled',false);
         } else {
-            $('#login').prop('disabled',true);
+            loginBtn.prop('disabled',true);
         }
     });
-    $('#password').keyup(function() {
-        var $pass_field = $('#password');
+    $('#password').on('keyup', function() {
+        var $pass_field = $(this);
         var password = $.trim($pass_field.val());
         var regex = /(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-        if ( (password === '') || ( !regex.test( $(this).val() ) ) ) {
-            $pass_field.removeClass('accepted_field');
-            $pass_field.addClass('required_field');
+        if ( (password === '') || ( !regex.test( $pass_field.val() ) ) ) {
+            $pass_field.removeClass('accepted_field').addClass('required_field');
         } else {
-            $pass_field.removeClass('required_field');
-            $pass_field.addClass('accepted_field');
+            $pass_field.removeClass('required_field').addClass('accepted_field');
         }
         if(checkFields()) {
-            $('#login').prop('disabled',false);
+            loginBtn.prop('disabled',false);
         } else {
-            $('#login').prop('disabled',true);
+            loginBtn.prop('disabled',true);
         }
     });
     function checkFields() {

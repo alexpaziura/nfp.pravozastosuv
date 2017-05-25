@@ -1,5 +1,10 @@
 var classColor = 'success';
-$("#table_user")
+var $table = $('#table_user');
+var $alert_add = $('#wrong_fields');
+var $alert_edit = $('#wrong_fields_edit');
+var add_user = $('#add-user');
+var edit_user = $('#edit-user');
+$table
     .on('click-row.bs.table', function (e, row, $element) {
     if ($($element).hasClass(classColor)) {
         $($element).removeClass(classColor);
@@ -20,8 +25,7 @@ $("#table_user")
         $($element).parent().parent().removeClass(classColor);
     });
 $(document).ready(function () {
-    $("#editUser").click(function () {
-        var $table = $('#table_user');
+    $("#editUser").on('click', function () {
         var selection = $table.bootstrapTable('getSelections');
         if (selection.length > 1) {
             $("#modal-ch-multi").modal({backdrop: "static"});
@@ -31,11 +35,10 @@ $(document).ready(function () {
             $("#modal-ch-0").modal({backdrop: "static"});
         }
     });
-    $("#addUser").click(function () {
+    $("#addUser").on('click', function () {
         $("#modal_add_user").modal({backdrop: "static"});
     });
-    $("#deleteUser").click(function () {
-        var $table = $('#table_user');
+    $("#deleteUser").on('click', function () {
         var selection = $table.bootstrapTable('getSelections');
         if (selection.length === 0) {
             $("#modal-ch-0").modal({backdrop: "static"});
@@ -44,86 +47,77 @@ $(document).ready(function () {
         }
     });
 });
-$('#username').keyup(function () {
-    var $user_field = $('#username');
+$('#username').on('keyup', function () {
+    var $user_field = $(this);
     var username = $.trim($user_field.val());
     var regex = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
     if ((username === '') || ( !regex.test($(this).val()) )) {
-        $user_field.removeClass('accepted_field');
-        $user_field.addClass('required_field');
+        $user_field.removeClass('accepted_field').addClass('required_field');
     } else {
-        $user_field.removeClass('required_field');
-        $user_field.addClass('accepted_field');
+        $user_field.removeClass('required_field').addClass('accepted_field');
     }
     if(checkFields('#add-user')) {
-        $('#wrong_fields').addClass('hidden');
+        $alert_add.addClass('hidden');
     } else {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_add.removeClass('hidden');
     }
-}).keydown(function (e) {
+}).on('keydown', function (e) {
     if (e.keyCode === 32) {
         return false;
     }
 });
-$('#password').keyup(function () {
-    var $pass_field = $('#password');
+$('#password').on('keyup', function () {
+    var $pass_field = $(this);
     var password = $.trim($pass_field.val());
     var regex = /(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-    if ((password === '') || ( !regex.test($(this).val()) )) {
-        $pass_field.removeClass('accepted_field');
-        $pass_field.addClass('required_field');
+    if ((password === '') || ( !regex.test($pass_field.val()) )) {
+        $pass_field.removeClass('accepted_field').addClass('required_field');
     } else {
-        $pass_field.removeClass('required_field');
-        $pass_field.addClass('accepted_field');
+        $pass_field.removeClass('required_field').addClass('accepted_field');
     }
     if(checkFields('#add-user')) {
-        $('#wrong_fields').addClass('hidden');
+        $alert_add.addClass('hidden');
     } else {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_add.removeClass('hidden');
     }
-}).keydown(function (e) {
+}).on('keydown', function (e) {
     if (e.keyCode === 32) {
         return false;
     }
 });
-$('#pib').keyup(function () {
+$('#pib').on('keyup', function () {
     var $field = $(this);
     var pib = $.trim($field.val());
     if (pib === '') {
-        $field.removeClass('accepted_field');
-        $field.addClass('required_field');
+        $field.removeClass('accepted_field').addClass('required_field');
     } else {
-        $field.removeClass('required_field');
-        $field.addClass('accepted_field');
+        $field.removeClass('required_field').addClass('accepted_field');
     }
     if(checkFields('#add-user')) {
-        $('#wrong_fields').addClass('hidden');
+        $alert_add.addClass('hidden');
     } else {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_add.removeClass('hidden');
     }
 });
 $('#memberof').on('change', function () {
-    if ($(this).val() != '') {
-        $(this).removeClass('required_field');
-        $(this).addClass('accepted_field');
+    if ($(this).val() !== '') {
+        $(this).removeClass('required_field').addClass('accepted_field');
     }
     if(checkFields('#add-user')) {
-        $('#wrong_fields').addClass('hidden');
+        $alert_add.addClass('hidden');
     } else {
-        $('#wrong_fields').removeClass('hidden');
+        $alert_add.removeClass('hidden');
     }
 });
 $('#ltoggle').on('click', function () {
     var chbox = $('#activeUser');
     var title = $('#title');
     if (chbox.is(':checked')) {
-        $(this).removeClass('btn-success');
-        $(this).addClass('btn-danger');
+        $(this).removeClass('btn-success').addClass('btn-danger');
         chbox.prop('checked', false);
         title.html("<i class='fa fa-ban'></i> Ні");
     } else {
-        $(this).removeClass('btn-danger');
-        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger').addClass('btn-success');
         chbox.prop('checked', true);
         title.html("<i class='fa fa-check'></i> Так");
     }
@@ -132,21 +126,19 @@ $('#ltoggle_edit').on('click', function () {
     var chbox = $('#activeUser_edit');
     var title = $('#title_edit');
     if (chbox.is(':checked')) {
-        $(this).removeClass('btn-success');
-        $(this).addClass('btn-danger');
+        $(this).removeClass('btn-success').addClass('btn-danger');
         chbox.prop('checked', false);
         title.html("<i class='fa fa-ban'></i> Ні");
     } else {
-        $(this).removeClass('btn-danger');
-        $(this).addClass('btn-success');
+        $(this).removeClass('btn-danger').addClass('btn-success');
         chbox.prop('checked', true);
         title.html("<i class='fa fa-check'></i> Так");
     }
 });
 
-$('#add-user').submit(function () {
+add_user.on('submit', function () {
     var noError = true;
-    var $alert = $('#wrong_fields');
+
     var $username = $('#username');
     var user = $.trim($username.val());
     var $password = $('#password');
@@ -157,32 +149,32 @@ $('#add-user').submit(function () {
     var group = $.trim($member.val());
 
     if (user === '') {
-        $alert.removeClass('hidden');
+        $alert_add.removeClass('hidden');
         $username.addClass('required_field');
         noError = false;
     }
     if (pass === '') {
-        $alert.removeClass('hidden');
+        $alert_add.removeClass('hidden');
         $password.addClass('required_field');
         noError = false;
     }
     if (full_name === '') {
-        $alert.removeClass('hidden');
+        $alert_add.removeClass('hidden');
         $pib.addClass('required_field');
         noError = false;
     }
     if (group === '') {
-        $alert.removeClass('hidden');
+        $alert_add.removeClass('hidden');
         $member.addClass('required_field');
         noError = false;
     }
-    if (!$alert.hasClass('hidden')) {
+    if (!$alert_add.hasClass('hidden')) {
         noError = false;
     }
     return noError;
 });
 function checkFields(form) {
-    var fields = $(form+" .form-control").filter('.required_field');
+    var fields = $(form).find(".form-control").filter('.required_field');
     var bool = true;
     if (fields.length !== 0) {
         bool = false;
@@ -192,12 +184,10 @@ function checkFields(form) {
 
 $(document).ready(function () {
     $("#modal_add_user").on('shown.bs.modal', function () {
-        $('#add-user .form-control').val('');
-        $('#add-user .form-control').removeClass('required_field');
-        $('#add-user .form-control').removeClass('accepted_field');
+        add_user.find('.form-control').val('').removeClass('required_field')
+            .removeClass('accepted_field');
     });
     $("#modal_edit_user").on('show.bs.modal', function () {
-        var $table = $('#table_user');
         var selection = $table.bootstrapTable('getSelections');
         var selectedRow = selection[0];
         var selectedRowJS = JSON.stringify(selectedRow);
@@ -233,19 +223,16 @@ $(document).ready(function () {
         }
         $('#memberof_edit').val(memberof);
         if(selectedRow.active_user === '<i class="fa fa-check" style="color:#5cb85c;"></i>') {
-            $('#ltoggle_edit').removeClass('btn-danger');
-            $('#ltoggle_edit').addClass('btn-success');
+            $('#ltoggle_edit').removeClass('btn-danger').addClass('btn-success');
             $('#activeUser_edit').prop('checked', true);
             $('#title_edit').html("<i class='fa fa-check'></i> Так");
         } else {
-            $('#ltoggle_edit').removeClass('btn-success');
-            $('#ltoggle_edit').addClass('btn-danger');
+            $('#ltoggle_edit').removeClass('btn-success').addClass('btn-danger');
             $('#activeUser_edit').prop('checked', false);
             $('#title_edit').html("<i class='fa fa-ban'></i> Ні");
         }
     });
     $("#modal_delete_user").on('show.bs.modal', function () {
-        var $table = $('#table_user');
         var selection = $table.bootstrapTable('getSelections');
         var selectedJS = JSON.stringify(selection, null, 4);
         $('#del_user_textT').html("<pre>"+selectedJS+"</pre>");
@@ -260,9 +247,8 @@ $(document).ready(function () {
     });
 });
 
-$('#edit-user').submit(function () {
+edit_user.on('submit', function () {
     var noError_edit = true;
-    var $alert = $('#wrong_fields_edit');
     var $username = $('#username_edit');
     var user = $.trim($username.val());
     var $pib = $('#pib_edit');
@@ -271,94 +257,87 @@ $('#edit-user').submit(function () {
     var group = $.trim($member.val());
 
     if (user === '') {
-        $alert.removeClass('hidden');
+        $alert_edit.removeClass('hidden');
         $username.addClass('required_field');
         noError_edit = false;
     }
     if (full_name === '') {
-        $alert.removeClass('hidden');
+        $alert_edit.removeClass('hidden');
         $pib.addClass('required_field');
         noError_edit = false;
     }
     if (group === '') {
-        $alert.removeClass('hidden');
+        $alert_edit.removeClass('hidden');
         $member.addClass('required_field');
         noError_edit = false;
     }
-    if (!$alert.hasClass('hidden')) {
+    if (!$alert_edit.hasClass('hidden')) {
         noError_edit = false;
     }
     return noError_edit;
 });
-$('#username_edit').keyup(function () {
-    var $user_field = $('#username_edit');
+$('#username_edit').on('keyup', function () {
+    var $user_field = $(this);
     var username = $.trim($user_field.val());
     var regex = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
-    if ((username === '') || ( !regex.test($(this).val()) )) {
-        $user_field.removeClass('accepted_field');
-        $user_field.addClass('required_field');
+    if ((username === '') || ( !regex.test($user_field.val()) )) {
+        $user_field.removeClass('accepted_field').addClass('required_field');
     } else {
-        $user_field.removeClass('required_field');
-        $user_field.addClass('accepted_field');
+        $user_field.removeClass('required_field').addClass('accepted_field');
     }
     if(checkFields('#edit-user')) {
-        $('#wrong_fields_edit').addClass('hidden');
+        $alert_edit.addClass('hidden');
     } else {
-        $('#wrong_fields_edit').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
     }
-}).keydown(function (e) {
+}).on('keydown', function (e) {
     if (e.keyCode === 32) {
         return false;
     }
 });
-$('#password_edit').keyup(function () {
-    var $pass_field = $('#password_edit');
+$('#password_edit').on('keyup', function () {
+    var $pass_field = $(this);
     var password = $.trim($pass_field.val());
     var regex = /(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
-    if  ( !regex.test($(this).val()) ) {
-        $pass_field.removeClass('accepted_field');
-        $pass_field.addClass('required_field');
+    if  ( !regex.test($pass_field.val()) ) {
+        $pass_field.removeClass('accepted_field').addClass('required_field');
     } else {
-        $pass_field.removeClass('required_field');
-        $pass_field.addClass('accepted_field');
+        $pass_field.removeClass('required_field').addClass('accepted_field');
     }
     if (password === '') {
         $pass_field.removeClass('required_field');
     }
     if(checkFields('#edit-user')) {
-        $('#wrong_fields_edit').addClass('hidden');
+        $alert_edit.addClass('hidden');
     } else {
-        $('#wrong_fields_edit').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
     }
-}).keydown(function (e) {
+}).on('keydown', function (e) {
     if (e.keyCode === 32) {
         return false;
     }
 });
-$('#pib_edit').keyup(function () {
+$('#pib_edit').on('keyup', function () {
     var $field = $(this);
     var pib = $.trim($field.val());
     if (pib === '') {
-        $field.removeClass('accepted_field');
-        $field.addClass('required_field');
+        $field.removeClass('accepted_field').addClass('required_field');
     } else {
-        $field.removeClass('required_field');
-        $field.addClass('accepted_field');
+        $field.removeClass('required_field').addClass('accepted_field');
     }
     if(checkFields('#edit-user')) {
-        $('#wrong_fields_edit').addClass('hidden');
+        $alert_edit.addClass('hidden');
     } else {
-        $('#wrong_fields_edit').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
     }
 });
 $('#memberof_edit').on('change', function () {
-    if ($(this).val() != '') {
-        $(this).removeClass('required_field');
-        $(this).addClass('accepted_field');
+    if ($(this).val() !== '') {
+        $(this).removeClass('required_field').addClass('accepted_field');
     }
     if(checkFields('#edit-user')) {
-        $('#wrong_fields_edit').addClass('hidden');
+        $alert_edit.addClass('hidden');
     } else {
-        $('#wrong_fields_edit').removeClass('hidden');
+        $alert_edit.removeClass('hidden');
     }
 });
