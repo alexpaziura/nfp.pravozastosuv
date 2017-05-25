@@ -4,6 +4,7 @@ session_start();
 $format_date = 'd.m.Y';
 $for_date_change = 'd.m.Y H:i:s';
 $state_add = '';
+$state_edit = '';
 require_once("src/database.php");
 require_once("src/functions.php");
 if ((isset($_POST['log_out']))||(!isUserActive())) {
@@ -29,17 +30,18 @@ if (isset($_POST['add_nag'])) {
     $_SESSION['action_time'] = microtime(true);
     //header ("location: ".$_SERVER['REQUEST_URI']);
 }
-/*if (isset($_POST['edit_nag'])) {
-    if (add_inspekt()) {
-        $state_add = 'success';
+if (isset($_POST['edit_nag'])) {
+    if (edit_nag()) {
+        $state_edit = 'success';
     } else {
-        $state_add = 'error';
+        $state_edit = 'error';
     }
+    $_SESSION['action_time'] = microtime(true);
     //echo '<pre>';
     //var_dump($_POST);
     //echo '</pre>';
     //unset($_POST);
-}*/
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -170,11 +172,33 @@ if (isset($_POST['add_nag'])) {
                 echo 'hidden';
             }
             ?>"
-                 id="success_err">
+                 id="error_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
                     <i class="fa fa-close"></i>
                 </button>
                 <h4>Виникла помилка при додаванні запису!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-success alert-dismissable alert-fixed <?= $state_edit == 'success' ? '' : 'hidden' ?>"
+                 id="success_edit">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h4>Запис успішно змінено!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_edit == 'error' ? '' : 'hidden' ?>"
+                 id="error_edit">
+                <button type="button" class="close alert-close" data-dismiss="alert">
+                    <i class="fa fa-close"></i>
+                </button>
+                <h4>Виникла помилка при редагуванні запису!</h4>
             </div>
         </div>
     </div>
@@ -767,7 +791,7 @@ if (isset($_POST['add_nag'])) {
     </div>
 </div>
 <?php
-if (isset($_POST['add_nag'])) {
+if (isset($_POST['edit_nag'])) {
     echo '<br><pre>';
     var_dump($_POST);
     echo '</pre>';
@@ -843,6 +867,7 @@ echo "Difference: ".($time2-$time1);*/
 <script src="js/form-add.js"></script>
 
 <?php require_once 'src/modal_edit_n.php'; ?>
+
 <script src="js/form-edit-n.js"></script>
 
 
@@ -892,7 +917,9 @@ echo "Difference: ".($time2-$time1);*/
 <script>
     setTimeout(function () {
         $('#success_add').alert("close");
-        $('#success_err').alert("close");
+        $('#error_add').alert("close");
+        $('#success_edit').alert("close");
+        $('#error_edit').alert("close");
     }, 7000);
 </script>
 <script>

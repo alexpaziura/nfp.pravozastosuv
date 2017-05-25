@@ -124,7 +124,7 @@ $('#type_foE').on('change', function () {
         $alert_edit.removeClass('hidden');
     }
 });
-function checkFields() {
+function checkFields_edit() {
     var fields = $("#edit-form-n .form-control").filter('.required_field');
     var bool = true;
     if (fields.length !== 0) {
@@ -199,6 +199,10 @@ $(document).ready(function () {
                 $('#pidstava_pozaplanSE').multiselect('select', pidstavs[i])
             }
         }
+        $("#d_start_perevirkiDE").datepicker("update", selectedRow.d_start_perevirki);
+        $("#d_end_perevirkiDE").datepicker("update", selectedRow.d_end_perevirki);
+        $("#d_start_dialnistDE").datepicker("update", selectedRow.d_start_dialnist);
+        $("#d_end_dialnistDE").datepicker("update", selectedRow.d_end_dialnist);
 
 
     });
@@ -223,6 +227,7 @@ $(document).ready(function () {
         inheritClass: true,
         buttonWidth: '100%'
     });
+
     /*$("#vid_akt_zu").selectBoxIt({
      theme: "default",
      autoWidth: false

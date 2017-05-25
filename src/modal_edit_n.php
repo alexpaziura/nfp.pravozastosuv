@@ -105,6 +105,130 @@
                             </div>
                         </div>
                     </div>
+                        <fieldset>
+                            <legend>Термін проведення перевірки</legend>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="d_start_perevirkiE">Дата початку</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_start_perevirkiDE">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
+                                            <input name="d_start_perevirkiE" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="d_end_perevirkiE">Дата закінчення</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_end_perevirkiDE">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
+                                            <input type="text" name="d_end_perevirkiE" data-mask="99.99.9999"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Період діяльності, що охоплюються перевіркою</legend>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="d_start_dialnistE">Дата початку</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_start_dialnistDE">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
+                                            <input name="d_start_dialnistE" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="d_end_dialnistE">Дата закінчення</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_end_dialnistDE">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
+                                            <input type="text" name="d_end_dialnistE" data-mask="99.99.9999"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Наказ про здійснення заходу державного нагляду</legend>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="d_nak_zahE">Дата</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_nak_zahDE">
+                                             <span class="input-group-addon">
+                                            <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
+                                            <input name="d_nak_zahE" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="n_nak_zahE">Номер</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_nak_zahE" type="text" class="form-control input-nomer"
+                                                   id="n_nak_zahE"
+                                                   maxlength="45">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Направлення (Подання) про проведення перевірки</legend>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="d_napr_provedE">Дата</label>
+                                        <div class="input-group date dp" data-provide="datepicker"
+                                             id="d_napr_provedDE">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-lg"></i>
+                                            </span>
+                                            <input name="d_napr_provedE" data-mask="99.99.9999" type="text"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="n_napr_provedE">Номер</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                            <i class="fa fa-hashtag fa-lg"></i>
+                                            </span>
+                                            <input name="n_napr_provedE" type="text" class="form-control input-nomer"
+                                                   id="n_napr_provedE"
+                                                   maxlength="45">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                     <div id="modal-page-2e" class="modal-page-edit">
 

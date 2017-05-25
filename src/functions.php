@@ -362,13 +362,95 @@ function edit_nag()
     $sql = "SELECT * FROM inspekt WHERE id_inspekt=" . $_POST['id_inspekt'] . ";";
     if ($result = mysqli_query($link, $sql)) {
         $row = mysqli_fetch_assoc($result);
-        extract($row, EXTR_PREFIX_ALL, 'old');
+        $old_val = $row;
+        unset($row);
         mysqli_free_result($result);
     } else {
         return false;
     }
+    $new_val = array();
+    $new_val['pidrozdil'] = 0;
+    switch ($_SESSION['group']) {
+        case "ДеРЗІТ":
+            $new_val['pidrozdil'] = 10;
+            break;
+        case "НПЗ":
+            $new_val['pidrozdil'] = 13;
+            break;
+        case "ЮР":
+            $new_val['pidrozdil'] = 11;
+            break;
+        case "СК":
+            $new_val['pidrozdil'] = 13;
+            break;
+        case "ФК":
+            $new_val['pidrozdil'] = 16;
+            break;
+        case "КС":
+            $new_val['pidrozdil'] = 15;
+            break;
+        case "РРФП":
+            $new_val['pidrozdil'] = 17;
+            break;
+    }
+    $new_val['nzp'] = full_trim(htmlspecialchars($_POST['nzpE'], ENT_QUOTES));
+    $new_val['date_change'] = strtotime(date('d.m.Y H:i:s'));
+    $new_val['user'] = $_SESSION['id_user'];
+    $new_val['short_name_fu'] = full_trim(htmlspecialchars($_POST['short_name_fuE'], ENT_QUOTES));
+    $new_val['edrpo'] = full_trim(htmlspecialchars($_POST['edrpoEE']));
+    $new_val['type_fo'] = htmlspecialchars($_POST['type_foE']);
+    $new_val['vid_perevirki'] = $_POST['vid_perevirkiSE'] != '' ? htmlspecialchars($_POST['vid_perevirkiSE']) : 1;
+    $new_val['pidstava_pozaplanS'] = "";
+    if (isset($_POST['pidstava_pozaplanSE'])) {
+        $pidstavi = $_POST['pidstava_pozaplanSE'];
+        $new_val['pidstava_pozaplanS'] = "'";
+        foreach ($pidstavi as $value) {
+            $new_val['pidstava_pozaplanS'] = $new_val['pidstava_pozaplanS'] . $value . "; ";
+        }
+        $new_val['pidstava_pozaplanS'] = $new_val['pidstava_pozaplanS'] . "'";
+    }
 
-    $new_nzp = full_trim(htmlspecialchars($_POST['nzp'], ENT_QUOTES));
+    $diffs = array();
+    $diffs['nzp'] = $new_val['nzp'] != $old_val['nzp']? $new_val['nzp'] : "" ;
+    $diffs['pidrozdil'] = $new_val['pidrozdil'] != $old_val['pidrozdil']? $new_val['pidrozdil'] : "" ;
+    $diffs['short_name_fu'] = $new_val['short_name_fu'] != $old_val['short_name_fu']? "'".$new_val['short_name_fu']."'" : "" ;
+    $diffs['edrpo'] = $new_val['edrpo'] != $old_val['edrpo']? "'".$new_val['edrpo']."'" : "" ;
+    $diffs['type_fu'] = $new_val['type_fo'] != $old_val['type_fu']? $new_val['type_fo'] : "" ;
+    $diffs['vid_perevirki'] = $new_val['vid_perevirki'] != $old_val['vid_perevirki']? $new_val['vid_perevirki'] : "" ;
+    $diffs['pidstava_pozaplan'] = $new_val['pidstava_pozaplanS'] != "'".$old_val['pidstava_pozaplan']."'"? $new_val['pidstava_pozaplanS'] : "" ;
+
+
+    $isNoChanged = true;
+    foreach ($diffs as $key => $value) {
+        if ($value != "") {
+            $isNoChanged = false;
+        }
+    }
+    if ($isNoChanged == true) {
+        return true;
+    }
+    $query = "date_change = ".$new_val['date_change'].", user = ".$new_val['user'];
+    $i = 1;
+    foreach ($diffs as $key => $value) {
+        if ($value != "") {
+            $query .= ", " . $key . "=" . $value;
+            $i++;
+        }
+    }
+    $sql = "UPDATE inspekt SET " . $query . " WHERE id_inspekt=" . $_POST['id_inspekt'] . ";";
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        writeLog('QUERY', $sql, 1);
+        return true;
+    } else {
+        writeLog('QUERY', $sql, 0);
+        $logs = fopen("logs.txt", "w") or die("Unable to open file!");
+        $txt = "Error: " . $sql . "\n" . mysqli_error($link);
+        fwrite($logs, $txt);
+        fclose($logs);
+        return false;
+    }
+
 
 
 }
