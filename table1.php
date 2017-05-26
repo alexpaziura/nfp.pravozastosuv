@@ -650,7 +650,7 @@ if (isset($_POST['edit_nag'])) {
                     </div>-->
 
                     </thead>
-                    <tbody >
+                    <tbody id="table_body">
                     <?php $table_inspekt = get_table_inspect();
                     $start1 = microtime(true);
                     $table_type_fu = get_dic('dic_type_fu');
@@ -706,7 +706,8 @@ if (isset($_POST['edit_nag'])) {
                             <td><?= $row['d_akt_zu'] == NULL ? '' : date($format_date, $row['d_akt_zu']) ?></td>
                             <td><?= $row['n_akt_zu'] ?></td>
                             <td>
-                                <div data-toggle="popover" data-content="<?= $row['name_akt_zu'] ?>" class="akt_zu">
+                                <div data-toggle="popover" data-trigger="hover"
+                                     data-content="<?= $row['name_akt_zu'] ?>" class="akt_zu">
                                 <span>
                                     <?= $row['vid_akt_zu'] == '1' ? '': $row['vid_akt_zu']?>
                                 </span>
@@ -894,15 +895,22 @@ echo "Difference: ".($time2-$time1);*/
         }
     });*/
     var classColor = 'success';
-    $("#table").on('click-row.bs.table', function (e, row, $element) {
-     if($($element).hasClass(classColor)) {
-     $($element).removeClass(classColor);
-     } else {
-     $($element).addClass(classColor);
-     }
-     }).on('check.bs.table', function (e, row, $element) {
+    $('.akt_zu').popover();
+    $("#table")
+        .on('all.bs.table', function (e, name, args) {
+            $('.akt_zu').popover();
+            $('tbody').find('.selected').addClass(classColor);
+        })
+        .on('click-row.bs.table', function (e, row, $element) {
+            if($($element).hasClass(classColor)) {
+                $($element).removeClass(classColor);
+            } else {
+                $($element).addClass(classColor);
+            }
+        })
+        .on('check.bs.table', function (e, row, $element) {
         $($element).parent().parent().addClass(classColor);
-    })
+        })
         .on('uncheck.bs.table', function (e, row, $element) {
             $($element).parent().parent().removeClass(classColor);
         })
@@ -912,7 +920,12 @@ echo "Difference: ".($time2-$time1);*/
         .on('uncheck-all.bs.table', function (e, $element) {
             $($element).parent().parent().removeClass(classColor);
         });
+function findSelected() {
 
+    var select = $(' tr.selected');
+    alert(JSON.stringify(select));
+
+}
 </script>
 <script>
     setTimeout(function () {

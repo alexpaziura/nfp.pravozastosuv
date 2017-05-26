@@ -5,16 +5,17 @@
 
 var add_form = $('#add-form');
 var $alert = $('#wrong_fields');
+var $nzp_field  = $('#nzp');
+var $short_name_fu = $('#short_name_fu');
+var $edrpoE = $('#edrpoE');
+var $type_fo = $('#type_fo');
+var $pidstava_pozaplanS = $('#pidstava_pozaplanS');
 add_form.on('submit', function () {
 
     var noError = true;
-    var $nzp_field  = $('#nzp');
     var nzp = $.trim($nzp_field.val());
-    var $short_name_fu = $('#short_name_fu');
     var short_name_fu = $.trim($short_name_fu.val());
-    var $edrpoE = $('#edrpoE');
     var edrpoE = $.trim($edrpoE.val());
-    var $type_fo = $('#type_fo');
     var type_fo = $.trim($type_fo.val());
     if (nzp === '') {
         $alert.removeClass('hidden');
@@ -42,7 +43,7 @@ add_form.on('submit', function () {
     return noError;
 });
 
-$('#nzp').on('keyup', function() {
+$nzp_field.on('keyup', function() {
     var $field  = $(this);
     var val = $.trim($field.val());
     var regex = /^[0-9]{1,11}$/;
@@ -57,7 +58,7 @@ $('#nzp').on('keyup', function() {
         $alert.removeClass('hidden');
     }
 });
-$('#short_name_fu').on('keyup', function() {
+$short_name_fu.on('keyup', function() {
     var $field  = $(this);
     var val = $.trim($field.val());
     if (val === '') {
@@ -71,7 +72,7 @@ $('#short_name_fu').on('keyup', function() {
         $alert.removeClass('hidden');
     }
 });
-$('#edrpoE').on('keyup', function() {
+$edrpoE.on('keyup', function() {
     var $field  = $(this);
     var val = $.trim($field.val());
     var regex = /(([A-Z]{1,2}) ([0-9]{6}))|([0-9]{8,12})/;
@@ -104,7 +105,7 @@ add_form.find('.suma').on('keyup', function() {
         $alert.removeClass('hidden');
     }
 });
-$('#type_fo').on('change', function () {
+$type_fo.on('change', function () {
     if ($(this).val() !== '') {
         $(this).removeClass('required_field').addClass('accepted_field');
     }
@@ -117,7 +118,6 @@ $('#type_fo').on('change', function () {
 function checkFields() {
     //var fields = add_form.find(".form-control").filter('.required_field');
     var fields = add_form.find(".form-control").filter('.required_field');
-    alert(JSON.stringify(fields));
     var bool = true;
     if (fields.length !== 0) {
         bool = false;
@@ -134,11 +134,11 @@ $("#modal-add-naglyad").on('shown.bs.modal', function () {
         .removeClass('accepted_field').popover('hide');
 });
 $(document).ready(function(){
-    $('#nzp').popover({title: "Поле обов'язкове для заповнення!", content: "Допускаються тільки цифри!",
+    $nzp_field.popover({title: "Поле обов'язкове для заповнення!", content: "Допускаються тільки цифри!",
         trigger: "manual", placement: "top", animation:true });
-    $('#short_name_fu').popover({content: "Поле обов'язкове для заповнення!", trigger: "manual", placement: "top",
+    $short_name_fu.popover({content: "Поле обов'язкове для заповнення!", trigger: "manual", placement: "top",
         animation: true});
-    $('#edrpoE').popover({title: "Поле обов'язкове для заповнення!",
+    $edrpoE.popover({title: "Поле обов'язкове для заповнення!",
         content: "Формат запису: 99999999999 або АА 999999", trigger: "manual", placement: "top",
         animation: true});
     add_form.find('.suma').popover({title: "Допускаються тільки цифри і крапка!",
@@ -147,13 +147,13 @@ $(document).ready(function(){
 
     $('#vid_perevirkiS').on('change', function () {
         if ($(this).val() === '3') {
-            $('#pidstava_pozaplanS').prop('disabled', false).multiselect('refresh').multiselect('enable');
+            $pidstava_pozaplanS.prop('disabled', false).multiselect('refresh').multiselect('enable');
         }
         else {
-            $('#pidstava_pozaplanS').prop('disabled', 'disabled').multiselect('refresh').multiselect('disable');
+            $pidstava_pozaplanS.prop('disabled', 'disabled').multiselect('refresh').multiselect('disable');
         }
     });
-    $('#pidstava_pozaplanS').multiselect({
+    $pidstava_pozaplanS.multiselect({
         nonSelectedText: 'Виберіть підставу!',
         allSelectedText: 'Вибрано всі підстави',
         disabledText: 'Заблоковано!',
