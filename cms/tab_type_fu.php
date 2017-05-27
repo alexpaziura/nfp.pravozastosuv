@@ -3,7 +3,7 @@ session_start();
 require_once("../src/database.php");
 require_once("../src/functions.php");
 if (!isset($_SESSION['user'])) {
-    header('Location: ../login.php');
+    header('Location: ../login');
 } else if ($_SESSION['group'] != 'ДеРЗІТ') {
     header('Location:/');
 }
@@ -14,7 +14,7 @@ if ((isset($_POST['log_out'])) || (!isUserActive())) {
     unset($_SESSION['full_name']);
     unset($_SESSION['action_time']);
     session_destroy();
-    header('Location: ../login.php');
+    header('Location: ../login');
 }
 if (isset($_POST['relogin'])) {
     writeLog('AUTH', 'LOGOUT', 1);
@@ -23,9 +23,18 @@ if (isset($_POST['relogin'])) {
     unset($_SESSION['full_name']);
     unset($_SESSION['action_time']);
     session_destroy();
-    header('Location: ../login.php');
+    header('Location: ../login');
 }
-
+$state_add_1 = '';
+$state_edit_1 = '';
+if(isset($_POST['add_row'])){
+    if (add_row_dic('dic_type_fu')) {
+        $state_add_1 = 'success';
+    } else {
+        $state_add_1 = 'error';
+    }
+    $_SESSION['action_time'] = microtime(true);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -61,8 +70,8 @@ if (isset($_POST['relogin'])) {
             <a href="/" class="navbar-brand"><i class="fa fa-balance-scale fa-lg"></i> Правозастосування</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="../table1.php">Інспеційна діяльність</a></li>
-            <li><a href="../table2.php">Інші види діяльності</a></li>
+            <li><a href="../table1">Інспеційна діяльність</a></li>
+            <li><a href="../table2">Інші види діяльності</a></li>
             <li class="active <?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="/cms/">Адміністрування</a>
             </li>
         </ul>
@@ -79,27 +88,22 @@ if (isset($_POST['relogin'])) {
     <hr id="nav-divider">
     <div class="container" id="nav2row">
         <ul class="nav navbar-nav">
-            <li><a href="users.php"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
-            <li class="dropdown">
+            <li><a href="users"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
+            <li class="dropdown active">
                 <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span
                             class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="tab_type_fu.php">Тип суб'єкта нагляду</a></li>
+                    <li class="active"><a href="tab_type_fu">Тип суб'єкта нагляду</a></li>
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
-            <li><a href="logs.php"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
+            <li><a href="logs"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
             <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a>
             </li>
         </ul>
     </div>
 
 </div>
-<?php
-$state_add_1 = '';
-$state_edit_1 = '';
-
-?>
 <div class="container-fluid" id="content-body" style="height: 90%">
     <!--<div class="toolbar">
 <button id="button" class="btn btn-default">getSelectedRow</button></div>-->
@@ -218,10 +222,12 @@ $state_edit_1 = '';
                 </button>
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2 class="modal-title"><i class="fa fa-plus fa-lg" style="color: "></i> &nbsp;&nbsp;Додавання</h2>
+                        <h2 class="modal-title">
+                            <i class="fa fa-plus fa-lg" style="color: "></i>
+                            &nbsp;&nbsp;Додати запис</h2>
                     </div>
                     <div class="col-sm-5" style="margin-bottom: -20px">
-                        <div class="alert alert-danger "
+                        <div class="alert alert-danger hidden"
                              id="wrong_fields">
                             <h4 style="margin-bottom: -5px;margin-top: -5px">Не заповнено поле!</h4>
                         </div>
@@ -233,12 +239,12 @@ $state_edit_1 = '';
                     <div class="row">
                         <div class="col-sm-6 col-md-offset-3">
                             <div class="form-group">
-                                <label for="username">Тип суб'єкта нагляду</label>
+                                <label for="type_sub">Тип суб'єкта нагляду</label>
                                 <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-font fa-lg"></i>
                                             </span>
-                                    <input name="username" type="text" class="form-control" id="username"
+                                    <input name="type_sub" type="text" class="form-control" id="type_sub"
                                            maxlength="255">
                                 </div>
                             </div>

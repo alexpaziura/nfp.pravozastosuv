@@ -3,7 +3,7 @@
     require_once("src/database.php");
     require_once("src/functions.php");
     if(!isset($_SESSION['user'])){
-        header('Location:login.php');
+        header('Location:login');
     }
     if(isset($_POST['log_out'])){
         writeLog('AUTH','LOGOUT',1);
@@ -11,7 +11,7 @@
         unset($_SESSION['group']);
         unset($_SESSION['full_name']);
         session_destroy();
-        header('Location:login.php');
+        header('Location:login');
     }
 
 ?>
@@ -29,7 +29,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="./css/jasny-bootstrap.css">
-
+    <link rel="stylesheet" href="../css/style.css">
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -47,8 +47,8 @@
             <a href="/" class="navbar-brand"><i class="fa fa-balance-scale fa-lg"></i> Правозастосування</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="table1.php">Інспеційна діяльність</a></li>
-            <li><a href="table2.php">Інші види діяльності</a></li>
+            <li><a href="table1">Інспеційна діяльність</a></li>
+            <li><a href="table2">Інші види діяльності</a></li>
             <li class="<?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="cms/">Адміністрування</a></li>
         </ul>
 
@@ -65,9 +65,9 @@
 
 <div class="container">
     <h2 class="text-center">Початкова сторінка</h2>
-    <a href="table1.php" class="btn btn-group-justified btn-primary btn-lg">Інспекційна діяльність</a>
+    <a href="table1" class="btn btn-group-justified btn-primary btn-lg">Інспекційна діяльність</a>
     <br>
-    <a href="table2.php" class="btn btn-group-justified btn-primary btn-lg">Інші види діяльності</a>
+    <a href="table2" class="btn btn-group-justified btn-primary btn-lg">Інші види діяльності</a>
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.1.1.js"></script>

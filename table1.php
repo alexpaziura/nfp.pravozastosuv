@@ -14,11 +14,11 @@ if ((isset($_POST['log_out']))||(!isUserActive())) {
     unset($_SESSION['group']);
     unset($_SESSION['full_name']);
     session_destroy();
-    header('Location:login.php');
+    header('Location:login');
     exit();
 }
 if (!isset($_SESSION['user'])) {
-    header('Location:login.php');
+    header('Location:login');
     exit();
 }
 if (isset($_POST['add_nag'])) {
@@ -128,8 +128,8 @@ if (isset($_POST['edit_nag'])) {
             <a href="/" class="navbar-brand"><i class="fa fa-balance-scale fa-lg"></i> Правозастосування</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="table1.php">Інспеційна діяльність</a></li>
-            <li><a href="table2.php">Інші види діяльності</a></li>
+            <li class="active"><a href="table1">Інспеційна діяльність</a></li>
+            <li><a href="table2">Інші види діяльності</a></li>
             <li class="<?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="cms/">Адміністрування</a></li>
         </ul>
         <form method="post" class="navbar-form navbar-right">

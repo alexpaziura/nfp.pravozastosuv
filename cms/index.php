@@ -3,7 +3,7 @@
     require_once("../src/database.php");
     require_once("../src/functions.php");
     if(!isset($_SESSION['user'])){
-        header('Location: ../login.php');
+        header('Location: ../login');
     } else if ($_SESSION['group']!='ДеРЗІТ') {
         header('Location:/');
     }
@@ -14,7 +14,7 @@
         unset($_SESSION['full_name']);
         unset($_SESSION['action_time']);
         session_destroy();
-        header('Location: ../login.php');
+        header('Location: ../login');
     }
     if (isset($_POST['relogin'])) {
         writeLog('AUTH','LOGOUT',1);
@@ -23,7 +23,7 @@
         unset($_SESSION['full_name']);
         unset($_SESSION['action_time']);
         session_destroy();
-        header('Location: ../login.php');
+        header('Location: ../login');
     }
 
 ?>
@@ -61,8 +61,8 @@
             <a href="/" class="navbar-brand"><i class="fa fa-balance-scale fa-lg"></i> Правозастосування</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="../table1.php">Інспеційна діяльність</a></li>
-            <li><a href="../table2.php">Інші види діяльності</a></li>
+            <li><a href="../table1">Інспеційна діяльність</a></li>
+            <li><a href="../table2">Інші види діяльності</a></li>
             <li class="active <?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="/cms/">Адміністрування</a></li>
         </ul>
         <form method="post" class="navbar-form navbar-right">
@@ -78,15 +78,15 @@
     <hr id="nav-divider">
     <div class="container" id="nav2row">
         <ul class="nav navbar-nav">
-            <li><a href="users.php"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
+            <li><a href="users"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="tab_type_fu.php">Тип суб'єкта нагляду</a></li>
+                    <li><a href="tab_type_fu">Тип суб'єкта нагляду</a></li>
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
-            <li><a href="logs.php"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
+            <li><a href="logs"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
             <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a></li>
         </ul>
     </div>

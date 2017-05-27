@@ -1,5 +1,11 @@
 <?php
 
+function full_trim($str)
+{
+    return trim(preg_replace('/\s{2,}/', ' ', $str));
+
+}
+
 function get_table_inspect()
 {
     global $link;
@@ -57,123 +63,6 @@ function get_row_inspect($id)
         return $rowS;
 
     }
-}
-
-function get_user()
-{
-    global $link;
-    global $username;
-    global $pwd;
-
-    $sql = "SELECT * FROM users";
-    $result = mysqli_query($link, $sql);
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    $exist = false;
-    foreach ($users as $row) {
-        if ((strcmp($row['username'], $username) == 0) && (strcasecmp($row['pwd'], md5($pwd)) == 0)) {
-            session_start();
-            if ($row['active_user'] == 1) {
-                $exist = true;
-                $_SESSION['id_user'] = $row['id_user'];
-                $_SESSION['user'] = $row['username'];
-                $_SESSION['group'] = $row['memberof'];
-                $_SESSION['full_name'] = $row['full_name'];
-                $_SESSION['action_time'] = microtime(true);
-            }
-            break;
-        }
-    }
-    if ($exist) {
-        writeLog('AUTH', 'LOGIN', 1);
-    } else {
-        writeLog('AUTH', 'LOGIN', 0);
-    }
-    return $exist;
-}
-
-function isUserActive()
-{
-    global $link;
-    if (!mysqli_ping($link)) {
-        echo "Error: " . mysqli_error($link);
-        exit();
-    }
-    $isActive = false;
-    $sql = "SELECT active_user FROM users WHERE id_user=" . $_SESSION['id_user'];
-    if ($result = mysqli_query($link, $sql)) {
-        while ($row = mysqli_fetch_row($result)) {
-            if ($row[0] == 1) {
-                $isActive = true;
-            }
-        }
-        mysqli_free_result($result);
-    }
-    return $isActive;
-}
-
-function get_users()
-{
-    global $link;
-    if (!mysqli_ping($link)) {
-        echo "Error: " . mysqli_error($link);
-        exit();
-    }
-
-    $sql = "SELECT * FROM users WHERE id_user <> 0";
-
-
-    $result = mysqli_query($link, $sql);
-
-    $table_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $table_users;
-
-}
-
-function get_dics()
-{
-    global $link;
-    if (!mysqli_ping($link)) {
-        echo "Error: " . mysqli_error($link);
-        exit();
-    }
-
-    $sql = "SELECT * FROM dic_type_fu WHERE visible=1;";
-    $sql .= "SELECT * FROM dic_vid_perevirki WHERE visible=1;";
-    $sql .= "SELECT * FROM dic_pidstava_pozaplan WHERE visible=1;";
-    $sql .= "SELECT * FROM dic_akt_zu WHERE visible=1";
-
-    $dics = array();
-    if (mysqli_multi_query($link, $sql)) {
-        do {
-            if ($result = mysqli_store_result($link)) {
-                $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                array_push($dics, $row);
-                mysqli_free_result($result);
-            }
-        } while (mysqli_next_result($link));
-    }
-    return $dics;
-
-}
-
-function get_dic($dic)
-{
-    global $link;
-    if (!mysqli_ping($link)) {
-        echo "Error: " . mysqli_error($link);
-        exit();
-    }
-
-    $sql = "SELECT * FROM " . $dic;
-
-
-    $result = mysqli_query($link, $sql);
-
-    $table_dic = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    mysqli_free_result($result);
-    return $table_dic;
-
 }
 
 function add_inspekt()
@@ -455,6 +344,78 @@ function edit_nag()
 
 }
 
+
+function get_users()
+{
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
+        exit();
+    }
+
+    $sql = "SELECT * FROM users WHERE id_user <> 0";
+
+
+    $result = mysqli_query($link, $sql);
+
+    $table_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $table_users;
+
+}
+
+function get_user()
+{
+    global $link;
+    global $username;
+    global $pwd;
+
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($link, $sql);
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $exist = false;
+    foreach ($users as $row) {
+        if ((strcmp($row['username'], $username) == 0) && (strcasecmp($row['pwd'], md5($pwd)) == 0)) {
+            session_start();
+            if ($row['active_user'] == 1) {
+                $exist = true;
+                $_SESSION['id_user'] = $row['id_user'];
+                $_SESSION['user'] = $row['username'];
+                $_SESSION['group'] = $row['memberof'];
+                $_SESSION['full_name'] = $row['full_name'];
+                $_SESSION['action_time'] = microtime(true);
+            }
+            break;
+        }
+    }
+    if ($exist) {
+        writeLog('AUTH', 'LOGIN', 1);
+    } else {
+        writeLog('AUTH', 'LOGIN', 0);
+    }
+    return $exist;
+}
+
+function isUserActive()
+{
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
+        exit();
+    }
+    $isActive = false;
+    $sql = "SELECT active_user FROM users WHERE id_user=" . $_SESSION['id_user'];
+    if ($result = mysqli_query($link, $sql)) {
+        while ($row = mysqli_fetch_row($result)) {
+            if ($row[0] == 1) {
+                $isActive = true;
+            }
+        }
+        mysqli_free_result($result);
+    }
+    return $isActive;
+}
+
 function add_user()
 {
     if (!isUserActive()) {
@@ -628,6 +589,7 @@ function edit_user()
 
 function delete_user()
 {
+    //TODO rewrite sql query
     if (!isUserActive()) {
         return false;
     }
@@ -643,9 +605,9 @@ function delete_user()
     $umov = '';
     foreach ($iter as $val) {
         $umov .= "id_user = " . $val;
-            if ($iter->hasNext()) {
-                $umov .= " OR ";
-            }
+        if ($iter->hasNext()) {
+            $umov .= " OR ";
+        }
     }
     $sql = "UPDATE users SET active_user = 0, visible = 0 WHERE $umov;";
     $result = mysqli_query($link, $sql);
@@ -661,6 +623,97 @@ function delete_user()
         return false;
     }
 }
+
+
+function get_dics()
+{
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
+        exit();
+    }
+
+    $sql = "SELECT * FROM dic_type_fu WHERE visible=1;";
+    $sql .= "SELECT * FROM dic_vid_perevirki WHERE visible=1;";
+    $sql .= "SELECT * FROM dic_pidstava_pozaplan WHERE visible=1;";
+    $sql .= "SELECT * FROM dic_akt_zu WHERE visible=1";
+
+    $dics = array();
+    if (mysqli_multi_query($link, $sql)) {
+        do {
+            if ($result = mysqli_store_result($link)) {
+                $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                array_push($dics, $row);
+                mysqli_free_result($result);
+            }
+        } while (mysqli_next_result($link));
+    }
+    return $dics;
+
+}
+
+function get_dic($dic)
+{
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
+        exit();
+    }
+
+    $sql = "SELECT * FROM " . $dic;
+
+
+    $result = mysqli_query($link, $sql);
+
+    $table_dic = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $table_dic;
+
+}
+
+function add_row_dic($dic) {
+
+    if (!isUserActive()) {
+        return false;
+    }
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
+        exit();
+    }
+    $column = '';
+    switch ($dic) {
+        case "dic_type_fu":
+            $column = 'name_type_fu';
+            break;
+    }
+
+    $val = "'" . full_trim(htmlspecialchars($_POST['type_sub'])) . "'";
+
+    $sql = "INSERT INTO $dic ($column, visible) VALUES ($val, 1);";
+
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        writeLog('QUERY', $sql, 1);
+        return true;
+    } else {
+        writeLog('QUERY', $sql, 0);
+        $logs = fopen("logs.txt", "w") or die("Unable to open file!");
+        $txt = "Error: " . $sql . "\n" . mysqli_error($link);
+        fwrite($logs, $txt);
+        fclose($logs);
+        return false;
+    }
+}
+
+function edit_row_dic($dic) {
+
+}
+
+function del_row_dic($dic) {
+
+}
+
 
 function writeLog($type, $query, $status)
 {
@@ -702,11 +755,5 @@ function get_logs()
     $table_logs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     mysqli_free_result($result);
     return $table_logs;
-
-}
-
-function full_trim($str)
-{
-    return trim(preg_replace('/\s{2,}/', ' ', $str));
 
 }

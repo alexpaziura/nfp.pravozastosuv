@@ -1,5 +1,7 @@
 body {
-  background-color: #a1c9f7;
+  /*background-color: #a1c9f7;*/
+  background: url("/img/back.jpg") no-repeat fixed center center;
+  background-size: cover;
 }
 .modal-header-warning {
   color:#fff;
