@@ -157,7 +157,7 @@ if (isset($_POST['edit_nag'])) {
             ?>"
                  id="success_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Запис успішно додано!</h4>
             </div>
@@ -174,7 +174,7 @@ if (isset($_POST['edit_nag'])) {
             ?>"
                  id="error_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Виникла помилка при додаванні запису!</h4>
             </div>
@@ -185,7 +185,7 @@ if (isset($_POST['edit_nag'])) {
             <div class="alert alert-success alert-dismissable alert-fixed <?= $state_edit == 'success' ? '' : 'hidden' ?>"
                  id="success_edit">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Запис успішно змінено!</h4>
             </div>
@@ -196,7 +196,7 @@ if (isset($_POST['edit_nag'])) {
             <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_edit == 'error' ? '' : 'hidden' ?>"
                  id="error_edit">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Виникла помилка при редагуванні запису!</h4>
             </div>

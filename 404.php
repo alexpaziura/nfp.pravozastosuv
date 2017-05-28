@@ -21,40 +21,40 @@
     <![endif]-->
     <link href="css/font-awesome.css" rel="stylesheet">
     <style>
-        #body_work a {
+        h1 {
             /*color: #FFDD1B;*/
             /*color: #228DFF;*/
-            color: #FF9900;
+            color: #0e437e;
             font-family: Appetite;
             font-size: 5em;
             text-align: center;
             text-decoration: none;
-            -webkit-animation: neon5 1.5s ease-in-out infinite alternate;
-            -moz-animation: neon5 1.5s ease-in-out infinite alternate;
-            animation: neon5 1.5s ease-in-out infinite alternate;
+            -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
+            -moz-animation: neon2 1.5s ease-in-out infinite alternate;
+            animation: neon2 1.5s ease-in-out infinite alternate;
         }
-        @-webkit-keyframes neon5 {
+        @-webkit-keyframes neon2 {
             from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF9900, 0 0 70px #FF9900, 0 0 80px #FF9900, 0 0 100px #FF9900, 0 0 150px #FF9900;
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e, 0 0 80px #0e437e, 0 0 100px #0e437e, 0 0 150px #0e437e;
             }
             to {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF9900, 0 0 35px #FF9900, 0 0 40px #FF9900, 0 0 50px #FF9900, 0 0 75px #FF9900;
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #0e437e, 0 0 35px #0e437e, 0 0 40px #0e437e, 0 0 50px #0e437e, 0 0 75px #0e437e;
             }
         }
-        @-moz-keyframes neon5 {
+        @-moz-keyframes neon2 {
             from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF9900, 0 0 70px #FF9900, 0 0 80px #FF9900, 0 0 100px #FF9900, 0 0 150px #FF9900;
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e, 0 0 80px #0e437e, 0 0 100px #0e437e, 0 0 150px #0e437e;
             }
             to {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF9900, 0 0 35px #FF9900, 0 0 40px #FF9900, 0 0 50px #FF9900, 0 0 75px #FF9900;
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #0e437e, 0 0 35px #0e437e, 0 0 40px #0e437e, 0 0 50px #0e437e, 0 0 75px #0e437e;
             }
         }
-        @keyframes neon5 {
+        @keyframes neon2 {
             from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF9900, 0 0 70px #FF9900, 0 0 80px #FF9900, 0 0 100px #FF9900, 0 0 150px #FF9900;
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e, 0 0 80px #0e437e, 0 0 100px #0e437e, 0 0 150px #0e437e;
             }
             to {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF9900, 0 0 35px #FF9900, 0 0 40px #FF9900, 0 0 50px #FF9900, 0 0 75px #FF9900;
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #0e437e, 0 0 35px #0e437e, 0 0 40px #0e437e, 0 0 50px #0e437e, 0 0 75px #0e437e;
             }
         }
     </style>
@@ -65,33 +65,21 @@
     <div class="container">
         <div class="navbar-header">
             <a href="/" class="navbar-brand"
-               style="transform: translateX(-50%); left: 50%; position: absolute; font-size: 1.5em;font-family: Appetite;">
+               style="transform: translateX(-50%); left: 50%; position: absolute;font-size: 1.5em;font-family: Appetite;">
                 <i class="fa fa-balance-scale fa-lg"></i> Правозастосування</a>
         </div>
     </div>
 </div>
-<div class="container" id="body_work" style="margin-top:30px;">
-    <!--<img src="img/work6.png" class="center-block" style="max-width: 70%;">-->
-    <img src="img/excl.png" id="excl" class="center-block">
-    <div class="center-block">
-        <a class="center-block">Ведуться технічні роботи!</a>
-        <a class="center-block">Зайдіть пізніше.</a>
-    </div>
+<div class="container center-block" style="margin-top:30px;">
+   <!-- <img src="img/work5.png" class="center-block" style="max-width: 70%;">-->
+    <h1>Сторінка не знайдена!</h1>
+
 </div>
 <div class="container" id="ad-log"></div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
-<script src="js/jquery.cookie.js"></script>
-<script>
-    $(document).ready(function () {
-        var cookies = $.cookie();
-        for(var cookie in cookies) {
-            $.removeCookie(cookie);
-        }
-    });
-</script>
 </body>
 
 </html>

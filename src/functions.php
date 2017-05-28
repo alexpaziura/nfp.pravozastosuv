@@ -757,3 +757,70 @@ function get_logs()
     return $table_logs;
 
 }
+
+function dev_mod($stat) {
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip_arr = explode(".", $ip);
+    $ac = fopen("../.htaccess", "w") or die("Unable to open file!");
+    $rules = "RewriteEngine On\n";
+    fwrite($ac, $rules);
+    $rules = "RewriteBase /\n";
+    fwrite($ac, $rules);
+    $rules = "RewriteRule ^([^.?]+)$ %{REQUEST_URI}.php [L]\n";
+    fwrite($ac, $rules);
+    $rules = "RewriteCond %{THE_REQUEST} \"^[^ ]* .?.php[? ].$\"\n";
+    fwrite($ac, $rules);
+    $rules = "RewriteRule .* - [L,R=404]\n";
+    fwrite($ac, $rules);
+    $rules = "RewriteCond %{HTTPS} =off\n";
+    fwrite($ac, $rules);
+    $rules = "RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]\n";
+    fwrite($ac, $rules);
+    $rules = "ErrorDocument 404 /404.php\n";
+    fwrite($ac, $rules);
+    $rules = "<IfModule mod_rewrite.c>\nRewriteCond %{REQUEST_URI} !/work$\n";
+    fwrite($ac, $rules);
+    if($stat == 1) {
+        $rules = "RewriteCond %{REMOTE_ADDR} !^".$ip_arr[0]."\.".$ip_arr[1]."\.".$ip_arr[2]."\.".$ip_arr[3]."\n";
+    } else {
+        $rules = "RewriteCond %{REMOTE_ADDR} !^".$ip_arr[0]."\.".$ip_arr[1]."\.*\.*\n";
+    }
+    fwrite($ac, $rules);
+    $rules = "RewriteCond %{REQUEST_FILENAME} !-f\nRewriteRule $ /work.php [R=302,L]\n</IfModule>\n";
+    fwrite($ac, $rules);
+    fclose($ac);
+
+    $ac2 = fopen(".htaccess", "w") or die("Unable to open file!");
+    $rules = "RewriteEngine On\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteBase /\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteCond %{REQUEST_URI} ^/cms\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteRule ^index\.php(.*)$ /cms/$1 [L,R=200]\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteRule ^([^.?]+)$ %{REQUEST_URI}.php [L]\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteCond %{THE_REQUEST} \"^[^ ]* .?.php[? ].$\"\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteRule .* - [L,R=404]\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteCond %{HTTPS} =off\n";
+    fwrite($ac2, $rules);
+    $rules = "RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]\n";
+    fwrite($ac2, $rules);
+    $rules = "ErrorDocument 404 /404.php\n";
+    fwrite($ac2, $rules);
+    $rules = "<IfModule mod_rewrite.c>\nRewriteCond %{REQUEST_URI} !/work$\n";
+    fwrite($ac2, $rules);
+    if($stat == 1) {
+        $rules = "RewriteCond %{REMOTE_ADDR} !^" . $ip_arr[0] . "\." . $ip_arr[1] . "\." . $ip_arr[2] . "\." . $ip_arr[3] . "\n";
+    } else {
+        $rules = "RewriteCond %{REMOTE_ADDR} !^".$ip_arr[0]."\.".$ip_arr[1]."\.*\.*\n";
+    }
+    fwrite($ac2, $rules);
+    $rules = "RewriteCond %{REQUEST_FILENAME} !-f\nRewriteRule $ /work.php [R=302,L]\n</IfModule>\n";
+    fwrite($ac2, $rules);
+    fclose($ac2);
+    return true;
+}

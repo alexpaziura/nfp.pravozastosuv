@@ -1,5 +1,4 @@
 RewriteEngine On
-#RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [L]
 RewriteBase /
 RewriteCond %{REQUEST_URI} ^/cms
 RewriteRule ^index\.php(.*)$ /cms/$1 [L,R=200]
@@ -8,10 +7,10 @@ RewriteCond %{THE_REQUEST} "^[^ ]* .?.php[? ].$"
 RewriteRule .* - [L,R=404]
 RewriteCond %{HTTPS} =off
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
+ErrorDocument 404 /404.php
 <IfModule mod_rewrite.c>
-    # заглушка
-    RewriteCond %{REQUEST_URI} !/work.php$
-    RewriteCond %{REMOTE_ADDR} !^192\.168\.0\.*
-	RewriteCond %{REMOTE_ADDR} !^10\.10\.10\.21
-    RewriteRule $ /work.php [R=302,L]
+RewriteCond %{REQUEST_URI} !/work$
+RewriteCond %{REMOTE_ADDR} !^192\.168\.*\.*
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule $ /work.php [R=302,L]
 </IfModule>

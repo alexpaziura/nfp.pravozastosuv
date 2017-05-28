@@ -112,7 +112,7 @@ if(isset($_POST['add_row'])){
             <div class="alert alert-success alert-dismissable alert-fixed <?= $state_add_1 == 'success' ? '' : 'hidden' ?>"
                  id="success_add_1">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Запис успішно додано!</h4>
             </div>
@@ -123,7 +123,7 @@ if(isset($_POST['add_row'])){
             <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_add_1 == 'error' ? '' : 'hidden' ?>"
                  id="error_add_1">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Виникла помилка при додаванні запису!</h4>
             </div>
@@ -134,7 +134,7 @@ if(isset($_POST['add_row'])){
             <div class="alert alert-success alert-dismissable alert-fixed <?= $state_edit_1 == 'success' ? '' : 'hidden' ?>"
                  id="success_edit_1">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Запис успішно змінено!</h4>
             </div>
@@ -145,7 +145,7 @@ if(isset($_POST['add_row'])){
             <div class="alert alert-danger alert-dismissable alert-fixed <?= $state_edit_1 == 'error' ? '' : 'hidden' ?>"
                  id="error_edit_1">
                 <button type="button" class="close alert-close" data-dismiss="alert">
-                    <i class="fa fa-close"></i>
+                    <i class="fa fa-close fa-2x"></i>
                 </button>
                 <h4>Виникла помилка при редагуванні запису!</h4>
             </div>
@@ -188,10 +188,10 @@ if(isset($_POST['add_row'])){
                     <tr>
 
                         <th data-field="state" data-checkbox="true" data-events="clickCheck"></th>
-                        <th data-field="id_user" data-sortable="true" data-halign="center" data-align="center">
+                        <th data-field="id_type" data-sortable="true" data-halign="center" data-align="center">
                             id
                         </th>
-                        <th data-field="username" data-sortable="true" data-halign="center" data-align="center">
+                        <th data-field="name_type" data-sortable="true" data-halign="center" data-align="center">
                             Тип суб'єкта нагляду
                         </th>
                     </tr>
@@ -254,6 +254,57 @@ if(isset($_POST['add_row'])){
             </div>
             <div class="modal-footer" style="background-color: #d9d9d9;">
                 <button class="btn btn-primary center-block btn-labeled" name="add_row" type="submit" form="add-row">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                    Зберегти
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade container-fluid" id="modal_edit_row">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button class="close" type="button" data-dismiss="modal">
+                    <i class="fa fa-close fa-2x" style="color: red;"></i>
+                </button>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 class="modal-title">
+                            <i class="fa fa-pencil fa-lg" style="color: "></i>
+                            &nbsp;&nbsp;Редагувати запис</h2>
+                    </div>
+                    <div class="col-sm-5" style="margin-bottom: -20px">
+                        <div class="alert alert-danger hidden"
+                             id="wrong_fieldsE">
+                            <h4 style="margin-bottom: -5px;margin-top: -5px">Не заповнено поле!</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--cae8ca-->
+                <form id="edit-row" method="post" autocomplete="off">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-offset-3">
+                            <div class="form-group">
+                                <label for="type_subE">Тип суб'єкта нагляду</label>
+                                <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-font fa-lg"></i>
+                                            </span>
+                                    <input name="type_subE" type="text" class="form-control" id="type_subE"
+                                           maxlength="255">
+                                </div>
+                                <input type="hidden" name="id_type_fu" id="id_type_fu" value="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="background-color: #d9d9d9;">
+                <button class="btn btn-primary center-block btn-labeled" name="edit_row" type="submit" form="edit-row">
                     <span class="btn-label">
                         <i class="fa fa-floppy-o fa-lg"></i>
                     </span>

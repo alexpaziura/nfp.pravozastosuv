@@ -13,7 +13,6 @@
         session_destroy();
         header('Location:login');
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -37,6 +36,21 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="css/font-awesome.css" rel="stylesheet">
+    <style>
+        h2 {
+            /*color: #FFDD1B;*/
+            /*color: #228DFF;*/
+            color: #0e437e;
+            font-family: Appetite;
+            font-size: 3em;
+            text-align: center;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e;
+        }
+        .btn-primary {
+            background: #007299;
+            box-shadow: 0 0 10px #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -64,7 +78,7 @@
 </div>
 
 <div class="container">
-    <h2 class="text-center">Початкова сторінка</h2>
+    <h2>Початкова сторінка <?=apache_getenv("DEV_MODE")?></h2>
     <a href="table1" class="btn btn-group-justified btn-primary btn-lg">Інспекційна діяльність</a>
     <br>
     <a href="table2" class="btn btn-group-justified btn-primary btn-lg">Інші види діяльності</a>

@@ -84,6 +84,7 @@ $correct_data = true;
         </div>
     </div>
 </div>
+<?=$_ENV['construction']?>
 <div class="container" id="ad-log"></div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.1.1.js"></script>

@@ -3,6 +3,10 @@ body {
   background: url("/img/back.jpg") no-repeat fixed center center;
   background-size: cover;
 }
+@font-face {
+  font-family: Appetite;
+  src: url("/fonts/appetite.otf");
+}
 .modal-header-warning {
   color:#fff;
   padding:9px 15px;
@@ -178,4 +182,7 @@ legend {
 .input-group-addon i {
   /*color: #0e437e;*/
   color: #fff;
+}
+i.fa-close {
+  color: red;
 }

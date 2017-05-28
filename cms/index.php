@@ -1,31 +1,46 @@
 <?php
-    session_start();
-    require_once("../src/database.php");
-    require_once("../src/functions.php");
-    if(!isset($_SESSION['user'])){
-        header('Location: ../login');
-    } else if ($_SESSION['group']!='ДеРЗІТ') {
-        header('Location:/');
+session_start();
+require_once("../src/database.php");
+require_once("../src/functions.php");
+if (!isset($_SESSION['user'])) {
+    header('Location: ../login');
+} else if ($_SESSION['group'] != 'ДеРЗІТ') {
+    header('Location:/');
+}
+if ((isset($_POST['log_out'])) || (!isUserActive())) {
+    writeLog('AUTH', 'LOGOUT', 1);
+    unset($_SESSION['user']);
+    unset($_SESSION['group']);
+    unset($_SESSION['full_name']);
+    unset($_SESSION['action_time']);
+    session_destroy();
+    header('Location: ../login');
+}
+if (isset($_POST['relogin'])) {
+    writeLog('AUTH', 'LOGOUT', 1);
+    unset($_SESSION['user']);
+    unset($_SESSION['group']);
+    unset($_SESSION['full_name']);
+    unset($_SESSION['action_time']);
+    session_destroy();
+    header('Location: ../login');
+}
+if (isset($_POST['act_dev_mode'])) {
+    if (dev_mod(1)) {
+        writeLog('DEV_MODE', 'ENABLED', 1);
+    } else {
+        writeLog('DEV_MODE', 'ENABLED', 0);
     }
-    if ((isset($_POST['log_out']))||(!isUserActive())) {
-        writeLog('AUTH','LOGOUT',1);
-        unset($_SESSION['user']);
-        unset($_SESSION['group']);
-        unset($_SESSION['full_name']);
-        unset($_SESSION['action_time']);
-        session_destroy();
-        header('Location: ../login');
+    $_SESSION['action_time'] = microtime(true);
+}
+if (isset($_POST['off_dev_mode'])) {
+    if (dev_mod(0)) {
+        writeLog('DEV_MODE', 'DISABLED', 1);
+    } else {
+        writeLog('DEV_MODE', 'DISABLED', 0);
     }
-    if (isset($_POST['relogin'])) {
-        writeLog('AUTH','LOGOUT',1);
-        unset($_SESSION['user']);
-        unset($_SESSION['group']);
-        unset($_SESSION['full_name']);
-        unset($_SESSION['action_time']);
-        session_destroy();
-        header('Location: ../login');
-    }
-
+    $_SESSION['action_time'] = microtime(true);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -63,7 +78,8 @@
         <ul class="nav navbar-nav">
             <li><a href="../table1">Інспеційна діяльність</a></li>
             <li><a href="../table2">Інші види діяльності</a></li>
-            <li class="active <?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="/cms/">Адміністрування</a></li>
+            <li class="active <?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="/cms/">Адміністрування</a>
+            </li>
         </ul>
         <form method="post" class="navbar-form navbar-right">
             <div class="form-group">
@@ -72,7 +88,7 @@
                 </button>
             </div>
         </form>
-        <p class="navbar-text navbar-right">Ви ввійши, як <?=$_SESSION['full_name']?>!</p>
+        <p class="navbar-text navbar-right">Ви ввійши, як <?= $_SESSION['full_name'] ?>!</p>
 
     </div>
     <hr id="nav-divider">
@@ -80,30 +96,88 @@
         <ul class="nav navbar-nav">
             <li><a href="users"><i class="fa fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Користувачі</a></li>
             <li class="dropdown">
-                <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span class="caret"></span></a>
+                <a href="#" data-toggle="dropdown"><i class="fa fa-book fa-lg"></i>&nbsp;&nbsp;&nbsp;Довідники <span
+                            class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="tab_type_fu">Тип суб'єкта нагляду</a></li>
                     <li><a href="#tab3primary" data-toggle="tab">Default 5</a></li>
                 </ul>
             </li>
             <li><a href="logs"><i class="fa fa-cog fa-lg"></i>&nbsp;&nbsp;&nbsp;Логи</a></li>
-            <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a></li>
+            <li><a href="#tabSQL" data-toggle="tab"><i class="fa fa-play fa-lg"></i>&nbsp;&nbsp;&nbsp;Виконати SQL</a>
+            </li>
         </ul>
     </div>
 
 </div>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="alert alert-danger"
+                 id="error_add"
+                 style="width: 100%;">
+                <h3 style="margin-top: 0px;font-weight: bold;"><i class="fa fa-code fa-lg"></i> Режим розробки!</h3>
+                <div class="row hidden" id="confirm">
+                    <div class="container" style="width: 100%; margin-top: 0px;">
+                        <h4 style="word-wrap: break-word; white-space: normal;">В разі ввімкнення режиму розробки доступ до ресурсу буде здійснюватись тільки з даної IP-адреси (<?=$_SERVER['REMOTE_ADDR']?>)!</h4>
+                        <div class="btn-group">
+                            <form method="post">
+                                <button class="btn btn-danger btn-labeled" type="submit" name="act_dev_mode" id="act_dev_mode">
+                                    <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Підтвердити
+                                </button>
+                            </form>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-default btn-labeled" type="button" name="cancel_dev_mode" id="cancel_dev_mode">
+                                <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Відміна
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row hidden" id="confirm_off">
+                    <div class="container" style="width: 100%;">
+                        <h4 style="word-wrap: break-word; white-space: normal; margin-top: 0;">В разі вимкнення режиму розробки доступ до ресурсу буде здійснюватись з будь-якої локальної IP-адреси!</h4>
+                        <div class="btn-group">
+                            <form method="post">
+                                <button class="btn btn-success btn-labeled" type="submit" name="off_dev_mode" id="off_dev_mode">
+                                    <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Підтвердити
+                                </button>
+                            </form>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-default btn-labeled" type="button" name="cancel_off_dev_mode" id="cancel_off_dev_mode">
+                                <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Відміна
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-danger btn-labeled" type="button" name="pre_dev_mode" id="pre_dev_mode">
+                        <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Активувати режим розробки
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-success btn-labeled" type="button" name="del_dev_mode" id="del_dev_mode">
+                        <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Вимкнути режим розробки
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>
 <div class="modal fade" id="modal-timer" style="margin-top: 15%;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-header-danger">
-                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна авторизація!</h2>
+                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна
+                    авторизація!</h2>
             </div>
             <div class="modal-body" style="background-color: #d9d9d9;"> <!--f1c2c0-->
                 <form id="form-relogin" method="post" autocomplete="off">
-                    <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit" form="form-relogin">
+                    <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit"
+                            form="form-relogin">
                     <span class="btn-label">
                         <i class="fa fa-floppy-o fa-lg"></i>
                     </span>
@@ -126,38 +200,49 @@
 <script src="../extensions/export/bootstrap-table-export.js"></script>
 <script src="../js/tableExport.js"></script>
 <script>
-    $(function() {
+    $(function () {
         $('[data-toggle="tooltip"]').tooltip();
         $('[data-toggle="popover"]').popover();
         checkTime();
-        setInterval(function (){
+        setInterval(function () {
             checkTime();
         }, 60000);
     });
     // Add slideDown animation to Bootstrap dropdown when expanding.
-    $('.dropdown').on('show.bs.dropdown', function() {
+    $('.dropdown').on('show.bs.dropdown', function () {
         $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-    }).on('hide.bs.dropdown', function() {
+    }).on('hide.bs.dropdown', function () {
         $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
     });
     function checkTime() {
         var action_time = <?=$_SESSION['action_time']?>;
         var d = new Date();
-        var sec = d.getTime()/1000;
+        var sec = d.getTime() / 1000;
         var diff = action_time - sec;
         if (diff < -3600) {
             $("#modal-timer").modal({backdrop: "static"});
         }
     }
-</script>
-<script>
-    setTimeout(function () {
-        $('#success_add').alert("close");
-        $('#error_add').alert("close");
-        $('#success_edit').alert("close");
-        $('#error_edit').alert("close");
-    }, 7000);
-
+    $('#pre_dev_mode').on('click', function () {
+        $(this).addClass('hidden');
+        $('#del_dev_mode').addClass('hidden');
+        $('#confirm').removeClass('hidden');
+    });
+    $('#cancel_dev_mode').on('click', function () {
+        $('#confirm').addClass('hidden');
+        $('#pre_dev_mode').removeClass('hidden');
+        $('#del_dev_mode').removeClass('hidden');
+    });
+    $('#del_dev_mode').on('click', function () {
+        $(this).addClass('hidden');
+        $('#pre_dev_mode').addClass('hidden');
+        $('#confirm_off').removeClass('hidden');
+    });
+    $('#cancel_off_dev_mode').on('click', function () {
+        $('#confirm_off').addClass('hidden');
+        $('#pre_dev_mode').removeClass('hidden');
+        $('#del_dev_mode').removeClass('hidden');
+    });
 </script>
 </body>
 
