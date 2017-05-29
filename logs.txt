@@ -1,1 +1,1 @@
-Error: UPDATE inspekt SET date_change = 1495703506, vid_perevirki=1, pidstava_pozaplan=''1; 2; '' WHERE id_inspekt=3;
+Error: UPDATE inspekt SET date_change = 1496056437, user = 1, n_nak_zah=gfgf WHERE id_inspekt=50;

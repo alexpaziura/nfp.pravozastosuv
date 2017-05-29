@@ -104,7 +104,7 @@ $(document).ready(function () {
         var noError_ed = true;
         var val = $.trim($('#type_subE').val());
         if (val === '') {
-            $alert_add.removeClass('hidden');
+            $alert_ed.removeClass('hidden');
             $('#type_subE').addClass('required_field');
             noError_ed = false;
         }

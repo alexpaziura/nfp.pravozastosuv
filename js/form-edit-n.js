@@ -148,11 +148,6 @@ $(document).ready(function () {
         var selectedRowJS = JSON.stringify(selectedRow);
         var rowTable = [];
 
-        /*$.post("requests.php", { id_inst_row: selectedRow.id_inspekt })
-            .done(function(data) {
-                alert("Data Loaded: " +  data);
-                rowTable = $.parseJSON(data);
-            });*/
         $('#id_inspekt').val(selectedRow.id_inspekt);
         $nzp_fieldE.val(selectedRow.nzp);
         $short_name_fuE.val(selectedRow.short_name_fu);
@@ -197,8 +192,17 @@ $(document).ready(function () {
         $("#d_end_perevirkiDE").datepicker("update", selectedRow.d_end_perevirki);
         $("#d_start_dialnistDE").datepicker("update", selectedRow.d_start_dialnist);
         $("#d_end_dialnistDE").datepicker("update", selectedRow.d_end_dialnist);
+        $("#d_nak_zahDE").datepicker("update", selectedRow.d_nak_zah);
+        $('#n_nak_zahE').val(selectedRow.n_nak_zah);
+        $("#d_napr_provedDE").datepicker("update", selectedRow.d_napr_proved);
+        $('#n_napr_provedE').val(selectedRow.n_napr_proved);
 
 
+    });
+    edit_form_n.find('.input-nomer').on('keydown', function (e) {
+        if ( (e.keyCode === 32) || ( (e.shiftKey === true)&&(e.keyCode === 51) )) {
+            return false;
+        }
     });
     $vid_perevirkiSE.on('change', function () {
         if ($(this).val() === '3') {

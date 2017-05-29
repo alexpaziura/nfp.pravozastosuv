@@ -37,10 +37,6 @@ if (isset($_POST['edit_nag'])) {
         $state_edit = 'error';
     }
     $_SESSION['action_time'] = microtime(true);
-    //echo '<pre>';
-    //var_dump($_POST);
-    //echo '</pre>';
-    //unset($_POST);
 }
 ?>
 <!DOCTYPE html>
@@ -87,7 +83,6 @@ if (isset($_POST['edit_nag'])) {
 <script src="./js/bootstrap-datepicker.uk.min.js" type="text/javascript"></script>
 <script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
-<!--<script type="text/javascript" src="js/jquery.selectBoxIt.js"></script>-->
 <script>
     $(document).ready(function () {
         $("#editBtn").click(function () {
@@ -110,17 +105,6 @@ if (isset($_POST['edit_nag'])) {
     });
 
 </script>
-
-
-<!--<script type="text/javascript">
-    $(document).ready(function() {
-        $(function(){
-            //2. Получить элемент, к которому необходимо добавить маску
-            $("#d_start_perevirki").mask("99.99.9999", {placeholder: "дд.мм.рррр" });
-            $("#d_end_perevirki").mask("99.99.9999", {placeholder: "дд.мм.рррр" });
-        });
-    });
-</script>-->
 
 <div class="navbar navbar-custom navbar-static-top">
     <div class="container">
@@ -864,6 +848,27 @@ echo "Difference: ".($time2-$time1);*/
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-timer" style="margin-top: 15%;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна
+                    авторизація!</h2>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--f1c2c0-->
+                <form id="form-relogin" method="post" autocomplete="off">
+                    <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit"
+                            form="form-relogin">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                        Авторизуватись
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <?php require_once 'src/modal_add_naglyad.php'; ?>
 <script src="js/form-add.js"></script>
 
@@ -876,24 +881,6 @@ echo "Difference: ".($time2-$time1);*/
     $('#table').bootstrapTable('resetView');
     var height_table = $('body').height() - 80;
     $("#table").attr("data-height", height_table.toString());
-    /*var clickCheck = {'click input[type="checkbox"]': function (e, value, row, index) {
-        var classColor = 'success';
-        if($('tr[data-index='.index."]").hasClass('selected')) {
-            $('tr[data-index='.index."]").removeClass('selected');
-            $('tr[data-index='.index."]").removeClass(classColor);
-        } else {
-            $('tr[data-index='.index."]").addClass('selected');
-            $('tr[data-index='.index."]").addClass(classColor);
-        }
-    }};*/
-    /*$("input[type='checkbox']").change(function() {
-        alert("click!");
-        if($(this).is(":checked")) {
-            $(this).parents("tr").addClass(classColor);
-        } else {
-            $(this).parents("tr").removeClass(classColor);
-        }
-    });*/
     var classColor = 'success';
     $('.akt_zu').popover();
     $("#table")
@@ -920,12 +907,21 @@ echo "Difference: ".($time2-$time1);*/
         .on('uncheck-all.bs.table', function (e, $element) {
             $($element).parent().parent().removeClass(classColor);
         });
-function findSelected() {
-
-    var select = $(' tr.selected');
-    alert(JSON.stringify(select));
-
-}
+    function checkTime() {
+        /*var action_time = <?=$_SESSION['action_time']?>;
+        var d = new Date();
+        var sec = d.getTime() / 1000;
+        var diff = action_time - sec;
+        if (diff < -3600) {
+            $("#modal-timer").modal({backdrop: "static"});
+        }*/
+    }
+    $(function () {
+        checkTime();
+        setInterval(function () {
+            checkTime();
+        }, 60000);
+    });
 </script>
 <script>
     setTimeout(function () {

@@ -298,6 +298,15 @@ function edit_nag()
         }
         $new_val['pidstava_pozaplanS'] = $new_val['pidstava_pozaplanS'] . "'";
     }
+    $new_val['d_start_perevirki'] = strtotime($_POST['d_start_perevirkiE']);
+    $new_val['d_end_perevirki'] = strtotime($_POST['d_end_perevirkiE']);
+    $new_val['d_start_dialnist'] = strtotime($_POST['d_start_dialnistE']);
+    $new_val['d_end_dialnist'] = strtotime($_POST['d_end_dialnistE']);
+    $new_val['d_nak_zah'] = strtotime($_POST['d_nak_zahE']);
+    $new_val['n_nak_zah'] = full_trim(htmlspecialchars($_POST['n_nak_zahE'], ENT_QUOTES));
+    $new_val['d_napr_proved'] = strtotime($_POST['d_napr_provedE']);
+    $new_val['n_napr_proved'] = full_trim(htmlspecialchars($_POST['n_napr_provedE'], ENT_QUOTES));
+
 
     $diffs = array();
     $diffs['nzp'] = $new_val['nzp'] != $old_val['nzp']? $new_val['nzp'] : "" ;
@@ -307,6 +316,24 @@ function edit_nag()
     $diffs['type_fu'] = $new_val['type_fo'] != $old_val['type_fu']? $new_val['type_fo'] : "" ;
     $diffs['vid_perevirki'] = $new_val['vid_perevirki'] != $old_val['vid_perevirki']? $new_val['vid_perevirki'] : "" ;
     $diffs['pidstava_pozaplan'] = $new_val['pidstava_pozaplanS'] != "'".$old_val['pidstava_pozaplan']."'"? $new_val['pidstava_pozaplanS'] : "" ;
+    $diffs['d_start_perevirki'] = $new_val['d_start_perevirki'] != $old_val['d_start_perevirki']? $new_val['d_start_perevirki'] : "" ;
+    $diffs['d_end_perevirki'] = $new_val['d_end_perevirki'] != $old_val['d_end_perevirki']? $new_val['d_end_perevirki'] : "" ;
+    $diffs['d_start_dialnist'] = $new_val['d_start_dialnist'] != $old_val['d_start_dialnist']? $new_val['d_start_dialnist'] : "" ;
+    $diffs['d_end_dialnist'] = $new_val['d_end_dialnist'] != $old_val['d_end_dialnist']? $new_val['d_end_dialnist'] : "" ;
+    $diffs['d_nak_zah'] = $new_val['d_nak_zah'] != $old_val['d_nak_zah']? $new_val['d_nak_zah'] : "" ;
+    $old_val['n_nak_zah'] = substr($old_val['n_nak_zah'],1);
+    if (($new_val['n_nak_zah'] != $old_val['n_nak_zah'])&&($new_val['n_nak_zah'] != "")) {
+        $diffs['n_nak_zah'] = "'№".$new_val['n_nak_zah']."'";
+    } else {
+        $diffs['n_nak_zah'] = "";
+    }
+    $diffs['d_napr_proved'] = $new_val['d_napr_proved'] != $old_val['d_napr_proved']? $new_val['d_napr_proved'] : "" ;
+    $old_val['n_napr_proved'] = substr($old_val['n_napr_proved'],1);
+    if (($new_val['n_napr_proved'] != $old_val['n_napr_proved'])&&($new_val['n_napr_proved'] != "")) {
+        $diffs['n_napr_proved'] = "'№".$new_val['n_napr_proved']."'";
+    } else {
+        $diffs['n_napr_proved'] = "";
+    }
 
 
     $isNoChanged = true;
@@ -783,7 +810,8 @@ function dev_mod($stat) {
     if($stat == 1) {
         $rules = "RewriteCond %{REMOTE_ADDR} !^".$ip_arr[0]."\.".$ip_arr[1]."\.".$ip_arr[2]."\.".$ip_arr[3]."\n";
     } else {
-        $rules = "RewriteCond %{REMOTE_ADDR} !^".$ip_arr[0]."\.".$ip_arr[1]."\.*\.*\n";
+        $rules = "RewriteCond %{REMOTE_ADDR} !^192\.168\.0\.*\n";
+        $rules .= "RewriteCond %{REMOTE_ADDR} !^10\.10\.*\.*\n";
     }
     fwrite($ac, $rules);
     $rules = "RewriteCond %{REQUEST_FILENAME} !-f\nRewriteRule $ /work.php [R=302,L]\n</IfModule>\n";
@@ -816,7 +844,8 @@ function dev_mod($stat) {
     if($stat == 1) {
         $rules = "RewriteCond %{REMOTE_ADDR} !^" . $ip_arr[0] . "\." . $ip_arr[1] . "\." . $ip_arr[2] . "\." . $ip_arr[3] . "\n";
     } else {
-        $rules = "RewriteCond %{REMOTE_ADDR} !^".$ip_arr[0]."\.".$ip_arr[1]."\.*\.*\n";
+        $rules = "RewriteCond %{REMOTE_ADDR} !^192\.168\.0\.*\n";
+        $rules .= "RewriteCond %{REMOTE_ADDR} !^10\.10\.*\.*\n";
     }
     fwrite($ac2, $rules);
     $rules = "RewriteCond %{REQUEST_FILENAME} !-f\nRewriteRule $ /work.php [R=302,L]\n</IfModule>\n";

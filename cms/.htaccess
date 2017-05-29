@@ -10,7 +10,7 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
 ErrorDocument 404 /404.php
 <IfModule mod_rewrite.c>
 RewriteCond %{REQUEST_URI} !/work$
-RewriteCond %{REMOTE_ADDR} !^192\.168\.*\.*
+RewriteCond %{REMOTE_ADDR} !^10\.10\.10\.21
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule $ /work.php [R=302,L]
 </IfModule>

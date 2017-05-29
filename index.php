@@ -37,7 +37,7 @@
     <![endif]-->
     <link href="css/font-awesome.css" rel="stylesheet">
     <style>
-        h2 {
+        #telo h2 {
             /*color: #FFDD1B;*/
             /*color: #228DFF;*/
             color: #0e437e;
@@ -46,7 +46,7 @@
             text-align: center;
             text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e;
         }
-        .btn-primary {
+        #telo .btn-primary {
             background: #007299;
             box-shadow: 0 0 10px #fff;
         }
@@ -77,17 +77,54 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" id="telo">
     <h2>Початкова сторінка <?=apache_getenv("DEV_MODE")?></h2>
     <a href="table1" class="btn btn-group-justified btn-primary btn-lg">Інспекційна діяльність</a>
     <br>
     <a href="table2" class="btn btn-group-justified btn-primary btn-lg">Інші види діяльності</a>
 </div>
+<div class="modal fade" id="modal-timer" style="margin-top: 15%;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <h2 class="modal-title"><i class="fa fa-refresh fa-spin"></i> &nbsp;&nbsp;Не обхідна повторна
+                    авторизація!</h2>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;"> <!--f1c2c0-->
+                <form id="form-relogin" method="post" autocomplete="off">
+                    <button class="btn btn-danger center-block btn-labeled" name="relogin" type="submit"
+                            form="form-relogin">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                        Авторизуватись
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery-2.1.1.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.js"></script>
-
+<script>
+    function checkTime() {
+        var action_time = <?=$_SESSION['action_time']?>;
+        var d = new Date();
+        var sec = d.getTime() / 1000;
+        var diff = action_time - sec;
+        if (diff < -3600) {
+            $("#modal-timer").modal({backdrop: "static"});
+        }
+    }
+    $(function () {
+        checkTime();
+        setInterval(function () {
+            checkTime();
+        }, 60000);
+    });
+</script>
 
 </body>
 
