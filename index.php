@@ -13,6 +13,15 @@
         session_destroy();
         header('Location:login');
     }
+if (isset($_POST['relogin'])) {
+    writeLog('AUTH', 'LOGOUT', 1);
+    unset($_SESSION['user']);
+    unset($_SESSION['group']);
+    unset($_SESSION['full_name']);
+    unset($_SESSION['action_time']);
+    session_destroy();
+    header('Location: ../login');
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -50,6 +59,34 @@
             background: #007299;
             box-shadow: 0 0 10px #fff;
         }
+        .navbar-img {padding:5px 6px !important;}
+        .navbar-img img {width:40px;}
+        #log_out {
+            color: #fbfdff;
+            text-align: left;
+            margin: 0;
+            text-decoration: none;
+            width: 100%;
+            height: ;
+            background-color: #d9534f;
+        }
+        #log_out:hover,
+        #log_out:focus {
+            color: #fbfdff;
+            text-decoration: none;
+            background-color: #a1c9f7;
+        }
+        .navbar-nav a {
+            width: 100%;
+            color: #fbfdff;
+            text-decoration: none;
+        }
+        .navbar-nav a:hover,
+        .navbar-nav a:focus {
+            text-decoration: none;
+            background-color: #a1c9f7;
+            color: #f2f3f4;
+        }
     </style>
 </head>
 
@@ -66,22 +103,46 @@
             <li class="<?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="cms/">Адміністрування</a></li>
         </ul>
 
-        <form method="post" class="navbar-form navbar-right">
+        <!--<form method="post" class="navbar-form navbar-right">
             <div class="form-group">
                 <button class="btn btn-danger btn-labeled" type="submit" name="log_out" id="log_out">
                     <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Вийти
                 </button>
             </div>
         </form>
-        <p class="navbar-text navbar-right">Ви ввійши, як <?=$_SESSION['full_name']?>!</p>
+        <p class="navbar-text navbar-right">Ви ввійши, як <?/*=$_SESSION['full_name']*/?>!</p>-->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle navbar-img" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="img/1496414865_user.png" alt="Profile Image" style="margin-right: 5px;"/>
+                    <?=$_SESSION['full_name']?> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <a href="#" class="btn btn-link dropdown-item" style=" text-align: left;">
+                        <i class="fa fa-cog fa-lg"></i> Налаштування
+                    </a>
+                    <div class="divider" style="margin-top: 0;  margin-bottom: 5px;"></div>
+                    <form method="post" class="dropdown-item">
+                        <button class="btn btn-link" type="submit" name="log_out" id="log_out">
+                            <i class="fa fa-sign-out fa-lg"></i> Вийти
+                        </button>
+                    </form>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
 
 <div class="container" id="telo">
     <h2>Початкова сторінка <?=apache_getenv("DEV_MODE")?></h2>
-    <a href="table1" class="btn btn-group-justified btn-primary btn-lg">Інспекційна діяльність</a>
-    <br>
-    <a href="table2" class="btn btn-group-justified btn-primary btn-lg">Інші види діяльності</a>
+    <div class="panel panel-primary">
+        <div class="panel-body" style="background-color: #d9d9d9">
+            <a href="table1" class="btn btn-group-justified btn-primary btn-lg">Інспекційна діяльність</a>
+            <br>
+            <a href="table2" class="btn btn-group-justified btn-primary btn-lg">Інші види діяльності</a>
+        </div>
+    </div>
+
 </div>
 <div class="modal fade" id="modal-timer" style="margin-top: 15%;">
     <div class="modal-dialog">

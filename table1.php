@@ -38,6 +38,15 @@ if (isset($_POST['edit_nag'])) {
     }
     $_SESSION['action_time'] = microtime(true);
 }
+if (isset($_POST['relogin'])) {
+    writeLog('AUTH', 'LOGOUT', 1);
+    unset($_SESSION['user']);
+    unset($_SESSION['group']);
+    unset($_SESSION['full_name']);
+    unset($_SESSION['action_time']);
+    session_destroy();
+    header('Location: ../login');
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">

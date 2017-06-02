@@ -57,10 +57,10 @@ $correct_data = true;
 </div>
 <div class="container" style="margin-top:30px">
     <div class="col-md-4 col-md-offset-4">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading"><h3 class="panel-title"><strong>Авторизація</strong></h3></div>
 
-            <div class="panel-body">
+            <div class="panel-body" style="background-color: #d9d9d9;">
                 <form id="form-login" method="post" autocomplete="off">
 
                     <div class="alert alert-danger <?=$correct_data?'hidden':''?>" id="wrong_field">
@@ -112,7 +112,7 @@ $correct_data = true;
     $('#username').on('keyup', function() {
         var $user_field  = $(this);
         var username = $.trim($user_field.val());
-        var regex = /^[a-zA-Z][a-zA-Z0-9- \.]{1,20}$/;
+        var regex = /^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/;
         if ( (username === '') || ( !regex.test( $user_field.val() ) ) ) {
             $user_field.removeClass('accepted_field').addClass('required_field');
         } else {

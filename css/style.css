@@ -1,7 +1,8 @@
 body {
   /*background-color: #a1c9f7;*/
-  background: url("/img/back.jpg") no-repeat fixed center center;
-  background-size: cover;
+  background-color: #9B806B;
+/*  background: url("/img/back.jpg") no-repeat fixed center center;
+  background-size: cover;*/
 }
 @font-face {
   font-family: Appetite;
@@ -177,7 +178,8 @@ legend {
   display: none;
 }
 .input-group-addon {
-  background-color: #428BCA;
+  /*background-color: #428BCA;*/
+  background-color: #337AB7;
 }
 .input-group-addon i {
   /*color: #0e437e;*/
