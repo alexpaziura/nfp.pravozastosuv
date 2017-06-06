@@ -54,6 +54,36 @@ if(isset($_POST['add_row'])){
     <link rel="stylesheet" href="../css/jasny-bootstrap.css">
     <link rel="stylesheet" href="../css/bootstrap-table.css">
     <link rel="stylesheet" href="../css/table-fixed-header.css">
+    <style>
+        .navbar-img {padding:5px 6px !important;}
+        .navbar-img img {width:40px;}
+        #log_out {
+            color: #fbfdff;
+            text-align: left;
+            margin: 0;
+            text-decoration: none;
+            width: 100%;
+            height: ;
+            background-color: #d9534f;
+        }
+        #log_out:hover,
+        #log_out:focus {
+            color: #fbfdff;
+            text-decoration: none;
+            background-color: #a1c9f7;
+        }
+        .navbar-nav a {
+            width: 100%;
+            color: #fbfdff;
+            text-decoration: none;
+        }
+        .navbar-nav a:hover,
+        .navbar-nav a:focus {
+            text-decoration: none;
+            background-color: #a1c9f7;
+            color: #f2f3f4;
+        }
+    </style>
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -75,14 +105,25 @@ if(isset($_POST['add_row'])){
             <li class="active <?= $_SESSION['group'] == 'ДеРЗІТ' ? '' : 'hidden' ?>"><a href="/cms/">Адміністрування</a>
             </li>
         </ul>
-        <form method="post" class="navbar-form navbar-right">
-            <div class="form-group">
-                <button class="btn btn-danger btn-labeled" type="submit" name="log_out" id="log_out">
-                    <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Вийти
-                </button>
-            </div>
-        </form>
-        <p class="navbar-text navbar-right">Ви ввійши, як <?= $_SESSION['full_name'] ?>!</p>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle navbar-img" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="../img/user2.png" alt="Profile Image" style="margin-right: 5px;"/>
+                    <?=$_SESSION['full_name']?> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <a href="../profile" class="btn btn-link dropdown-item" style=" text-align: left;">
+                        <i class="fa fa-cog fa-lg"></i> Налаштування
+                    </a>
+                    <div class="divider" style="margin-top: 0;  margin-bottom: 5px;"></div>
+                    <form method="post" class="dropdown-item">
+                        <button class="btn btn-link" type="submit" name="log_out" id="log_out">
+                            <i class="fa fa-sign-out fa-lg"></i> Вийти
+                        </button>
+                    </form>
+                </ul>
+            </li>
+        </ul>
 
     </div>
     <hr id="nav-divider">
@@ -151,31 +192,14 @@ if(isset($_POST['add_row'])){
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: -20px;">
-        <div class="container">
-            <div id="toolbar_1" class="btn-toolbar">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-labeled add" id="add_row">
-                        <span class="btn-label"><i class="fa fa-plus fa-lg"></i></span>Додати
-                    </button>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-warning btn-labeled edit" id="edit_row">
-                        <span class="btn-label"><i class="fa fa-pencil fa-lg"></i></span>Редагувати
-                    </button>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-danger btn-labeled" id="delete_row">
-                        <span class="btn-label"><i class="fa fa-trash fa-lg"></i></span>Видалити
-                    </button>
-                </div>
-            </div>
-            <div class="center-block">
-                <table
-                        data-toggle="table"
+    <div class="row" style="margin-top: -20px;" id="cont_table">
+
+              <!--  <table
+
                         id="table_type_fu"
+
                         class="table table-striped table-bordered table-fixed-header table-condensed"
-                        data-sort-name="id_user"
+                        data-sort-name="id_type"
                         data-sort-order="asc"
                         data-toolbar="#toolbar_1"
                         data-search="true"
@@ -197,20 +221,20 @@ if(isset($_POST['add_row'])){
                     </tr>
                     </thead>
                     <tbody>
-                    <?php
-                    $table_type_fu = get_dic('dic_type_fu');
+<!--                    <?php
+/*                    $table_type_fu = get_dic('dic_type_fu');
                     foreach ($table_type_fu as $row):
-                        if ($row['visible'] == '0') continue; ?>
+                        if ($row['visible'] == '0') continue; */?>
                         <tr>
                             <td></td>
-                            <td><?= $row['id_type_fu'] ?></td>
-                            <td><?= $row['name_type_fu'] ?></td>
+                            <td><?/*= $row['id_type_fu'] */?></td>
+                            <td><?/*= $row['name_type_fu'] */?></td>
                         </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    --><?php /*endforeach; */?>
+                    
+                    <!--</tbody>
+                </table>-->
+
     </div>
 </div>
 <div class="modal fade container-fluid" id="modal_add_row">
@@ -360,6 +384,21 @@ if(isset($_POST['add_row'])){
         </div>
     </div>
 </div>
+<div class="modal fade" id="modal-progress">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <h2 class="modal-title"><i class="fa fa-download"></i> &nbsp;&nbsp;Завантаження данних</h2>
+            </div>
+            <div class="modal-body" style="background-color: #d9d9d9;">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-primary progress-bar-striped active"
+                         style="width:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -368,7 +407,7 @@ if(isset($_POST['add_row'])){
 <script src="../js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
 <script src="../js/table-fixed-header.js" type="text/javascript"></script>
 <script src="../js/jasny-bootstrap.js" type="text/javascript"></script>
-<script src="../js/tabs/tab_type_fu.js" type="text/javascript"></script>
+
 <script src="../extensions/export/bootstrap-table-export.js"></script>
 <script src="../js/tableExport.js"></script>
 <script>
@@ -379,6 +418,7 @@ if(isset($_POST['add_row'])){
         setInterval(function () {
             checkTime();
         }, 60000);
+        loadData();
     });
     // Add slideDown animation to Bootstrap dropdown when expanding.
     $('.dropdown').on('show.bs.dropdown', function () {
@@ -394,6 +434,38 @@ if(isset($_POST['add_row'])){
         if (diff < -3600) {
             $("#modal-timer").modal({backdrop: "static"});
         }
+    }
+    function loadData() {
+        $("#modal-progress").modal({backdrop: "static"});
+        //$("tbody").html("");
+        $.ajax({
+            type:'POST',
+            url:'../src/req.php',
+            data: "table=type_fu",
+            dataType: 'html',
+            success:function(mydata){
+                //$('tbody').html(html);
+/*                $("#modal-progress").modal('hide');
+                alert(mydata);
+                var js = $.parseJSON(mydata);
+                $("#table_type_fu").bootstrapTable({
+                    data: mydata
+                });
+                $("#table_type_fu").bootstrapTable('refresh');*/
+                $('#cont_table').html(mydata);
+                $("#table_type_fu").bootstrapTable();
+                $("#modal-progress").modal('hide');
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+        /*$('#table_type_fu').bootstrapTable({
+            method: 'post',
+            url : "../requests.php?table=type_fu",
+
+            cache: false
+        });*/
     }
 </script>
 <script>

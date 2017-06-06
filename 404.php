@@ -21,41 +21,14 @@
     <![endif]-->
     <link href="css/font-awesome.css" rel="stylesheet">
     <style>
-        h1 {
+        h1,h2 {
             /*color: #FFDD1B;*/
             /*color: #228DFF;*/
-            color: #0e437e;
+            color: #fff;
             font-family: Appetite;
-            font-size: 5em;
+            font-size: 3em;
             text-align: center;
             text-decoration: none;
-            -webkit-animation: neon2 1.5s ease-in-out infinite alternate;
-            -moz-animation: neon2 1.5s ease-in-out infinite alternate;
-            animation: neon2 1.5s ease-in-out infinite alternate;
-        }
-        @-webkit-keyframes neon2 {
-            from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e, 0 0 80px #0e437e, 0 0 100px #0e437e, 0 0 150px #0e437e;
-            }
-            to {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #0e437e, 0 0 35px #0e437e, 0 0 40px #0e437e, 0 0 50px #0e437e, 0 0 75px #0e437e;
-            }
-        }
-        @-moz-keyframes neon2 {
-            from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e, 0 0 80px #0e437e, 0 0 100px #0e437e, 0 0 150px #0e437e;
-            }
-            to {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #0e437e, 0 0 35px #0e437e, 0 0 40px #0e437e, 0 0 50px #0e437e, 0 0 75px #0e437e;
-            }
-        }
-        @keyframes neon2 {
-            from {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e, 0 0 80px #0e437e, 0 0 100px #0e437e, 0 0 150px #0e437e;
-            }
-            to {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #0e437e, 0 0 35px #0e437e, 0 0 40px #0e437e, 0 0 50px #0e437e, 0 0 75px #0e437e;
-            }
         }
     </style>
 </head>
@@ -71,7 +44,9 @@
     </div>
 </div>
 <div class="container center-block" style="margin-top:30px;">
-   <!-- <img src="img/work5.png" class="center-block" style="max-width: 70%;">-->
+    <div class="page-header" style="margin-top: 0;">
+        <h2 style="margin: 0;">Сторінка не знайдена!</h2>
+    </div>
     <h1>Сторінка не знайдена!</h1>
 
 </div>

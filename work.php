@@ -24,14 +24,11 @@
         #body_work a {
             /*color: #FFDD1B;*/
             /*color: #228DFF;*/
-            color: #FF9900;
+            color: #E6C44F;
             font-family: Appetite;
-            font-size: 5em;
+            font-size: 3em;
             text-align: center;
             text-decoration: none;
-            -webkit-animation: neon5 1.5s ease-in-out infinite alternate;
-            -moz-animation: neon5 1.5s ease-in-out infinite alternate;
-            animation: neon5 1.5s ease-in-out infinite alternate;
         }
         @-webkit-keyframes neon5 {
             from {

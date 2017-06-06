@@ -58,7 +58,7 @@ $correct_data = true;
 <div class="container" style="margin-top:30px">
     <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-primary">
-            <div class="panel-heading"><h3 class="panel-title"><strong>Авторизація</strong></h3></div>
+            <div class="panel-heading"><h3 class="panel-title text-center"><strong>Авторизація</strong></h3></div>
 
             <div class="panel-body" style="background-color: #d9d9d9;">
                 <form id="form-login" method="post" autocomplete="off">
@@ -76,7 +76,7 @@ $correct_data = true;
                         <input id="password" type="password" class="form-control" name="password" placeholder="Пароль">
                     </div>
 
-                    <button id="login" class="btn btn-success center-block btn-labeled" name="login" form="form-login" type="submit" disabled="disabled">
+                    <button id="login" class="btn btn-primary center-block btn-labeled" name="login" form="form-login" type="submit" disabled="disabled">
                         <span class="btn-label"><i class="fa fa-sign-in fa-lg"></i></span>Ввійти
                     </button>
                 </form>

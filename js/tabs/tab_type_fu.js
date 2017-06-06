@@ -1,10 +1,10 @@
-var classColor = 'success';
-var $table = $('#table_type_fu');
 var $form_add = $("#add-row");
 var $form_edit = $("#edit-row");
 var $alert_add = $('#wrong_fields');
 var $alert_ed = $('#wrong_fieldsE');
 var $type_sub = $('#type_sub');
+var $table = $('#table_type_fu');
+var classColor = 'success';
 $table
     .on('all.bs.table', function (e, name, args) {
         $('tbody').find('.selected').addClass(classColor);
@@ -47,7 +47,7 @@ $(document).ready(function () {
         if (selection.length === 0) {
             $("#modal-ch-0").modal({backdrop: "static"});
         } else {
-            $("#modal_delete_user").modal({backdrop: "static"});
+            $("#modal-progress").modal({backdrop: "static"});
         }
     });
     $("#modal_add_row").on('shown.bs.modal', function () {

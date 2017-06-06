@@ -1,18 +1,18 @@
 <?php
-    session_start();
-    require_once("src/database.php");
-    require_once("src/functions.php");
-    if(!isset($_SESSION['user'])){
-        header('Location:login');
-    }
-    if(isset($_POST['log_out'])){
-        writeLog('AUTH','LOGOUT',1);
-        unset($_SESSION['user']);
-        unset($_SESSION['group']);
-        unset($_SESSION['full_name']);
-        session_destroy();
-        header('Location:login');
-    }
+session_start();
+require_once("src/database.php");
+require_once("src/functions.php");
+if(!isset($_SESSION['user'])){
+    header('Location:login');
+}
+if(isset($_POST['log_out'])){
+    writeLog('AUTH','LOGOUT',1);
+    unset($_SESSION['user']);
+    unset($_SESSION['group']);
+    unset($_SESSION['full_name']);
+    session_destroy();
+    header('Location:login');
+}
 if (isset($_POST['relogin'])) {
     writeLog('AUTH', 'LOGOUT', 1);
     unset($_SESSION['user']);
@@ -37,25 +37,28 @@ if (isset($_POST['relogin'])) {
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="./css/jasny-bootstrap.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="css/font-awesome.css" rel="stylesheet">
     <style>
         #telo h2 {
             /*color: #FFDD1B;*/
             /*color: #228DFF;*/
+            /*color: #0e437e;*/
             color: #fff;
             font-family: Appetite;
             font-size: 3em;
             text-align: center;
+            /*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #0e437e, 0 0 70px #0e437e;*/
         }
         #telo .btn-primary {
-            background: #1270d9;
+            background: #007299;
+            box-shadow: 0 0 10px #fff;
         }
         .navbar-img {padding:5px 6px !important;}
         .navbar-img img {width:40px;}
@@ -133,13 +136,20 @@ if (isset($_POST['relogin'])) {
 
 <div class="container" id="telo">
     <div class="page-header" style="margin-top: 0;">
-        <h2 style="margin: 0;">Початкова сторінка</h2>
+        <h2 style="margin: 0;">Профіль</h2>
     </div>
-    <div class="panel panel-primary">
-        <div class="panel-body" style="background-color: #d9d9d9">
-            <a href="table1" class="btn btn-group-justified btn-primary btn-lg">Інспекційна діяльність</a>
+
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h3 style="margin: 0;"><strong>Зміна паролю</strong></h3>
+        </div>
+        <div class="panel-body" style="background-color: #d9d9d9;">
+
             <br>
-            <a href="table2" class="btn btn-group-justified btn-primary btn-lg">Інші види діяльності</a>
+
+        </div>
+        <div class="panel-footer" style="background-color: #d9d9d9;">
+            <br>
         </div>
     </div>
 
@@ -165,10 +175,10 @@ if (isset($_POST['relogin'])) {
         </div>
     </div>
 </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-2.1.1.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-2.1.1.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.js"></script>
 <script>
     function checkTime() {
         var action_time = <?=$_SESSION['action_time']?>;

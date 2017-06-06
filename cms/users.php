@@ -73,6 +73,36 @@ if(isset($_POST['delete_user'])){
     <link rel="stylesheet" href="../css/jasny-bootstrap.css">
     <link rel="stylesheet" href="../css/bootstrap-table.css">
     <link rel="stylesheet" href="../css/table-fixed-header.css">
+    <style>
+        .navbar-img {padding:5px 6px !important;}
+        .navbar-img img {width:40px;}
+        #log_out {
+            color: #fbfdff;
+            text-align: left;
+            margin: 0;
+            text-decoration: none;
+            width: 100%;
+            height: ;
+            background-color: #d9534f;
+        }
+        #log_out:hover,
+        #log_out:focus {
+            color: #fbfdff;
+            text-decoration: none;
+            background-color: #a1c9f7;
+        }
+        .navbar-nav a {
+            width: 100%;
+            color: #fbfdff;
+            text-decoration: none;
+        }
+        .navbar-nav a:hover,
+        .navbar-nav a:focus {
+            text-decoration: none;
+            background-color: #a1c9f7;
+            color: #f2f3f4;
+        }
+    </style>
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -93,14 +123,25 @@ if(isset($_POST['delete_user'])){
             <li><a href="../table2">Інші види діяльності</a></li>
             <li class="active <?=$_SESSION['group']=='ДеРЗІТ'?'':'hidden'?>"><a href="/cms/">Адміністрування</a></li>
         </ul>
-        <form method="post" class="navbar-form navbar-right">
-            <div class="form-group">
-                <button class="btn btn-danger btn-labeled" type="submit" name="log_out" id="log_out">
-                    <span class="btn-label"><i class="fa fa-sign-out fa-lg"></i></span>Вийти
-                </button>
-            </div>
-        </form>
-        <p class="navbar-text navbar-right">Ви ввійши, як <?=$_SESSION['full_name']?>!</p>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle navbar-img" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img src="../img/user2.png" alt="Profile Image" style="margin-right: 5px;"/>
+                    <?=$_SESSION['full_name']?> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <a href="../profile" class="btn btn-link dropdown-item" style=" text-align: left;">
+                        <i class="fa fa-cog fa-lg"></i> Налаштування
+                    </a>
+                    <div class="divider" style="margin-top: 0;  margin-bottom: 5px;"></div>
+                    <form method="post" class="dropdown-item">
+                        <button class="btn btn-link" type="submit" name="log_out" id="log_out">
+                            <i class="fa fa-sign-out fa-lg"></i> Вийти
+                        </button>
+                    </form>
+                </ul>
+            </li>
+        </ul>
 
     </div>
     <hr id="nav-divider">
