@@ -1,1 +1,18 @@
-Error: UPDATE inspekt SET date_change = 1496056437, user = 1, n_nak_zah=gfgf WHERE id_inspekt=50;
+Error: INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_name_fu, edrpo, type_fu, vid_perevirki, pidstava_pozaplan,
+            d_start_perevirki, d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah,
+            d_napr_proved, n_napr_proved, ker_inspekt_group, ch_inspekt_group, d_akt_perevirki,
+            n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, d_rozp_usun, n_rozp_usun, strok_usun_por,
+            b_usun_lic_umov, info_vik_rozp, d_dovidki_vik_rozp, dn_akt_nevik, d_post_shtraf, n_post_shtraf, suma_shtraf,
+            strok_splat_shtraf, info_splat_shtraf, info_usun_por, d_dovidki_vik_post, dn_sluj_ur, sluj_perep_splat, 
+            dn_doc_splat, dn_sluj_nap_mat, povern_sud_zbir, dn_list_dobro_splat, shtraf_slpach_dobro, dn_sluj_primus, 
+            napr_zap_derjrei, napr_zap_dfs, napr_zai_police, napr_info_bank, napr_info_zasn, napr_info_prokuror,
+            napr_info_oms, napr_info_dfs) 
+            VALUES (1, 1496736244, 1, 44, 10, 'fdfd','43434343434',1,1,NULL,
+            NULL, NULL, NULL, NULL, NULL, NULL,
+            NULL, NULL, NULL, NULL, NULL,
+            NULL, NULL, NULL, 1, NULL, NULL, NULL,
+            NULL, 1, NULL, '', NULL, NULL,
+            33.55 грн., NULL, NULL, NULL, NULL, ' ',
+            NULL, '', '', '', '', 
+            '', '', NULL, NULL, NULL, NULL,
+            NULL, NULL, NULL, NULL)

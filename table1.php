@@ -1,6 +1,6 @@
 <?php
 session_start();
-//error_reporting(E_ERROR);
+error_reporting(E_ERROR);
 $format_date = 'd.m.Y';
 $for_date_change = 'd.m.Y H:i:s';
 $state_add = '';
@@ -109,19 +109,6 @@ if (isset($_POST['relogin'])) {
 <body id="body" style="height: 100%;">
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <!-- <script src="js/jquery-1.12.4.min.js"></script>-->
-<script src="js/jquery-2.1.1.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="./js/bootstrap.js" type="text/javascript"></script>
-<script src="./js/bootstrap-table.js" type="text/javascript"></script>
-<script src="./js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
-<script src="./js/table-fixed-header.js" type="text/javascript"></script>
-<script src="extensions/export/bootstrap-table-export.js"></script>
-<script src="js/tableExport.js"></script>
-<script src="./js/bootstrap-datepicker.js" type="text/javascript"></script>
-<script src="./js/bootstrap-datepicker.uk.min.js" type="text/javascript"></script>
-<script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
 
 <div class="navbar navbar-custom navbar-static-top">
@@ -317,6 +304,19 @@ echo "Difference: ".($time2-$time1);*/
         </div>
     </div>
 </div>
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./js/bootstrap.js" type="text/javascript"></script>
+<script src="./js/bootstrap-table.js" type="text/javascript"></script>
+<script src="./js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
+
+<script src="extensions/export/bootstrap-table-export.js"></script>
+<script src="js/tableExport.js"></script>
+<script src="./js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="./js/bootstrap-datepicker.uk.min.js" type="text/javascript"></script>
+<script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
 
 <script>
@@ -331,44 +331,35 @@ echo "Difference: ".($time2-$time1);*/
             $("#modal-timer").modal({backdrop: "static"});
         }*/
     }
-    function loadData() {
+    function loadData(page) {
         $("#modal-progress").modal({backdrop: "static"});
-        //$("tbody").html("");
+
         $.ajax({
             type:'POST',
             url:'../src/req.php',
-            data: "table=inspekt",
+            data: "table=inspekt&page="+page,
             dataType: 'html',
+
             success:function(mydata){
-                //$('tbody').html(html);
-                /*                $("#modal-progress").modal('hide');
-                 alert(mydata);
-                 var js = $.parseJSON(mydata);
-                 $("#table_type_fu").bootstrapTable({
-                 data: mydata
-                 });
-                 $("#table_type_fu").bootstrapTable('refresh');*/
                 $('#row-table-inspekt').html(mydata);
                 $("#table").bootstrapTable();
-                $("#modal-progress").modal('hide');
+                $("#table-footer").find('.pagination li').removeClass('active-primary');
+                $('#inspekt-'+page).addClass('active-primary');
+                $("#modal-progress").modal('toggle');
             },
             error: function () {
                 alert("error");
+                $("#modal-progress").modal('toggle');
             }
         });
-        /*$('#table_type_fu').bootstrapTable({
-         method: 'post',
-         url : "../requests.php?table=type_fu",
 
-         cache: false
-         });*/
     }
     $(function () {
         checkTime();
         setInterval(function () {
             checkTime();
         }, 60000);
-        loadData();
+        loadData(1);
     });
 </script>
 <script>
@@ -382,7 +373,7 @@ echo "Difference: ".($time2-$time1);*/
 <script>
 
 </script>
-
+<script src="./js/table-fixed-header.js" type="text/javascript"></script>
 <!--<script>
     $(document).ready(function(){
     var select;

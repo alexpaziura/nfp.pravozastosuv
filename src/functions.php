@@ -6,13 +6,17 @@ function full_trim($str)
 
 }
 
-function get_table_inspect()
+function get_table_inspect($page)
 {
     global $link;
     if (!mysqli_ping($link)) {
         echo "Error: " . mysqli_error($link);
         exit();
     } else {
+        $lim = 0;
+        if($page !== 1) {
+            $lim = ($page-1)*100;
+        }
         $sql = "SELECT id_inspekt, active, date_change, username, nzp, pidrozdil, short_name_fu, edrpo, type_fu, name_type_fu, 
               vid_perevirki, name_vid_perevirki, pidstava_pozaplan, d_start_perevirki, 
               d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah, d_napr_proved, n_napr_proved,
@@ -30,13 +34,19 @@ function get_table_inspect()
               FROM inspekt, dic_type_fu, users, dic_vid_perevirki, dic_info_vik, dic_akt_zu
               WHERE type_fu=id_type_fu AND user=id_user AND vid_perevirki=id_vid_perevirki
               AND info_vik_rozp=id_info_vik AND vid_akt_zu=id_akt_zu
-              ORDER BY nzp";
+              ORDER BY nzp LIMIT $lim,100";
 
 
         $result = mysqli_query($link, $sql);
         $table_inspekt = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);
-        return $table_inspekt;
+        $sql = "SELECT COUNT(id_inspekt) AS kil_rows FROM inspekt;";
+        $result = mysqli_query($link, $sql);
+        $row = mysqli_fetch_assoc($result);
+        //$table_inspekt["kil_rows"] = $row["kil_rows"];
+        mysqli_free_result($result);
+        $new_table = array($table_inspekt, $row["kil_rows"]);
+        return $new_table;
 
     }
 }
