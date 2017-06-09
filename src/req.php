@@ -2,6 +2,7 @@
 session_start();
 require_once("database.php");
 require_once("functions.php");
+require_once("pag_inspekt.php");
 $format_date = 'd.m.Y';
 $for_date_change = 'd.m.Y H:i:s';
 if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
@@ -624,24 +625,10 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
             </div>
             <div class="panel-footer" style="padding: 0; background-color: #d9d9d9;" id="table-footer">
                 <nav class="text-center" style="margin: 0; padding-top: 3px;">
-                    <ul class="pagination" style="margin: 0;">
+                    <ul class="pagination" style="margin: 0;" id="pagin-inspekt">
                         <?php
-                        $kil_rows = $new_table[1];
-                        //echo $kil_rows;
-                        $kil_pages = 1;
-                        if ($kil_rows !== 0) {
-                            $kil_pages = ceil($kil_rows/100);
-                        }
-                        $page = intval($_REQUEST['page']);
+                        echo paginate($new_table[1]);
                         ?>
-                        <li id="inspekt-prev"><a href="#" onclick="clickPrevInspekt()"><i class="fa fa-arrow-left"></i></a></li>
-
-                        <?php
-                        for ($i = 1; $i <= $kil_pages; $i++) {
-                            echo "<li id=\"inspekt-" . $i . "\"><a href=\"#\" class=\"pageInspekt\">$i</a></li>";
-                        }
-                        ?>
-                        <li id="inspekt-next"><a href="#" onclick="clickNextInspekt()"><i class="fa fa-arrow-right"></i></a></li>
                     </ul>
                 </nav>
             </div>
@@ -656,7 +643,15 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
             }
             loadData(id);
         });
-
+        function clickPrevInspekt() {
+            var id = $("#pagin-inspekt").find(".active-primary").parent().attr("id").substring(8);
+            if(id === 1) return false;
+            loadData(id-1);
+        }
+        function clickNextInspekt() {
+            var id = $("#pagin-inspekt").find(".active-primary").parent().attr("id").substring(8);
+            loadData(id+1);
+        }
         /*        $('#table').bootstrapTable('resetView');
          */
         var classColor = 'success';

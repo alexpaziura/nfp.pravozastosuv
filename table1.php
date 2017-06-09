@@ -97,6 +97,13 @@ if (isset($_POST['relogin'])) {
             background-color: #a1c9f7;
             color: #f2f3f4;
         }
+/*        .paggination-dots {
+            padding: 2px 5px 2px 5px;
+            margin: 2px;
+            border: 1px solid #EEE;
+
+            color: #DDD;
+        }*/
     </style>
     <!-- <link href="css/bootstrap.css" rel="stylesheet">HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
