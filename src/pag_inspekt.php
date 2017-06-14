@@ -10,13 +10,13 @@ function paginate($count) {
     if($lastpage > 1) {
         if ($page > 1)
             $pagination .= "<li id=\"inspekt-prev\">
-                                <a href=\"#\" onclick=\"clickPrevInspekt()\">
+                                <a href=\"#\" id=\"pagePrev\">
                                     <i class=\"fa fa-arrow-left\"></i>
                                 </a>
                            </li>";
         else
             $pagination .= "<li id=\"inspekt-prev\" class=\"disabled\">
-                                <a href=\"#\" onclick=\"clickPrevInspekt()\" tabindex=\"-1\">
+                                <a href=\"#\" id=\"pagePrev\" tabindex=\"-1\">
                                     <i class=\"fa fa-arrow-left\"></i>
                                 </a>
                            </li>";
@@ -111,13 +111,13 @@ function paginate($count) {
         }
         if($page < $counter - 1)
             $pagination.= "<li id=\"inspekt-next\">
-                                <a href=\"#\" onclick=\"clickNextInspekt()\">
+                                <a href=\"#\" id=\"pageNext\">
                                     <i class=\"fa fa-arrow-right\"></i>
                                 </a>
                           </li>";
         else
             $pagination.= "<li id=\"inspekt-next\" class=\"disabled\">
-                                <a href=\"#\" onclick=\"clickNextInspekt()\" tabindex=\"-1\">
+                                <a href=\"#\" id=\"pageNext\" tabindex=\"-1\">
                                       <i class=\"fa fa-arrow-right\"></i>
                                 </a>
                            </li>";

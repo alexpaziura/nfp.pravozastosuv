@@ -628,6 +628,7 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
                     <ul class="pagination" style="margin: 0;" id="pagin-inspekt">
                         <?php
                         echo paginate($new_table[1]);
+                        $lp = ceil($new_table[1]/100);
                         ?>
                     </ul>
                 </nav>
@@ -643,15 +644,21 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
             }
             loadData(id);
         });
-        function clickPrevInspekt() {
-            var id = $("#pagin-inspekt").find(".active-primary").parent().attr("id").substring(8);
-            if(id === 1) return false;
-            loadData(id-1);
-        }
-        function clickNextInspekt() {
-            var id = $("#pagin-inspekt").find(".active-primary").parent().attr("id").substring(8);
-            loadData(id+1);
-        }
+        $("#pagePrev").on("click", function () {
+            if(!$(this).parent().hasClass("disabled")) {
+                var id = $("#pagin-inspekt").find(".active-primary").attr("id").substring(8);
+                if(id === 1) return false;
+                loadData(parseInt(id)-1);
+            }
+        });
+
+        $("#pageNext").on("click", function () {
+            if(!$(this).parent().hasClass("disabled")) {
+                var id = $("#pagin-inspekt").find(".active-primary").attr("id").substring(8);
+                if (id === <?=$lp?>) return false;
+                loadData(parseInt(id) + 1);
+            }
+        });
         /*        $('#table').bootstrapTable('resetView');
          */
         var classColor = 'success';

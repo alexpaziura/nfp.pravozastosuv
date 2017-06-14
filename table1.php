@@ -27,6 +27,7 @@ if (isset($_POST['add_nag'])) {
     } else {
         $state_add = 'error';
     }
+    unset($_POST);
     $_SESSION['action_time'] = microtime(true);
     //header ("location: ".$_SERVER['REQUEST_URI']);
 }
