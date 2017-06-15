@@ -951,7 +951,13 @@
                         <!--<li><a href="#">4</a></li>-->
                     </ul>
                 </nav>
-                <button class="btn btn-primary center-block btn-labeled" name="add_nag" type="submit" form="add-form">
+<!--                <button class="btn btn-primary center-block btn-labeled" name="add_nag" type="submit" form="add-form">
+                    <span class="btn-label">
+                        <i class="fa fa-floppy-o fa-lg"></i>
+                    </span>
+                    Зберегти
+                </button>-->
+                <button class="btn btn-primary center-block btn-labeled" name="add_nag" id="submit_add" type="button" form="add-form">
                     <span class="btn-label">
                         <i class="fa fa-floppy-o fa-lg"></i>
                     </span>

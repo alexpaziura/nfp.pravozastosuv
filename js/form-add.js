@@ -43,6 +43,80 @@ add_form.on('submit', function () {
     return noError;
 });
 
+$("#submit_add").on("click", function () {
+    var noError = true;
+    var nzp = $.trim($nzp_field.val());
+    var short_name_fu = $.trim($short_name_fu.val());
+    var edrpoE = $.trim($edrpoE.val());
+    var type_fo = $.trim($type_fo.val());
+    if (nzp === '') {
+        $alert.removeClass('hidden');
+        $nzp_field.addClass('required_field');
+        noError = false;
+    }
+    if (short_name_fu === '') {
+        $alert.removeClass('hidden');
+        $short_name_fu.addClass('required_field');
+        noError = false;
+    }
+    if (edrpoE === '') {
+        $alert.removeClass('hidden');
+        $edrpoE.addClass('required_field');
+        noError = false;
+    }
+    if (type_fo === '') {
+        $alert.removeClass('hidden');
+        $type_fo.addClass('required_field');
+        noError = false;
+    }
+    if(!$alert.hasClass('hidden')) {
+        noError = false;
+    }
+    if(!noError) {return false;}
+    $("#modal-add-naglyad").modal('toggle');
+    $("#modal-progress").modal({backdrop: "static"});
+    var status = "";
+    $.ajax({
+        type:'POST',
+        url:'../src/add-forms.php',
+        data: ({table: "inspekt",
+            nzp: nzp,
+            short_name_fu: short_name_fu,
+            edrpoE: edrpoE,
+            type_fo: type_fo}),
+        dataType: 'html',
+        success:function(mydata){
+/*            $('#row-table-inspekt').html(mydata);
+            $("#table").bootstrapTable();
+            $("#table-footer").find('.pagination li').removeClass('active-primary');
+            $('#inspekt-'+page).addClass('active-primary');
+            $("#modal-progress").modal('toggle');*/
+            mydata = JSON.parse(mydata);
+            //alert("result: "+mydata.state);
+            status = mydata.state;
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+    loadData(1);
+    $("#modal-progress").modal('toggle');
+
+    if(status="success") {
+        $('#success_add').removeClass("hidden").bind('afterShow', function() {
+            setTimeout(function () {
+                $('#success_add').alert("close");
+            }, 7000);
+        });
+    }
+    else {
+        $('#error_add').removeClass("hidden").bind('afterShow', function() {
+            setTimeout(function () {
+                $('#error_add').alert("close");
+            }, 7000);
+        });
+    }
+});
 $nzp_field.on('keyup', function() {
     var $field  = $(this);
     var val = $.trim($field.val());
