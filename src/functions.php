@@ -40,17 +40,56 @@ function get_table_inspect($page)
         $result = mysqli_query($link, $sql);
         $table_inspekt = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);
-        $sql = "SELECT COUNT(id_inspekt) AS kil_rows FROM inspekt;";
-        $result = mysqli_query($link, $sql);
-        $row = mysqli_fetch_assoc($result);
-        //$table_inspekt["kil_rows"] = $row["kil_rows"];
-        mysqli_free_result($result);
-        $new_table = array($table_inspekt, $row["kil_rows"]);
+        $new_table = array($table_inspekt, get_count_inspekt());
         return $new_table;
 
     }
 }
 
+function get_count_inspekt() {
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
+        exit();
+    } else {
+        $sql = "SELECT COUNT(id_inspekt) AS kil_rows FROM inspekt;";
+        $result = mysqli_query($link, $sql);
+        $row = mysqli_fetch_assoc($result);
+        mysqli_free_result($result);
+        return $row["kil_rows"];
+    }
+
+}
+
+function get_page_row_inspekt($field) {
+    global $link;
+    if (!mysqli_ping($link)) {
+        echo "Error: " . mysqli_error($link);
+        exit();
+    } else {
+        $sql = "SELECT id_inspekt, nzp
+              FROM inspekt 
+              ORDER BY nzp";
+
+
+        $result = mysqli_query($link, $sql);
+        $table_inspekt = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $i = 0;
+        $zap = 0;
+        $nzp = full_trim(htmlspecialchars($field, ENT_QUOTES));
+        foreach ($table_inspekt as $row) {
+            if ($row["nzp"] === $nzp) {
+                $zap = $i;
+                break;
+            }
+            $i++;
+        }
+        $page = ceil($zap/100);
+
+        mysqli_free_result($result);
+        return $page;
+    }
+}
 function get_row_inspect($id)
 {
     global $link;

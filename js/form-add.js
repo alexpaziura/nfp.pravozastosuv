@@ -10,6 +10,7 @@ var $short_name_fu = $('#short_name_fu');
 var $edrpoE = $('#edrpoE');
 var $type_fo = $('#type_fo');
 var $pidstava_pozaplanS = $('#pidstava_pozaplanS');
+var $modal_progress = $("#modal-progress");
 add_form.on('submit', function () {
 
     var noError = true;
@@ -73,44 +74,43 @@ $("#submit_add").on("click", function () {
         noError = false;
     }
     if(!noError) {return false;}
-    $("#modal-add-naglyad").modal('toggle');
-    $("#modal-progress").modal({backdrop: "static"});
+
+    $modal_progress.modal({backdrop: "static"});
     var status = "";
+    var page = 1;
     $.ajax({
         type:'POST',
         url:'../src/add-forms.php',
-        data: ({table: "inspekt",
+        data: ({
+            table: "inspekt",
             nzp: nzp,
             short_name_fu: short_name_fu,
             edrpoE: edrpoE,
             type_fo: type_fo}),
         dataType: 'html',
         success:function(mydata){
-/*            $('#row-table-inspekt').html(mydata);
-            $("#table").bootstrapTable();
-            $("#table-footer").find('.pagination li').removeClass('active-primary');
-            $('#inspekt-'+page).addClass('active-primary');
-            $("#modal-progress").modal('toggle');*/
             mydata = JSON.parse(mydata);
-            //alert("result: "+mydata.state);
             status = mydata.state;
+            page = mydata.page;
         },
         error: function () {
             alert("error");
         }
     });
-    loadData(1);
-    $("#modal-progress").modal('toggle');
-
+    loadData(page);
+    $modal_progress.modal('toggle');
+    $("#modal-add-naglyad").modal('toggle');
     if(status="success") {
-        $('#success_add').removeClass("hidden").bind('afterShow', function() {
+        $('#success_add').removeClass("hidden");
+        $('#success_add').bind('afterShow', function() {
             setTimeout(function () {
                 $('#success_add').alert("close");
             }, 7000);
         });
     }
     else {
-        $('#error_add').removeClass("hidden").bind('afterShow', function() {
+        $('#error_add').removeClass("hidden");
+        $('#error_add').bind('afterShow', function() {
             setTimeout(function () {
                 $('#error_add').alert("close");
             }, 7000);

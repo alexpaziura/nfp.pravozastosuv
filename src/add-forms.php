@@ -10,7 +10,12 @@ if (isset($_POST["table"]) && $_POST["table"] === 'inspekt') {
         $answer["state"] = 'error';
     }
     $_SESSION['action_time'] = microtime(true);
-    echo "{\"state\":\"".$answer["state"]."\"}";
+    $page = intval(get_page_row_inspekt($_POST["nzp"]));
+    /*if (!is_int($page)) {
+        $page = 1;
+    }*/
+
+    echo "{\"state\":\"".$answer["state"]."\", \"page\":\"".$page."\"}";
 
 }
 ?>
