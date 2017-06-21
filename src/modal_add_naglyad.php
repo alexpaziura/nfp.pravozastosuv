@@ -981,31 +981,31 @@
     function click1() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-1').removeClass('hidden');
-        $('.pagination li').removeClass('active-primary');
+        $("#modal-add-naglyad").find('.pagination li').removeClass('active-primary');
         $('#page-1').addClass('active-primary');
     }
     function click2() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-2').removeClass('hidden');
-        $('.pagination li').removeClass('active-primary');
+        $("#modal-add-naglyad").find('.pagination li').removeClass('active-primary');
         $('#page-2').addClass('active-primary');
     }
     function click3() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-3').removeClass('hidden');
-        $('.pagination li').removeClass('active-primary');
+        $("#modal-add-naglyad").find('.pagination li').removeClass('active-primary');
         $('#page-3').addClass('active-primary');
     }
     function click4() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-4').removeClass('hidden');
-        $('.pagination li').removeClass('active-primary');
+        $("#modal-add-naglyad").find('.pagination li').removeClass('active-primary');
         $('#page-4').addClass('active-primary');
     }
     function click5() {
         $('.modal-page').addClass('hidden');
         $('#modal-page-5').removeClass('hidden');
-        $('.pagination li').removeClass('active-primary');
+        $("#modal-add-naglyad").find('.pagination li').removeClass('active-primary');
         $('#page-5').addClass('active-primary');
     }
 </script>

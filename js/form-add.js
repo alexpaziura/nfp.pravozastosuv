@@ -74,11 +74,12 @@ $("#submit_add").on("click", function () {
         noError = false;
     }
     if(!noError) {return false;}
-
+    var ser = add_form.serialize();
+    alert(ser);
     $modal_progress.modal({backdrop: "static"});
     var status = "";
-    var page = 1;
-    $.ajax({
+    var curr_page = 1;
+/*    $.ajax({
         type:'POST',
         url:'../src/add-forms.php',
         data: ({
@@ -91,31 +92,58 @@ $("#submit_add").on("click", function () {
         success:function(mydata){
             mydata = JSON.parse(mydata);
             status = mydata.state;
-            page = mydata.page;
+            curr_page = mydata.page;
+            //alert("status: "+status+"\npage: "+curr_page);
+            loadData(curr_page);
         },
         error: function () {
             alert("error");
+            loadData(1);
+        }
+    });  */
+    $.ajax({
+        type:'POST',
+        url:'../src/add-forms.php',
+        data: ser + "&table=inspekt" ,
+        dataType: 'html',
+        success:function(mydata){
+            mydata = JSON.parse(mydata);
+            status = mydata.state;
+            curr_page = mydata.page;
+            //alert("status: "+status+"\npage: "+curr_page);
+            loadData(curr_page);
+            if(status="success") {
+                $('#success_add').removeClass("hidden");
+                $('#success_add').bind('afterShow', function() {
+                    setTimeout(function () {
+                        $('#success_add').alert("close");
+                    }, 7000);
+                });
+            }
+            else {
+                $('#error_add').removeClass("hidden");
+                $('#error_add').bind('afterShow', function() {
+                    setTimeout(function () {
+                        $('#error_add').alert("close");
+                    }, 7000);
+                });
+            }
+        },
+        error: function () {
+            alert("error");
+            $('#error_add').removeClass("hidden");
+            $('#error_add').bind('afterShow', function() {
+                setTimeout(function () {
+                    $('#error_add').alert("close");
+                }, 7000);
+            });
+            loadData(1);
         }
     });
-    loadData(page);
-    $modal_progress.modal('toggle');
+    //alert("status: "+status+"\npage: "+curr_page);
+    //loadData(curr_page);
     $("#modal-add-naglyad").modal('toggle');
-    if(status="success") {
-        $('#success_add').removeClass("hidden");
-        $('#success_add').bind('afterShow', function() {
-            setTimeout(function () {
-                $('#success_add').alert("close");
-            }, 7000);
-        });
-    }
-    else {
-        $('#error_add').removeClass("hidden");
-        $('#error_add').bind('afterShow', function() {
-            setTimeout(function () {
-                $('#error_add').alert("close");
-            }, 7000);
-        });
-    }
+
 });
 $nzp_field.on('keyup', function() {
     var $field  = $(this);

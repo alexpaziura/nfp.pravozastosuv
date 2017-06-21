@@ -104,7 +104,7 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
                             data-toggle="table"
                             id="table"
                             class="table table-striped table-bordered table-fixed-header table-condensed"
-                            data-sort-name="id_inspekt"
+                            data-sort-name="nzp"
                             data-sort-order="asc"
                             data-toolbar="#toolbar"
                             data-height="820"
@@ -642,12 +642,14 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
             if($(this).hasClass("active-primary")) {
                 return false;
             }
+            $modal_progress.modal({backdrop: "static"});
             loadData(id);
         });
         $("#pagePrev").on("click", function () {
             if(!$(this).parent().hasClass("disabled")) {
                 var id = $("#pagin-inspekt").find(".active-primary").attr("id").substring(8);
                 if(id === 1) return false;
+                $modal_progress.modal({backdrop: "static"});
                 loadData(parseInt(id)-1);
             }
         });
@@ -656,6 +658,7 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
             if(!$(this).parent().hasClass("disabled")) {
                 var id = $("#pagin-inspekt").find(".active-primary").attr("id").substring(8);
                 if (id === <?=$lp?>) return false;
+                $modal_progress.modal({backdrop: "static"});
                 loadData(parseInt(id) + 1);
             }
         });

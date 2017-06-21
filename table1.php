@@ -351,10 +351,12 @@ echo "Difference: ".($time2-$time1);*/
                 $("#table").bootstrapTable();
                 $("#table-footer").find('.pagination li').removeClass('active-primary');
                 $('#inspekt-'+page).addClass('active-primary');
+                $("#modal-progress").modal('toggle');
+
             },
             error: function () {
                 alert("error");
-
+                $("#modal-progress").modal('toggle');
             }
         });
 
@@ -366,7 +368,7 @@ echo "Difference: ".($time2-$time1);*/
         }, 60000);
         $("#modal-progress").modal({backdrop: "static"});
         loadData(1);
-        $("#modal-progress").modal('toggle');
+        //$("#modal-progress").modal('toggle');
     });
 </script>
 <script>

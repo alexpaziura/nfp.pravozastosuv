@@ -193,7 +193,7 @@ function add_inspekt()
     $dn_akt_nevik .= "'";
     $d_post_shtraf = $_POST['d_post_shtraf'] != '' ? strtotime($_POST['d_post_shtraf']) : 'NULL';
     $n_post_shtraf = $_POST['n_post_shtraf'] != '' ? "'№" . full_trim(htmlspecialchars($_POST['n_post_shtraf'], ENT_QUOTES)) . "'" : 'NULL';
-    $suma_shtraf = $_POST['suma_shtraf'] != '' ? full_trim(htmlspecialchars($_POST['suma_shtraf'], ENT_QUOTES))." грн." : 'NULL';
+    $suma_shtraf = $_POST['suma_shtraf'] != '' ? full_trim(htmlspecialchars($_POST['suma_shtraf'], ENT_QUOTES)) : 'NULL';
     $strok_splat_shtraf = $_POST['strok_splat_shtraf'] != '' ? strtotime($_POST['strok_splat_shtraf']) : 'NULL';
     $info_splat_shtraf = $_POST['info_splat_shtraf'] != '' ? strtotime($_POST['info_splat_shtraf']) : 'NULL';
     $info_usun_por = $_POST['info_usun_por'] != '' ? "'" . full_trim(htmlspecialchars($_POST['info_usun_por'], ENT_QUOTES)) . "'" : 'NULL';
