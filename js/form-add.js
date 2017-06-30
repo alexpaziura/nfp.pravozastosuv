@@ -77,7 +77,7 @@ $("#submit_add").on("click", function () {
     var ser = add_form.serialize();
     alert(ser);
     $modal_progress.modal({backdrop: "static"});
-    var status = "";
+    //var status = "";
     var curr_page = 1;
 /*    $.ajax({
         type:'POST',
@@ -108,25 +108,25 @@ $("#submit_add").on("click", function () {
         dataType: 'html',
         success:function(mydata){
             mydata = JSON.parse(mydata);
-            status = mydata.state;
+            var status = mydata.state;
             curr_page = mydata.page;
             //alert("status: "+status+"\npage: "+curr_page);
             loadData(curr_page);
-            if(status="success") {
+            if(status === "success") {
                 $('#success_add').removeClass("hidden");
-                $('#success_add').bind('afterShow', function() {
+/*                $('#success_add').bind('afterShow', function() {
                     setTimeout(function () {
                         $('#success_add').alert("close");
                     }, 7000);
-                });
+                });*/
             }
             else {
                 $('#error_add').removeClass("hidden");
-                $('#error_add').bind('afterShow', function() {
+/*                $('#error_add').bind('afterShow', function() {
                     setTimeout(function () {
                         $('#error_add').alert("close");
                     }, 7000);
-                });
+                });*/
             }
         },
         error: function () {

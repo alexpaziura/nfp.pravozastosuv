@@ -3,7 +3,7 @@ session_start();
 error_reporting(E_ERROR);
 $format_date = 'd.m.Y';
 $for_date_change = 'd.m.Y H:i:s';
-$state_add = '';
+//$state_add = '';
 $state_edit = '';
 require_once("src/database.php");
 require_once("src/functions.php");
@@ -21,7 +21,7 @@ if (!isset($_SESSION['user'])) {
     header('Location:login');
     exit();
 }
-if (isset($_POST['add_nag'])) {
+/*if (isset($_POST['add_nag'])) {
     if (add_inspekt()) {
         $state_add = 'success';
     } else {
@@ -30,7 +30,7 @@ if (isset($_POST['add_nag'])) {
     unset($_POST);
     $_SESSION['action_time'] = microtime(true);
     //header ("location: ".$_SERVER['REQUEST_URI']);
-}
+}*/
 if (isset($_POST['edit_nag'])) {
     if (edit_nag()) {
         $state_edit = 'success';
@@ -155,14 +155,7 @@ if (isset($_POST['relogin'])) {
 <button id="button" class="btn btn-default">getSelectedRow</button></div>-->
     <div class="row">
         <div class="container">
-            <div class="alert alert-success alert-dismissable alert-fixed
-            <?php
-            if ($state_add == 'success') {
-                echo '';
-            } else {
-                echo 'hidden';
-            }
-            ?>"
+            <div class="alert alert-success alert-dismissable alert-fixed hidden"
                  id="success_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
                     <i class="fa fa-close fa-2x"></i>
@@ -173,13 +166,7 @@ if (isset($_POST['relogin'])) {
     </div>
     <div class="row">
         <div class="container">
-            <div class="alert alert-danger alert-dismissable alert-fixed <?php
-            if ($state_add == 'error') {
-                echo '';
-            } else {
-                echo 'hidden';
-            }
-            ?>"
+            <div class="alert alert-danger alert-dismissable alert-fixed hidden"
                  id="error_add">
                 <button type="button" class="close alert-close" data-dismiss="alert">
                     <i class="fa fa-close fa-2x"></i>
@@ -371,14 +358,14 @@ echo "Difference: ".($time2-$time1);*/
         //$("#modal-progress").modal('toggle');
     });
 </script>
-<script>
+<!--<script>
     setTimeout(function () {
         $('#success_add').alert("close");
         $('#error_add').alert("close");
         $('#success_edit').alert("close");
         $('#error_edit').alert("close");
     }, 7000);
-</script>
+</script>-->
 <script>
 
 </script>

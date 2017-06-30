@@ -107,7 +107,7 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
                             data-sort-name="nzp"
                             data-sort-order="asc"
                             data-toolbar="#toolbar"
-                            data-height="820"
+                            data-height="750"
                             data-checkbox-header="false"
                             data-click-to-select="true"
                             data-resizable="true"
