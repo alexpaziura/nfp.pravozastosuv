@@ -104,10 +104,8 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
                             data-toggle="table"
                             id="table"
                             class="table table-striped table-bordered table-fixed-header table-condensed"
-                            data-sort-name="nzp"
-                            data-sort-order="asc"
                             data-toolbar="#toolbar"
-                            data-height="750"
+                            data-height="<?=isset($_REQUEST["pageHeight"])? intval($_REQUEST["pageHeight"])-120 : 750?>"
                             data-checkbox-header="false"
                             data-click-to-select="true"
                             data-resizable="true"
@@ -665,11 +663,12 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
         /*        $('#table').bootstrapTable('resetView');
          */
         var classColor = 'success';
-        $('#table').bootstrapTable('resetView');
-        var height_table = $('body').height() - 80;
-        $("#table").attr("data-height", height_table.toString());
+        var table = $('#table');
+        //table.bootstrapTable('resetView');
+        //var height_table = $('body').height() - 80;
+        //table.attr("data-height", height_table.toString());
         $('.akt_zu').popover();
-        $("#table")
+        table
             .on('all.bs.table', function (e, name, args) {
                 $('.akt_zu').popover();
                 $('tbody').find('.selected').addClass(classColor);
@@ -713,10 +712,12 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
 
         });
     </script>
-    <?php require_once 'modal_add_naglyad.php'; ?>
+
+    <?php require_once '../src/modal_add_naglyad.php'; ?>
     <script src="../js/form-add.js"></script>
 
-    <?php require_once 'modal_edit_n.php'; ?>
+    <?php require_once '../src/modal_edit_n.php'; ?>
 
     <script src="../js/form-edit-n.js"></script>
+
 <?php } ?>

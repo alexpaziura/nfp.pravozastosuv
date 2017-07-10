@@ -1,0 +1,18 @@
+Error: INSERT INTO inspekt (active, date_change, user, nzp, pidrozdil, short_name_fu, edrpo, type_fu, vid_perevirki, pidstava_pozaplan,
+            d_start_perevirki, d_end_perevirki, d_start_dialnist, d_end_dialnist, d_nak_zah, n_nak_zah,
+            d_napr_proved, n_napr_proved, ker_inspekt_group, ch_inspekt_group, d_akt_perevirki,
+            n_akt_perevirki, d_akt_zu, n_akt_zu, vid_akt_zu, d_rozp_usun, n_rozp_usun, strok_usun_por,
+            b_usun_lic_umov, info_vik_rozp, d_dovidki_vik_rozp, dn_akt_nevik, d_post_shtraf, n_post_shtraf, suma_shtraf,
+            strok_splat_shtraf, info_splat_shtraf, info_usun_por, d_dovidki_vik_post, dn_sluj_ur, sluj_perep_splat, 
+            dn_doc_splat, dn_sluj_nap_mat, povern_sud_zbir, dn_list_dobro_splat, shtraf_slpach_dobro, dn_sluj_primus, 
+            napr_zap_derjrei, napr_zap_dfs, napr_zai_police, napr_info_bank, napr_info_zasn, napr_info_prokuror,
+            napr_info_oms, napr_info_dfs) 
+            VALUES (1, 1498046300, 1, 767657, 10, 'test ajax ser','111111111111',5,3,'2; 3; ',
+            1498078800, 1498078800, 1498165200, 1498251600, 1498338000, '№1',
+            1498424400, '№2', 'rerere', 'xsxs', 1498597200,
+            '№4', 1498770000, ''№5', 3, 1498856400, '№6', '65',
+            2, 2, 1498683600, '03.07.2017 №11', 1499115600, '№12',
+            333.33, 1499202000, 1499288400, '333', 1499374800, '08.07.2017 13',
+            '31213213213gfgfdegdgdf', '09.07.2017 №14', '01.06.2017 №15', '№16 02.06.2017 8888.88 грн.', '04.06.2017 №17', 
+            '№18 05.06.2017 9999.99 грн.', '06.06.2017 №18', 'uyiyujuxfbxgfydrfh', 'gfsdfawfasvasfdsfs', 'dasdfsgdrfjudfhjdgfhn', 'bvmn mghiolp7ykltfdhjxdfgh',
+            '56754edxujdtr5jugb cnju ujcgh', 'jtjht6iuj67tyikjkid 8 7u567tr u5uijrtdfhrs', 'yrtyrtsey56 7y56u 5ikjgkjhlkgh 7 6r7 8', 'h 65ru tyduju6u 6udjhu6 usd6uhj dj')

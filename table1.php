@@ -299,6 +299,7 @@ echo "Difference: ".($time2-$time1);*/
         </div>
     </div>
 </div>
+
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -306,11 +307,11 @@ echo "Difference: ".($time2-$time1);*/
 <script src="./js/bootstrap-table.js" type="text/javascript"></script>
 <script src="./js/bootstrap-table-uk-UA.js" type="text/javascript"></script>
 
-<script src="extensions/export/bootstrap-table-export.js"></script>
-<script src="js/tableExport.js"></script>
+<!--<script src="extensions/export/bootstrap-table-export.js"></script>
+<script src="js/tableExport.js"></script>-->
 <script src="./js/bootstrap-datepicker.js" type="text/javascript"></script>
 <script src="./js/bootstrap-datepicker.uk.min.js" type="text/javascript"></script>
-<script src="./js/jasny-bootstrap.js" type="text/javascript"></script>
+<!--<script src="./js/jasny-bootstrap.js" type="text/javascript"></script>-->
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
 
@@ -327,12 +328,14 @@ echo "Difference: ".($time2-$time1);*/
         }*/
     }
     function loadData(page) {
+        var pageHeight = $( window ).height();
+        //alert(pageHeight);
         $.ajax({
             type:'POST',
             url:'../src/req.php',
-            data: "table=inspekt&page="+page,
+            data: "table=inspekt&page="+page+"&pageHeight="+pageHeight,
             dataType: 'html',
-
+            async: false,
             success:function(mydata){
                 $('#row-table-inspekt').html(mydata);
                 $("#table").bootstrapTable();
