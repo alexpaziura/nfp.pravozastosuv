@@ -314,7 +314,15 @@ echo "Difference: ".($time2-$time1);*/
 <!--<script src="./js/jasny-bootstrap.js" type="text/javascript"></script>-->
 <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
 
+<script>
 
+</script>
+<?php require_once 'src/modal_add_naglyad.php'; ?>
+<script src="js/form-add.js"></script>
+
+<?php require_once 'src/modal_edit_n.php'; ?>
+
+<script src="js/form-edit-n.js"></script>
 <script>
 
 

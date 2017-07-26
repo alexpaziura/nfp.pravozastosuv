@@ -712,12 +712,4 @@ if (isset($_REQUEST["table"]) && $_REQUEST["table"] === 'type_fu') {
 
         });
     </script>
-
-    <?php require_once '../src/modal_add_naglyad.php'; ?>
-    <script src="../js/form-add.js"></script>
-
-    <?php require_once '../src/modal_edit_n.php'; ?>
-
-    <script src="../js/form-edit-n.js"></script>
-
 <?php } ?>
